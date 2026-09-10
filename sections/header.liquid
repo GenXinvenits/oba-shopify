@@ -1,0 +1,50 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="header-menu">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="MobileNav">Menu</button>
+    </div>
+
+    <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+      {% if settings.logo != blank %}
+        {{ settings.logo | image_url: width: 360 | image_tag: alt: shop.name, loading: 'eager' }}
+      {% else %}
+        <span>OBA</span>
+      {% endif %}
+    </a>
+
+    <nav class="nav" aria-label="Main navigation">
+      <a href="{{ routes.collections_url }}">Shop</a>
+      <a href="{{ routes.collections_url }}/rackets">Rackets</a>
+      <a href="{{ routes.collections_url }}/shoes">Shoes</a>
+      <a href="{{ routes.collections_url }}/shuttlecocks">Shuttles</a>
+      <a href="{{ routes.collections_url }}/sale">Sale</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="optional" href="{{ routes.search_url }}">Search</a>
+      <a class="optional" href="{{ routes.account_url }}">Account</a>
+      <a href="{{ routes.cart_url }}">Cart <span data-cart-count>({{ cart.item_count }})</span></a>
+    </div>
+  </div>
+
+  <div id="MobileNav" class="mobile-nav" hidden>
+    <nav class="container" aria-label="Mobile navigation">
+      <a href="{{ routes.collections_url }}">Shop all</a>
+      <a href="{{ routes.collections_url }}/rackets">Rackets</a>
+      <a href="{{ routes.collections_url }}/shoes">Shoes</a>
+      <a href="{{ routes.collections_url }}/bags">Bags</a>
+      <a href="{{ routes.collections_url }}/accessories">Accessories</a>
+      <a href="{{ routes.collections_url }}/apparel">Apparel</a>
+      <a href="{{ routes.collections_url }}/shuttlecocks">Shuttlecocks</a>
+      <a href="{{ routes.collections_url }}/sale">Sale</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+.menu-toggle{display:none;border:0;background:none;text-transform:uppercase;font-size:11px;font-weight:800;padding:0}.mobile-nav{border-top:1px solid var(--oba-line);padding:18px 0}.mobile-nav nav{display:grid;gap:14px}.mobile-nav a{text-transform:uppercase;font-size:12px;font-weight:800}@media(max-width:900px){.menu-toggle{display:block}.header-menu{order:-1}.mobile-nav[hidden]{display:none!important}}
+</style>
+
+{% schema %}
+{"name":"Header","settings":[]}
+{% endschema %}
