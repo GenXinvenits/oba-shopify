@@ -1,0 +1,16 @@
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <div><div class="eyebrow">OBA Pro Shop</div><h1>{{ collection.title }}</h1></div>
+      <p>{{ collection.description | strip_html | truncate: 220 }}</p>
+    </div>
+    <div class="product-grid">
+      {% for product in collection.products limit: section.settings.products_per_page %}{% render 'product-card', product: product %}{% endfor %}
+    </div>
+    {% if collection.products_count == 0 %}<p>No products found in this collection.</p>{% endif %}
+  </div>
+</section>
+
+{% schema %}
+{"name":"Main collection","settings":[{"type":"range","id":"products_per_page","label":"Products","min":12,"max":48,"step":12,"default":24}],"presets":[{"name":"Main collection"}]}
+{% endschema %}
