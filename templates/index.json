@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "hero": {"type":"hero","settings":{"eyebrow":"OBA PRO SHOP","heading":"PLAY WITH PURPOSE.","text":"Authentic badminton gear selected for players who train, compete and love the game.","primary_label":"Shop rackets","primary_link":"/collections/rackets","secondary_label":"Shop all","secondary_link":"/collections/all"}},
+    "categories": {"type":"category-grid","blocks":{"rackets":{"type":"category","settings":{"collection":"rackets","title":"Rackets"}},"shoes":{"type":"category","settings":{"collection":"shoes","title":"Shoes"}},"bags":{"type":"category","settings":{"collection":"bags","title":"Bags"}},"accessories":{"type":"category","settings":{"collection":"accessories","title":"Accessories"}},"apparel":{"type":"category","settings":{"collection":"apparel","title":"Apparel"}},"shuttles":{"type":"category","settings":{"collection":"shuttlecocks","title":"Shuttlecocks"}}},"block_order":["rackets","shoes","bags","accessories","apparel","shuttles"],"settings":{"heading":"SHOP BY CATEGORY","text":"Build your setup from rackets, shoes, shuttles and the gear you trust on court."}},
+    "featured": {"type":"featured-products","settings":{"heading":"NEW & NOTABLE","collection":"frontpage","products_to_show":4}},
+    "story": {"type":"story","settings":{"heading":"TRAIN. PLAY. COMPETE.","text":"Oregon Badminton Academy is a community built around the sport. Our Pro Shop brings that same player-first mindset to the gear you use on court — authentic equipment from brands trusted by badminton players.","button_label":"Visit OBA","button_link":"https://orbadminton.com/"}},
+    "brands": {"type":"brand-strip","blocks":{"yonex":{"type":"brand","settings":{"name":"YONEX"}},"victor":{"type":"brand","settings":{"name":"VICTOR"}},"hundred":{"type":"brand","settings":{"name":"HUNDRED"}},"yangyang":{"type":"brand","settings":{"name":"YANG YANG"}}},"block_order":["yonex","victor","hundred","yangyang"],"settings":{}},
+    "newsletter": {"type":"newsletter","settings":{"heading":"GET IN THE GAME.","button":"Subscribe"}}
+  },
+  "order": ["hero","categories","featured","story","brands","newsletter"]
+}

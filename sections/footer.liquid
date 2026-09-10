@@ -1,0 +1,15 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><div class="footer-brand">OBA</div><p>{{ settings.store_tagline | default: 'Train. Play. Compete.' }}</p></div>
+      <div class="footer-col"><h3>Shop</h3><a href="{{ routes.collections_url }}/rackets">Rackets</a><a href="{{ routes.collections_url }}/shoes">Shoes</a><a href="{{ routes.collections_url }}/bags">Bags</a><a href="{{ routes.collections_url }}/accessories">Accessories</a></div>
+      <div class="footer-col"><h3>Explore</h3><a href="https://orbadminton.com/">OBA Academy</a><a href="https://orbadminton.com/#coaching">Coaching</a><a href="https://orbadminton.com/">Court reservations</a></div>
+      <div class="footer-col"><h3>Visit</h3><a href="https://maps.google.com/?q=11150+SW+Allen+Blvd,+Beaverton,+OR+97005">11150 SW Allen Blvd<br>Beaverton, OR 97005</a><a href="tel:+15034307861">(503) 430-7861</a></div>
+    </div>
+    <div class="footer-bottom"><span>© {{ 'now' | date: '%Y' }} {{ shop.name }}</span><span>Authentic badminton gear. Player-first.</span></div>
+  </div>
+</footer>
+
+{% schema %}
+{"name":"Footer","settings":[]}
+{% endschema %}

@@ -1,0 +1,101 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="header-menu">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="MobileNav">
+        <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
+        <span>Menu</span>
+      </button>
+    </div>
+
+    <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+      {% if settings.logo != blank %}
+        {{ settings.logo | image_url: width: 360 | image_tag: alt: shop.name, loading: 'eager' }}
+      {% else %}
+        <span class="brand-word">OBA<span>.</span></span>
+      {% endif %}
+    </a>
+
+    <nav class="nav" aria-label="Main navigation">
+      <details class="nav-shop">
+        <summary>Shop <span class="nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mega-menu">
+          <div class="mega-intro">
+            <span class="mega-kicker">OBA PRO SHOP</span>
+            <strong>Gear for the way you play.</strong>
+            <a href="{{ routes.collections_url }}">Shop all <span>↗</span></a>
+          </div>
+          <div class="mega-column">
+            <span>Equipment</span>
+            <a href="{{ routes.collections_url }}/rackets">Rackets</a>
+            <a href="{{ routes.collections_url }}/shoes">Shoes</a>
+            <a href="{{ routes.collections_url }}/shuttlecocks">Shuttlecocks</a>
+            <a href="{{ routes.collections_url }}/bags">Bags</a>
+          </div>
+          <div class="mega-column">
+            <span>On court</span>
+            <a href="{{ routes.collections_url }}/accessories">Accessories</a>
+            <a href="{{ routes.collections_url }}/apparel">Apparel</a>
+            <a href="{{ routes.collections_url }}/strings">Strings</a>
+            <a href="{{ routes.collections_url }}/grips">Grips</a>
+          </div>
+          <div class="mega-feature">
+            <div class="mega-feature-mark">TRAIN<br>PLAY<br>COMPETE</div>
+            <p>Everything you need to elevate your game.</p>
+            <a href="https://orbadminton.com/">Visit OBA Academy ↗</a>
+          </div>
+        </div>
+      </details>
+      <a href="{{ routes.collections_url }}/rackets">Rackets</a>
+      <a href="{{ routes.collections_url }}/shoes">Shoes</a>
+      <a href="{{ routes.collections_url }}/shuttlecocks">Shuttles</a>
+      <a href="{{ routes.collections_url }}/bags">Bags</a>
+      <a class="nav-sale" href="{{ routes.collections_url }}/sale">Sale</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-action" href="{{ routes.search_url }}" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+        <span>Search</span>
+      </a>
+      <a class="header-action account-action" href="{{ routes.account_url }}" aria-label="Account">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20c.8-3.5 3-5.3 6.5-5.3s5.7 1.8 6.5 5.3"></path></svg>
+        <span>Account</span>
+      </a>
+      <a class="header-action cart-link" href="{{ routes.cart_url }}" aria-label="Cart, {{ cart.item_count }} items">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4h2l1.6 11.1a2 2 0 0 0 2 1.7h8.8a2 2 0 0 0 1.9-1.5L21 8H6.2"></path><circle cx="9.5" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg>
+        <span>Cart</span>
+        <span class="cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <div id="MobileNav" class="mobile-nav" hidden>
+    <nav class="container" aria-label="Mobile navigation">
+      <a href="{{ routes.collections_url }}"><span>01</span>Shop all</a>
+      <a href="{{ routes.collections_url }}/rackets"><span>02</span>Rackets</a>
+      <a href="{{ routes.collections_url }}/shoes"><span>03</span>Shoes</a>
+      <a href="{{ routes.collections_url }}/bags"><span>04</span>Bags</a>
+      <a href="{{ routes.collections_url }}/accessories"><span>05</span>Accessories</a>
+      <a href="{{ routes.collections_url }}/apparel"><span>06</span>Apparel</a>
+      <a href="{{ routes.collections_url }}/shuttlecocks"><span>07</span>Shuttlecocks</a>
+      <a class="mobile-sale" href="{{ routes.collections_url }}/sale"><span>08</span>Sale</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+.site-header{transition:background .35s ease,box-shadow .35s ease}.site-header:has(details[open]){box-shadow:0 18px 45px rgba(0,0,0,.08)}
+.header-inner{grid-template-columns:auto 1fr auto;gap:36px}.brand{justify-self:start;min-width:145px}.brand-word{font-size:30px;font-weight:950;letter-spacing:-.09em}.brand-word span{color:var(--oba-accent)}
+.nav{justify-content:flex-start;gap:24px}.nav>a,.nav summary{position:relative;display:flex;align-items:center;gap:7px;height:78px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;cursor:pointer}.nav>a:after,.nav summary:after{content:"";position:absolute;left:0;right:100%;bottom:21px;height:2px;background:var(--oba-ink);transition:right .25s ease}.nav>a:hover:after,.nav summary:hover:after,.nav summary:focus-visible:after{right:0}.nav-shop{position:static}.nav-shop summary{list-style:none}.nav-shop summary::-webkit-details-marker{display:none}.nav-chevron{width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .25s}.nav-shop[open] .nav-chevron{transform:rotate(225deg) translate(-1px,-1px)}
+.mega-menu{position:absolute;left:0;right:0;top:100%;display:grid;grid-template-columns:1.15fr .8fr .8fr 1.25fr;gap:34px;padding:34px max(24px,calc((100vw - var(--oba-max))/2 + 24px)) 38px;background:#f5f5f1;border-top:1px solid var(--oba-line);border-bottom:1px solid var(--oba-line);box-shadow:0 22px 45px rgba(0,0,0,.08);animation:megaIn .24s ease both}.mega-intro,.mega-column,.mega-feature{min-width:0}.mega-intro{display:flex;flex-direction:column;align-items:flex-start;padding-right:24px;border-right:1px solid var(--oba-line)}.mega-kicker,.mega-column>span{font-size:9px;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:var(--oba-muted)}.mega-intro strong{font-size:28px;line-height:.98;letter-spacing:-.045em;max-width:230px;margin:14px 0 26px}.mega-intro>a,.mega-feature>a{font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:800}.mega-intro>a span{display:inline-block;transition:transform .2s}.mega-intro>a:hover span{transform:translate(3px,-3px)}.mega-column{display:flex;flex-direction:column;align-items:flex-start;gap:10px}.mega-column>span{margin-bottom:8px}.mega-column a{font-size:14px;font-weight:700;transition:transform .2s,color .2s}.mega-column a:hover{transform:translateX(4px);color:#606800}.mega-feature{background:#111;color:#fff;min-height:180px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.mega-feature:after{content:"";position:absolute;width:170px;height:170px;right:-60px;bottom:-80px;border-radius:50%;background:var(--oba-accent)}.mega-feature-mark{position:relative;z-index:1;font-size:24px;font-weight:950;line-height:.8;letter-spacing:-.07em}.mega-feature p{position:relative;z-index:1;color:#bbb;font-size:12px;max-width:220px;margin:20px 0 0;line-height:1.45}.mega-feature a{position:relative;z-index:2;margin-top:20px}.nav-sale{color:#626900!important}.header-actions{gap:14px}.header-action{position:relative;gap:7px;font-size:10px;letter-spacing:.08em}.header-action svg{width:17px;height:17px}.header-action:before{content:"";position:absolute;inset:-9px -7px;border-radius:30px;background:var(--oba-accent);transform:scale(.5);opacity:0;transition:.25s}.header-action:hover:before{transform:scale(1);opacity:.18}.header-action svg,.header-action span{position:relative}.cart-count{background:var(--oba-ink);color:#fff;transition:transform .25s}.cart-link:hover .cart-count{transform:scale(1.12)}
+.menu-icon{gap:5px}.menu-icon i{transition:transform .25s}.menu-toggle[aria-expanded=true] .menu-icon i:first-child{transform:translateY(3px) rotate(45deg)}.menu-toggle[aria-expanded=true] .menu-icon i:last-child{transform:translateY(-3px) rotate(-45deg)}.mobile-nav{animation:mobileIn .28s ease both}.mobile-nav a{transition:padding-left .2s,background .2s}.mobile-nav a:hover{padding-left:8px;background:rgba(216,255,62,.12)}
+@keyframes megaIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}@keyframes mobileIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@media(max-width:1100px){.header-inner{gap:22px}.nav{gap:16px}.nav>a,.nav summary{font-size:10px}.header-actions{gap:11px}.account-action span{display:none}.mega-menu{grid-template-columns:1fr 1fr 1fr}.mega-feature{display:none}}
+@media(max-width:900px){.header-inner{grid-template-columns:auto 1fr auto;gap:12px}.header-menu{display:block}.menu-toggle{display:flex}.brand{justify-self:center;min-width:0}.nav{display:none}.header-actions{gap:12px}.header-action span:not(.cart-count){display:none}.account-action{display:none}.header-action svg{width:18px;height:18px}.mobile-nav[hidden]{display:none!important}}
+@media(max-width:600px){.header-inner{min-height:66px}.brand-word{font-size:27px}.header-actions{gap:10px}.header-action svg{width:17px;height:17px}.cart-count{min-width:19px;height:19px}.mobile-nav{padding-top:12px}}
+@media(prefers-reduced-motion:reduce){.mega-menu,.mobile-nav{animation:none}.nav>a:after,.nav summary:after,.header-action:before,.mobile-nav a{transition:none}}
+</style>
+
+{% schema %}
+{"name":"Header","settings":[]}
+{% endschema %}
