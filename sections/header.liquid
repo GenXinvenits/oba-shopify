@@ -1,7 +1,10 @@
 <header class="site-header">
   <div class="container header-inner">
     <div class="header-menu">
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="MobileNav">Menu</button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="MobileNav">
+        <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
+        <span>Menu</span>
+      </button>
     </div>
 
     <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
@@ -17,32 +20,43 @@
       <a href="{{ routes.collections_url }}/rackets">Rackets</a>
       <a href="{{ routes.collections_url }}/shoes">Shoes</a>
       <a href="{{ routes.collections_url }}/shuttlecocks">Shuttles</a>
-      <a href="{{ routes.collections_url }}/sale">Sale</a>
+      <a href="{{ routes.collections_url }}/bags">Bags</a>
+      <a class="nav-sale" href="{{ routes.collections_url }}/sale">Sale</a>
     </nav>
 
     <div class="header-actions">
-      <a class="optional" href="{{ routes.search_url }}">Search</a>
-      <a class="optional" href="{{ routes.account_url }}">Account</a>
-      <a href="{{ routes.cart_url }}">Cart <span data-cart-count>({{ cart.item_count }})</span></a>
+      <a class="header-action optional" href="{{ routes.search_url }}" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+        <span>Search</span>
+      </a>
+      <a class="header-action optional" href="{{ routes.account_url }}" aria-label="Account">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20c.8-3.5 3-5.3 6.5-5.3s5.7 1.8 6.5 5.3"></path></svg>
+        <span>Account</span>
+      </a>
+      <a class="header-action cart-link" href="{{ routes.cart_url }}" aria-label="Cart, {{ cart.item_count }} items">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4h2l1.6 11.1a2 2 0 0 0 2 1.7h8.8a2 2 0 0 0 1.9-1.5L21 8H6.2"></path><circle cx="9.5" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg>
+        <span>Cart</span>
+        <span class="cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
     </div>
   </div>
 
   <div id="MobileNav" class="mobile-nav" hidden>
     <nav class="container" aria-label="Mobile navigation">
-      <a href="{{ routes.collections_url }}">Shop all</a>
-      <a href="{{ routes.collections_url }}/rackets">Rackets</a>
-      <a href="{{ routes.collections_url }}/shoes">Shoes</a>
-      <a href="{{ routes.collections_url }}/bags">Bags</a>
-      <a href="{{ routes.collections_url }}/accessories">Accessories</a>
-      <a href="{{ routes.collections_url }}/apparel">Apparel</a>
-      <a href="{{ routes.collections_url }}/shuttlecocks">Shuttlecocks</a>
-      <a href="{{ routes.collections_url }}/sale">Sale</a>
+      <a href="{{ routes.collections_url }}"><span>01</span>Shop all</a>
+      <a href="{{ routes.collections_url }}/rackets"><span>02</span>Rackets</a>
+      <a href="{{ routes.collections_url }}/shoes"><span>03</span>Shoes</a>
+      <a href="{{ routes.collections_url }}/bags"><span>04</span>Bags</a>
+      <a href="{{ routes.collections_url }}/accessories"><span>05</span>Accessories</a>
+      <a href="{{ routes.collections_url }}/apparel"><span>06</span>Apparel</a>
+      <a href="{{ routes.collections_url }}/shuttlecocks"><span>07</span>Shuttlecocks</a>
+      <a class="mobile-sale" href="{{ routes.collections_url }}/sale"><span>08</span>Sale</a>
     </nav>
   </div>
 </header>
 
 <style>
-.menu-toggle{display:none;border:0;background:none;text-transform:uppercase;font-size:11px;font-weight:800;padding:0}.mobile-nav{border-top:1px solid var(--oba-line);padding:18px 0}.mobile-nav nav{display:grid;gap:14px}.mobile-nav a{text-transform:uppercase;font-size:12px;font-weight:800}@media(max-width:900px){.menu-toggle{display:block}.header-menu{order:-1}.mobile-nav[hidden]{display:none!important}}
+.header-menu{display:none}.menu-toggle{display:none;border:0;background:none;color:inherit;text-transform:uppercase;font-size:10px;font-weight:800;letter-spacing:.1em;padding:8px 0;align-items:center;gap:8px}.menu-icon{display:grid;gap:4px}.menu-icon i{display:block;width:17px;height:1px;background:currentColor}.header-action{display:flex;align-items:center;gap:6px}.header-action svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.cart-count{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:50%;background:var(--oba-ink);color:#fff;font-size:9px;line-height:1}.nav-sale{color:#5e6500}.mobile-nav{border-top:1px solid var(--oba-line);background:var(--oba-bg);padding:20px 0 24px}.mobile-nav nav{display:grid;gap:0}.mobile-nav a{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--oba-line);padding:15px 0;text-transform:uppercase;font-size:14px;font-weight:800;letter-spacing:.03em}.mobile-nav a span{font-size:9px;color:var(--oba-muted);letter-spacing:.12em}.mobile-nav .mobile-sale{color:#697000}@media(max-width:1100px){.nav{gap:19px}.header-actions{gap:13px}.header-actions .optional span{display:none}.header-action svg{width:18px;height:18px}}@media(max-width:900px){.header-inner{grid-template-columns:auto 1fr auto}.header-menu{display:block;order:-1}.menu-toggle{display:flex}.nav{display:none}.brand{justify-self:center}.header-actions{gap:12px}.header-actions .optional{display:flex}.header-actions .optional span{display:none}.header-actions .cart-link span:not(.cart-count){display:none}.mobile-nav[hidden]{display:none!important}}@media(max-width:600px){.header-inner{min-height:66px}.header-actions{gap:10px}.header-action svg{width:17px;height:17px}.cart-count{min-width:19px;height:19px}.mobile-nav{padding-top:12px}}
 </style>
 
 {% schema %}
