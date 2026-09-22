@@ -1,4 +1,4 @@
-<section class="section product-page product-page--split">
+<section class="section product-page">
   <div class="container">
     <nav class="product-breadcrumbs" aria-label="Breadcrumb">
       <a href="{{ routes.root_url }}">Home</a><span>/</span>
@@ -6,8 +6,8 @@
       <span>{{ product.title }}</span>
     </nav>
 
-    <div class="product-layout product-layout--split">
-      <div class="product-gallery product-gallery--split">
+    <div class="product-layout product-layout--amazon">
+      <div class="product-gallery">
         <div class="product-thumbs" aria-label="Product images">
           {% for image in product.images %}
             <a href="#ProductImage-{{ image.id }}" class="product-thumb">
