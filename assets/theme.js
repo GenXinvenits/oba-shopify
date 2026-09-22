@@ -32,3 +32,36 @@ document.addEventListener('DOMContentLoaded',()=>{
     revealTargets.forEach(el=>el.classList.add('is-visible'));
   }
 });
+
+document.addEventListener('submit',(event)=>{
+  const form=event.target.closest('[data-product-card-form]');
+  if(!form) return;
+  event.preventDefault();
+  const button=form.querySelector('button[type="submit"]');
+  if(!button||button.disabled) return;
+  const original=button.innerHTML;
+  button.disabled=true;
+  button.innerHTML='<span>Adding…</span><span aria-hidden="true">✓</span>';
+  fetch(form.action,{method:'POST',headers:{Accept:'application/javascript','X-Requested-With':'XMLHttpRequest'},body:new FormData(form)})
+    .then((response)=>{
+      if(!response.ok) throw new Error('Cart request failed');
+      return response.json();
+    })
+    .then((cart)=>{
+      document.querySelectorAll('[data-cart-count]').forEach((el)=>{el.textContent=cart.item_count});
+      button.innerHTML='<span>Added</span><span aria-hidden="true">✓</span>';
+      window.setTimeout(()=>{button.disabled=false;button.innerHTML=original},1200);
+    })
+    .catch(()=>{
+      form.submit();
+    });
+});
+document.addEventListener('click',(event)=>{
+  const toggle=event.target.closest('.collection-filter-toggle');
+  if(!toggle) return;
+  const filters=document.getElementById(toggle.getAttribute('aria-controls'));
+  if(!filters) return;
+  const open=toggle.getAttribute('aria-expanded')==='true';
+  toggle.setAttribute('aria-expanded',String(!open));
+  filters.hidden=open;
+});
