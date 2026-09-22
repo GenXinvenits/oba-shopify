@@ -1,16 +1,100 @@
-<section class="section">
+<section class="section collection-section">
   <div class="container">
-    <div class="section-heading">
-      <div><div class="eyebrow">OBA Pro Shop</div><h1>{{ collection.title }}</h1></div>
-      <p>{{ collection.description | strip_html | truncate: 220 }}</p>
+    <div class="collection-intro">
+      <div>
+        <div class="eyebrow">OBA Pro Shop</div>
+        <h1>{{ collection.title }}</h1>
+      </div>
+      {% if collection.description != blank %}
+        <div class="collection-description">{{ collection.description }}</div>
+      {% endif %}
     </div>
-    <div class="product-grid">
-      {% for product in collection.products limit: section.settings.products_per_page %}{% render 'product-card', product: product %}{% endfor %}
+
+    <div class="collection-toolbar">
+      <div class="collection-toolbar__summary">
+        <span>{{ collection.products_count }} {% if collection.products_count == 1 %}product{% else %}products{% endif %}</span>
+      </div>
+      <div class="collection-toolbar__controls">
+        {% if collection.filters.size > 0 %}
+          <button type="button" class="collection-filter-toggle" aria-expanded="false" aria-controls="CollectionFilters">
+            Filter <span aria-hidden="true">+</span>
+          </button>
+        {% endif %}
+        {% if collection.sort_options.size > 0 %}
+          <form class="collection-sort" method="get">
+            <label for="SortBy">Sort</label>
+            <select id="SortBy" name="sort_by" onchange="this.form.submit()">
+              {% for option in collection.sort_options %}
+                <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>{{ option.name }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        {% endif %}
+      </div>
     </div>
-    {% if collection.products_count == 0 %}<p>No products found in this collection.</p>{% endif %}
+
+    {% if collection.filters.size > 0 %}
+      <div id="CollectionFilters" class="collection-filters" hidden>
+        <form method="get">
+          {% for filter in collection.filters %}
+            <details class="collection-filter" {% if filter.active_values.size > 0 %}open{% endif %}>
+              <summary>{{ filter.label }} <span aria-hidden="true">+</span></summary>
+              <div class="collection-filter__values">
+                {% case filter.type %}
+                  {% when 'boolean' %}
+                    <a href="{{ filter.true_value.url_to_add }}" class="filter-chip{% if filter.true_value.active %} is-active{% endif %}">
+                      {{ filter.true_value.label }}
+                    </a>
+                  {% else %}
+                    {% for value in filter.values %}
+                      <a href="{{ value.url_to_add }}" class="filter-chip{% if value.active %} is-active{% endif %}">
+                        <span>{{ value.label }}</span>
+                        <span>{{ value.count }}</span>
+                      </a>
+                    {% endfor %}
+                {% endcase %}
+              </div>
+            </details>
+          {% endfor %}
+        </form>
+      </div>
+    {% endif %}
+
+    {% paginate collection.products by section.settings.products_per_page %}
+      {% if collection.products_count > 0 %}
+        <div class="product-grid product-grid--collection">
+          {% for product in collection.products %}
+            {% render 'product-card', product: product %}
+          {% endfor %}
+        </div>
+        {% if paginate.pages > 1 %}
+          <nav class="pagination" aria-label="Pagination">
+            {% if paginate.previous %}
+              <a href="{{ paginate.previous.url }}" class="pagination__link" aria-label="Previous page">←</a>
+            {% endif %}
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <a href="{{ part.url }}" class="pagination__link">{{ part.title }}</a>
+              {% else %}
+                <span class="pagination__link{% if part.title == paginate.current_page %} is-current{% endif %}">{{ part.title }}</span>
+              {% endif %}
+            {% endfor %}
+            {% if paginate.next %}
+              <a href="{{ paginate.next.url }}" class="pagination__link" aria-label="Next page">→</a>
+            {% endif %}
+          </nav>
+        {% endif %}
+      {% else %}
+        <div class="collection-empty">
+          <h2>No products found</h2>
+          <p>Try removing a filter or browse the full OBA Pro Shop.</p>
+          <a class="button" href="{{ routes.all_products_collection_url }}">Shop all products</a>
+        </div>
+      {% endif %}
+    {% endpaginate %}
   </div>
 </section>
 
 {% schema %}
-{"name":"Main collection","settings":[{"type":"range","id":"products_per_page","label":"Products","min":12,"max":48,"step":12,"default":24}],"presets":[{"name":"Main collection"}]}
+{"name":"Main collection","settings":[{"type":"range","id":"products_per_page","label":"Products per page","min":12,"max":48,"step":12,"default":24}],"presets":[{"name":"Main collection"}]}
 {% endschema %}
