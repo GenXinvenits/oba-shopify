@@ -1,11 +1,49 @@
+{% assign card_variant = product.selected_or_first_available_variant %}
 <article class="product-card">
-  <a class="product-card__media" href="{{ product.url }}">
-    {% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy' }}{% endif %}
-    {% if product.compare_at_price > product.price %}<span class="product-badge">Sale</span>{% endif %}
-  </a>
+  <div class="product-card__media-wrap">
+    <a class="product-card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+      {% if product.featured_image != blank %}
+        {{ product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360,540,720,900,1200', sizes: '(min-width: 1200px) 25vw, (min-width: 750px) 50vw, 50vw', class: 'product-card__image product-card__image--primary' }}
+        {% if product.images.size > 1 %}
+          {{ product.images[1] | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360,540,720,900,1200', sizes: '(min-width: 1200px) 25vw, (min-width: 750px) 50vw, 50vw', class: 'product-card__image product-card__image--secondary' }}
+        {% endif %}
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+      {% endif %}
+      <span class="product-card__badges">
+        {% if product.compare_at_price > product.price %}
+          <span class="product-badge product-badge--sale">Sale</span>
+        {% endif %}
+        {% if product.tags contains 'New' or product.tags contains 'new' %}
+          <span class="product-badge product-badge--new">New</span>
+        {% endif %}
+      </span>
+      <span class="product-card__quick">View product <span aria-hidden="true">↗</span></span>
+    </a>
+    {% if card_variant != blank %}
+      <form class="product-card__quick-add" method="post" action="{{ routes.cart_add_url }}" data-product-card-form>
+        <input type="hidden" name="id" value="{{ card_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="product-card__add-button" {% unless card_variant.available %}disabled{% endunless %}>
+          <span>{% if card_variant.available %}Quick add{% else %}Sold out{% endif %}</span>
+          <span aria-hidden="true">+</span>
+        </button>
+      </form>
+    {% endif %}
+  </div>
+
   <div class="product-card__info">
-    {% if product.vendor != blank %}<div class="product-card__brand">{{ product.vendor }}</div>{% endif %}
+    <div class="product-card__meta">
+      {% if product.vendor != blank %}<span class="product-card__brand">{{ product.vendor }}</span>{% endif %}
+      {% if product.available %}<span class="product-card__availability">In stock</span>{% endif %}
+    </div>
     <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
-    <div class="price">{{ product.price | money }}{% if product.compare_at_price > product.price %} <s>{{ product.compare_at_price | money }}</s>{% endif %}</div>
+    <div class="product-card__footer">
+      <div class="price">
+        {{ product.price | money }}
+        {% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}
+      </div>
+      {% if product.price_varies %}<span class="product-card__from">From</span>{% endif %}
+    </div>
   </div>
 </article>
