@@ -1,0 +1,19 @@
+<section class="story">
+  <div class="story-grid">
+    <div class="story-media">
+      {% if section.settings.image != blank %}{{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'lazy' }}{% endif %}
+    </div>
+    <div class="story-content">
+      <div>
+        <div class="eyebrow">More than a pro shop</div>
+        <h2>{{ section.settings.heading }}</h2>
+        <p>{{ section.settings.text }}</p>
+        {% if section.settings.button_label != blank %}<a class="button button--light" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{"name":"OBA story","settings":[{"type":"image_picker","id":"image","label":"Image"},{"type":"text","id":"heading","label":"Heading","default":"TRAIN. PLAY. COMPETE."},{"type":"textarea","id":"text","label":"Text","default":"Oregon Badminton Academy is a community built around the sport. Our Pro Shop brings that same player-first mindset to the gear you use on court — authentic equipment from brands trusted by badminton players."},{"type":"text","id":"button_label","label":"Button","default":"Visit OBA"},{"type":"url","id":"button_link","label":"Button link"}],"presets":[{"name":"OBA story"}]}
+{% endschema %}

@@ -1,0 +1,28 @@
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <div><div class="eyebrow">Equip</div><h2>{{ section.settings.heading }}</h2></div>
+      {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+    </div>
+    <div class="category-grid">
+      {% for block in section.blocks %}
+        {% assign collection = block.settings.collection %}
+        <a class="category-card" href="{% if collection != blank %}{{ collection.url }}{% else %}{{ routes.collections_url }}{% endif %}" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+          {% elsif collection.featured_image != blank %}
+            {{ collection.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+          {% endif %}
+          <div class="category-card__content">
+            <div class="eyebrow">Shop</div>
+            <h3>{% if block.settings.title != blank %}{{ block.settings.title }}{% elsif collection != blank %}{{ collection.title }}{% else %}Category{% endif %}</h3>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{"name":"Shop by category","settings":[{"type":"text","id":"heading","label":"Heading","default":"SHOP BY CATEGORY"},{"type":"textarea","id":"text","label":"Intro","default":"Build your setup from rackets, shoes, shuttles and the gear you trust on court."}],"blocks":[{"type":"category","name":"Category","settings":[{"type":"collection","id":"collection","label":"Collection"},{"type":"image_picker","id":"image","label":"Image override"},{"type":"text","id":"title","label":"Title override"}]}],"max_blocks":6,"presets":[{"name":"Shop by category","blocks":[{"type":"category"},{"type":"category"},{"type":"category"},{"type":"category"},{"type":"category"},{"type":"category"}]}]}
+{% endschema %}

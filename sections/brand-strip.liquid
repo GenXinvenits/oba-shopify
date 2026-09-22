@@ -1,0 +1,11 @@
+<section class="brand-strip">
+  <div class="container">
+    <div class="brand-list">
+      {% for block in section.blocks %}<span {{ block.shopify_attributes }}>{{ block.settings.name }}</span>{% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{"name":"Brand strip","settings":[],"blocks":[{"type":"brand","name":"Brand","settings":[{"type":"text","id":"name","label":"Brand name","default":"YONEX"}]}],"max_blocks":8,"presets":[{"name":"OBA brands","blocks":[{"type":"brand","settings":{"name":"YONEX"}},{"type":"brand","settings":{"name":"VICTOR"}},{"type":"brand","settings":{"name":"HUNDRED"}},{"type":"brand","settings":{"name":"YANG YANG"}}]}]}
+{% endschema %}
