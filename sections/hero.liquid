@@ -1,8 +1,3 @@
-{{- comment -}}
-  OBA Pro Shop — editorial full-width hero slider.
-  Uses real OBA imagery; no generated/mockup artwork is embedded in the theme.
-{{- endcomment -}}
-
 <section class="oba-hero-slider" data-oba-hero>
   <div class="oba-hero-slider__track">
     <article class="oba-hero-slide is-active">
@@ -15,104 +10,58 @@
         <h1>{{ section.settings.heading }}</h1>
         <p>{{ section.settings.text }}</p>
         <div class="hero-actions">
-          {% if section.settings.primary_label != blank %}
-            <a class="button" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label }}</a>
-          {% endif %}
-          {% if section.settings.secondary_label != blank %}
-            <a class="button button--light" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>
-          {% endif %}
+          {% if section.settings.primary_label != blank %}<a class="button" href="{{ section.settings.primary_link }}">{{ section.settings.primary_label }}</a>{% endif %}
+          {% if section.settings.secondary_label != blank %}<a class="button button--light" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label }}</a>{% endif %}
         </div>
       </div>
     </article>
-
     <article class="oba-hero-slide">
-      <div class="oba-hero-slide__media">
-        <img src="https://orbadminton.com/wp-content/uploads/2025/08/PXL_20250423_0147530011-scaled.jpg" alt="OBA badminton court" loading="lazy">
-      </div>
+      <div class="oba-hero-slide__media"><img src="https://orbadminton.com/wp-content/uploads/2025/08/PXL_20250423_0147530011-scaled.jpg" alt="OBA badminton court" loading="lazy"></div>
       <div class="oba-hero-slide__shade"></div>
       <div class="oba-hero-slide__content container">
-        <div class="eyebrow">EQUIPMENT FOR EVERY RALLY</div>
-        <h2>GEAR UP.<br>GET BETTER.</h2>
+        <div class="eyebrow">EQUIPMENT FOR EVERY RALLY</div><h2>GEAR UP.<br>GET BETTER.</h2>
         <p>Rackets, shoes and court essentials selected for serious badminton players.</p>
-        <div class="hero-actions">
-          <a class="button" href="{{ routes.collections_url }}">Shop the collection</a>
-          <a class="button button--light" href="{{ routes.collections_url }}/rackets">Explore rackets</a>
-        </div>
+        <div class="hero-actions"><a class="button" href="{{ routes.collections_url }}">Shop the collection</a><a class="button button--light" href="{{ routes.collections_url }}/rackets">Explore rackets</a></div>
       </div>
     </article>
-
     <article class="oba-hero-slide">
-      <div class="oba-hero-slide__media">
-        <img src="https://orbadminton.com/wp-content/uploads/2025/04/enhacningg-Picsart-AiImageEnhancer-700x800.png" alt="OBA badminton players" loading="lazy">
-      </div>
+      <div class="oba-hero-slide__media"><img src="https://orbadminton.com/wp-content/uploads/2025/04/enhacningg-Picsart-AiImageEnhancer-700x800.png" alt="OBA badminton players" loading="lazy"></div>
       <div class="oba-hero-slide__shade"></div>
       <div class="oba-hero-slide__content container">
-        <div class="eyebrow">OREGON BADMINTON ACADEMY</div>
-        <h2>TRAIN.<br>PLAY.<br>COMPETE.</h2>
+        <div class="eyebrow">OREGON BADMINTON ACADEMY</div><h2>TRAIN.<br>PLAY.<br>COMPETE.</h2>
         <p>Built around the game. Made for the players who keep showing up.</p>
-        <div class="hero-actions">
-          <a class="button" href="{{ routes.collections_url }}">Shop OBA Pro Shop</a>
-          <a class="button button--light" href="https://orbadminton.com/">Visit OBA Academy</a>
-        </div>
+        <div class="hero-actions"><a class="button" href="{{ routes.collections_url }}">Shop OBA Pro Shop</a><a class="button button--light" href="https://orbadminton.com/">Visit OBA Academy</a></div>
       </div>
     </article>
   </div>
-
   <div class="oba-hero-slider__controls container">
     <div class="oba-hero-slider__counter"><strong data-hero-current>01</strong><span>/ 03</span></div>
-    <div class="oba-hero-slider__dots" role="tablist" aria-label="Hero slides">
-      <button type="button" class="is-active" data-hero-slide="0" aria-label="Show slide 1"></button>
-      <button type="button" data-hero-slide="1" aria-label="Show slide 2"></button>
-      <button type="button" data-hero-slide="2" aria-label="Show slide 3"></button>
-    </div>
+    <div class="oba-hero-slider__dots" role="tablist" aria-label="Hero slides"><button type="button" class="is-active" data-hero-slide="0" aria-label="Show slide 1"></button><button type="button" data-hero-slide="1" aria-label="Show slide 2"></button><button type="button" data-hero-slide="2" aria-label="Show slide 3"></button></div>
     <button type="button" class="oba-hero-slider__next" data-hero-next aria-label="Next slide">NEXT <span>↗</span></button>
   </div>
 </section>
 
 <style>
-.oba-hero-slider{position:relative;min-height:min(820px,calc(100vh - 110px));background:#111;color:#fff;overflow:hidden}
-.oba-hero-slider__track{position:absolute;inset:0}
-.oba-hero-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility .8s ease}
+.oba-hero-slider{position:relative;min-height:calc(100svh - var(--header-height,0px));height:max(720px,calc(100svh - var(--header-height,0px)));background:#111;color:#fff;overflow:hidden}
+.oba-hero-slider__track,.oba-hero-slide,.oba-hero-slide__media{position:absolute;inset:0}
+.oba-hero-slide{opacity:0;visibility:hidden;transition:opacity .8s ease,visibility .8s ease}
 .oba-hero-slide.is-active{opacity:1;visibility:visible}
-.oba-hero-slide__media{position:absolute;inset:0;background:#151515}
-.oba-hero-slide__media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.05);transition:transform 7s cubic-bezier(.15,.75,.2,1)}
+.oba-hero-slide__media{background:#151515}
+.oba-hero-slide__media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center;transform:scale(1.04);transition:transform 7s cubic-bezier(.15,.75,.2,1)}
 .oba-hero-slide.is-active .oba-hero-slide__media img{transform:scale(1)}
-.oba-hero-slide__shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.9) 0%,rgba(10,10,10,.72) 34%,rgba(10,10,10,.25) 68%,rgba(10,10,10,.08) 100%),linear-gradient(0deg,rgba(0,0,0,.4),transparent 45%)}
-.oba-hero-slide__content{position:relative;z-index:2;min-height:inherit;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-top:40px;padding-bottom:120px}
+.oba-hero-slide__shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,.9) 0%,rgba(10,10,10,.7) 34%,rgba(10,10,10,.25) 68%,rgba(10,10,10,.08) 100%),linear-gradient(0deg,rgba(0,0,0,.48),transparent 50%)}
+.oba-hero-slide__content{position:relative;z-index:2;min-height:inherit;height:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-top:40px;padding-bottom:110px}
 .oba-hero-slide__content>*{opacity:0;transform:translateY(24px)}
 .oba-hero-slide.is-active .oba-hero-slide__content>*{animation:obaHeroText .7s cubic-bezier(.2,.8,.2,1) forwards}
-.oba-hero-slide.is-active .oba-hero-slide__content .eyebrow{animation-delay:.08s}
-.oba-hero-slide.is-active .oba-hero-slide__content h1,.oba-hero-slide.is-active .oba-hero-slide__content h2{animation-delay:.16s}
-.oba-hero-slide.is-active .oba-hero-slide__content p{animation-delay:.24s}
-.oba-hero-slide.is-active .oba-hero-slide__content .hero-actions{animation-delay:.32s}
+.oba-hero-slide.is-active .oba-hero-slide__content .eyebrow{animation-delay:.08s}.oba-hero-slide.is-active .oba-hero-slide__content h1,.oba-hero-slide.is-active .oba-hero-slide__content h2{animation-delay:.16s}.oba-hero-slide.is-active .oba-hero-slide__content p{animation-delay:.24s}.oba-hero-slide.is-active .oba-hero-slide__content .hero-actions{animation-delay:.32s}
 .oba-hero-slide h1,.oba-hero-slide h2{font-size:clamp(62px,9.5vw,142px);line-height:.79;letter-spacing:-.075em;margin:14px 0 28px;max-width:850px}
 .oba-hero-slide p{max-width:510px;color:#ededeb;font-size:17px;line-height:1.55;margin:0 0 28px}
-.oba-hero-slide .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
-.oba-hero-slide .button--light{background:#fff;color:#111;border-color:#fff}
-.oba-hero-slide .button--light:hover{background:var(--oba-accent);color:#111;border-color:var(--oba-accent)}
+.oba-hero-slide .hero-actions{display:flex;gap:10px;flex-wrap:wrap}.oba-hero-slide .button--light{background:#fff;color:#111;border-color:#fff}.oba-hero-slide .button--light:hover{background:var(--oba-accent);color:#111;border-color:var(--oba-accent)}
 .oba-hero-slider__controls{position:absolute;z-index:5;bottom:28px;left:50%;transform:translateX(-50%);display:grid;grid-template-columns:100px 1fr 100px;align-items:center;gap:20px}
-.oba-hero-slider__counter{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#aaa}
-.oba-hero-slider__counter strong{color:#fff;font-size:15px;margin-right:5px}
-.oba-hero-slider__dots{display:flex;justify-content:center;gap:8px}
-.oba-hero-slider__dots button{width:42px;height:2px;padding:0;border:0;background:rgba(255,255,255,.35);cursor:pointer;transition:background .3s,width .3s}
-.oba-hero-slider__dots button.is-active{background:#fff;width:64px}
-.oba-hero-slider__next{justify-self:end;border:0;background:transparent;color:#fff;font-size:10px;letter-spacing:.14em;font-weight:800;cursor:pointer;padding:10px 0}
-.oba-hero-slider__next span{font-size:16px;margin-left:6px;transition:transform .2s;display:inline-block}
-.oba-hero-slider__next:hover span{transform:translate(3px,-3px)}
+.oba-hero-slider__counter{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#aaa}.oba-hero-slider__counter strong{color:#fff;font-size:15px;margin-right:5px}.oba-hero-slider__dots{display:flex;justify-content:center;gap:8px}.oba-hero-slider__dots button{width:42px;height:2px;padding:0;border:0;background:rgba(255,255,255,.35);cursor:pointer;transition:background .3s,width .3s}.oba-hero-slider__dots button.is-active{background:#fff;width:64px}.oba-hero-slider__next{justify-self:end;border:0;background:transparent;color:#fff;font-size:10px;letter-spacing:.14em;font-weight:800;cursor:pointer;padding:10px 0}.oba-hero-slider__next span{font-size:16px;margin-left:6px;transition:transform .2s;display:inline-block}.oba-hero-slider__next:hover span{transform:translate(3px,-3px)}
 @keyframes obaHeroText{to{opacity:1;transform:none}}
-@media(max-width:700px){
-  .oba-hero-slider{min-height:78vh}
-  .oba-hero-slide__shade{background:linear-gradient(180deg,rgba(10,10,10,.5),rgba(10,10,10,.78) 62%,rgba(10,10,10,.92))}
-  .oba-hero-slide__content{justify-content:flex-end;padding-bottom:115px}
-  .oba-hero-slide h1,.oba-hero-slide h2{font-size:clamp(54px,16vw,82px)}
-  .oba-hero-slide p{font-size:15px;max-width:360px}
-  .oba-hero-slider__controls{grid-template-columns:60px 1fr 65px;bottom:18px;gap:10px}
-  .oba-hero-slider__dots button{width:24px}.oba-hero-slider__dots button.is-active{width:38px}
-}
-@media(prefers-reduced-motion:reduce){
-  .oba-hero-slide,.oba-hero-slide__media img{transition:none}
-  .oba-hero-slide.is-active .oba-hero-slide__content>*{animation:none;opacity:1;transform:none}
-}
+@media(max-width:700px){.oba-hero-slider{min-height:78svh;height:78svh;max-height:none}.oba-hero-slide__shade{background:linear-gradient(180deg,rgba(10,10,10,.42),rgba(10,10,10,.76) 60%,rgba(10,10,10,.94))}.oba-hero-slide__content{justify-content:flex-end;padding-bottom:105px}.oba-hero-slide h1,.oba-hero-slide h2{font-size:clamp(54px,16vw,82px)}.oba-hero-slide p{font-size:15px;max-width:360px}.oba-hero-slider__controls{grid-template-columns:60px 1fr 65px;bottom:18px;gap:10px}.oba-hero-slider__dots button{width:24px}.oba-hero-slider__dots button.is-active{width:38px}}
+@media(prefers-reduced-motion:reduce){.oba-hero-slide,.oba-hero-slide__media img{transition:none}.oba-hero-slide.is-active .oba-hero-slide__content>*{animation:none;opacity:1;transform:none}}
 </style>
 
 {% schema %}
