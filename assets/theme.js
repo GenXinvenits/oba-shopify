@@ -1,67 +1,33 @@
 document.addEventListener('DOMContentLoaded',()=>{
   const toggle=document.querySelector('.menu-toggle');
   const nav=document.getElementById('MobileNav');
-  if(toggle&&nav){
-    toggle.addEventListener('click',()=>{
-      const open=toggle.getAttribute('aria-expanded')==='true';
-      toggle.setAttribute('aria-expanded',String(!open));
-      nav.hidden=open;
-    });
+  if(toggle&&nav){toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));nav.hidden=open;});}
+
+  const hero=document.querySelector('[data-oba-hero]');
+  if(hero){
+    const slides=[...hero.querySelectorAll('.oba-hero-slide')];
+    const dots=[...hero.querySelectorAll('[data-hero-slide]')];
+    const current=hero.querySelector('[data-hero-current]');
+    const next=hero.querySelector('[data-hero-next]');
+    let index=0; let timer;
+    const show=(nextIndex)=>{index=(nextIndex+slides.length)%slides.length;slides.forEach((slide,i)=>slide.classList.toggle('is-active',i===index));dots.forEach((dot,i)=>dot.classList.toggle('is-active',i===index));if(current) current.textContent=String(index+1).padStart(2,'0');};
+    const start=()=>{clearInterval(timer);timer=setInterval(()=>show(index+1),6500);};
+    dots.forEach((dot,i)=>dot.addEventListener('click',()=>{show(i);start();}));
+    next?.addEventListener('click',()=>{show(index+1);start();});
+    hero.addEventListener('mouseenter',()=>clearInterval(timer));
+    hero.addEventListener('mouseleave',start);
+    hero.addEventListener('focusin',()=>clearInterval(timer));
+    hero.addEventListener('focusout',start);
+    start();
   }
 
   const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduceMotion) return;
-
   const revealTargets=document.querySelectorAll('.section-heading,.category-card,.product-card,.story-content,.story-media,.brand-list span,.newsletter-grid,.site-footer .footer-grid');
-  revealTargets.forEach((el,index)=>{
-    el.classList.add('oba-reveal');
-    el.style.setProperty('--oba-delay',`${Math.min(index%4,3)*70}ms`);
-  });
-
-  if('IntersectionObserver' in window){
-    const observer=new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },{threshold:.12,rootMargin:'0px 0px -40px'});
-    revealTargets.forEach(el=>observer.observe(el));
-  }else{
-    revealTargets.forEach(el=>el.classList.add('is-visible'));
-  }
+  revealTargets.forEach((el,index)=>{el.classList.add('oba-reveal');el.style.setProperty('--oba-delay',(Math.min(index%4,3)*70)+'ms');});
+  if('IntersectionObserver' in window){const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}});},{threshold:.12,rootMargin:'0px 0px -40px'});revealTargets.forEach(el=>observer.observe(el));}else revealTargets.forEach(el=>el.classList.add('is-visible'));
 });
 
-document.addEventListener('submit',(event)=>{
-  const form=event.target.closest('[data-product-card-form]');
-  if(!form) return;
-  event.preventDefault();
-  const button=form.querySelector('button[type="submit"]');
-  if(!button||button.disabled) return;
-  const original=button.innerHTML;
-  button.disabled=true;
-  button.innerHTML='<span>Adding…</span><span aria-hidden="true">✓</span>';
-  fetch(form.action,{method:'POST',headers:{Accept:'application/javascript','X-Requested-With':'XMLHttpRequest'},body:new FormData(form)})
-    .then((response)=>{
-      if(!response.ok) throw new Error('Cart request failed');
-      return response.json();
-    })
-    .then((cart)=>{
-      document.querySelectorAll('[data-cart-count]').forEach((el)=>{el.textContent=cart.item_count});
-      button.innerHTML='<span>Added</span><span aria-hidden="true">✓</span>';
-      window.setTimeout(()=>{button.disabled=false;button.innerHTML=original},1200);
-    })
-    .catch(()=>{
-      form.submit();
-    });
-});
-document.addEventListener('click',(event)=>{
-  const toggle=event.target.closest('.collection-filter-toggle');
-  if(!toggle) return;
-  const filters=document.getElementById(toggle.getAttribute('aria-controls'));
-  if(!filters) return;
-  const open=toggle.getAttribute('aria-expanded')==='true';
-  toggle.setAttribute('aria-expanded',String(!open));
-  filters.hidden=open;
-});
+document.addEventListener('submit',(event)=>{const form=event.target.closest('[data-product-card-form]');if(!form)return;event.preventDefault();const button=form.querySelector('button[type="submit"]');if(!button||button.disabled)return;const original=button.innerHTML;button.disabled=true;button.innerHTML='<span>Adding…</span><span aria-hidden="true">✓</span>';fetch(form.action,{method:'POST',headers:{Accept:'application/javascript','X-Requested-With':'XMLHttpRequest'},body:new FormData(form)}).then((response)=>{if(!response.ok)throw new Error('Cart request failed');return response.json();}).then((cart)=>{document.querySelectorAll('[data-cart-count]').forEach((el)=>{el.textContent=cart.item_count});button.innerHTML='<span>Added</span><span aria-hidden="true">✓</span>';window.setTimeout(()=>{button.disabled=false;button.innerHTML=original},1200);}).catch(()=>{form.submit();});});
+
+document.addEventListener('click',(event)=>{const toggle=event.target.closest('.collection-filter-toggle');if(!toggle)return;const filters=document.getElementById(toggle.getAttribute('aria-controls'));if(!filters)return;const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));filters.hidden=open;});
