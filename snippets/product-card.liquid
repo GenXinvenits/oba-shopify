@@ -20,12 +20,13 @@
       </span>
       <span class="product-card__quick">View product <span aria-hidden="true">↗</span></span>
     </a>
-    {% if card_variant != blank %}
+
+    {% if card_variant != blank and card_variant.available %}
       <form class="product-card__quick-add" method="post" action="{{ routes.cart_add_url }}" data-product-card-form>
         <input type="hidden" name="id" value="{{ card_variant.id }}">
         <input type="hidden" name="quantity" value="1">
-        <button type="submit" class="product-card__add-button" {% unless card_variant.available %}disabled{% endunless %}>
-          <span>{% if card_variant.available %}Quick add{% else %}Sold out{% endif %}</span>
+        <button type="submit" class="product-card__add-button">
+          <span>Quick add</span>
           <span aria-hidden="true">+</span>
         </button>
       </form>
