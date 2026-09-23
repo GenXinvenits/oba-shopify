@@ -1,9 +1,29 @@
-<section class="hero">
-  {% if section.settings.image != blank %}
-    <div class="hero-media">
-      {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', widths: '900,1200,1600,2000,2400', sizes: '100vw' }}
-    </div>
-  {% endif %}
+<section class="hero hero--oba">
+  <div class="hero-visuals" aria-hidden="true">
+    <figure class="hero-visual hero-visual--player">
+      <img
+        src="https://orbadminton.com/wp-content/uploads/2025/08/a-photograph.webp"
+        alt=""
+        loading="eager"
+        fetchpriority="high"
+      >
+    </figure>
+    <figure class="hero-visual hero-visual--court">
+      <img
+        src="https://orbadminton.com/wp-content/uploads/2025/08/PXL_20250423_0147530011-scaled.jpg"
+        alt=""
+        loading="eager"
+      >
+    </figure>
+    <figure class="hero-visual hero-visual--team">
+      <img
+        src="https://orbadminton.com/wp-content/uploads/2025/04/enhacningg-Picsart-AiImageEnhancer-700x800.png"
+        alt=""
+        loading="eager"
+      >
+    </figure>
+  </div>
+
   <div class="hero-content">
     <div class="eyebrow">{{ section.settings.eyebrow }}</div>
     <h1>{{ section.settings.heading }}</h1>
