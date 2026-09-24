@@ -1,9 +1,9 @@
-<section class="section collection-section">
+<section class="section collection-section{% if collection.handle == 'sale' %} collection-section--sale{% endif %}">
   <div class="container">
     <div class="collection-intro">
       <div>
-        <div class="eyebrow">OBA Pro Shop</div>
-        <h1>{{ collection.title }}</h1>
+        <div class="eyebrow">{% if collection.handle == 'sale' %}OBA Sale{% else %}OBA Pro Shop{% endif %}</div>
+        <h1>{% if collection.handle == 'sale' %}SALE{% else %}{{ collection.title }}{% endif %}</h1>
       </div>
       {% if collection.description != blank %}
         <div class="collection-description">{{ collection.description }}</div>
