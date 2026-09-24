@@ -103,3 +103,12 @@
   .collection-section .collection-intro,
   .collection-section .collection-toolbar{padding-left:0;padding-right:0}
 }
+
+/* Sale collection */
+.collection-section--sale .collection-intro{background:var(--oba-accent);border:0;border-radius:14px;padding:34px 38px;margin-bottom:18px}
+.collection-section--sale .collection-intro h1{font-size:clamp(58px,9vw,120px);letter-spacing:-.075em}
+.collection-section--sale .collection-description{color:var(--oba-ink)}
+.collection-section--sale .collection-toolbar{background:#fff;border:1px solid var(--oba-line);border-radius:10px;padding:14px 18px;margin-bottom:24px}
+.collection-section--sale .product-card__media{border:1px solid var(--oba-line);border-radius:10px}
+.collection-section--sale .product-badge--sale{background:var(--oba-accent);color:var(--oba-ink);border-radius:999px}
+@media(max-width:600px){.collection-section--sale .collection-intro{padding:26px 20px;border-radius:12px}.collection-section--sale .collection-intro h1{font-size:58px}.collection-section--sale .collection-toolbar{padding:12px 14px}}
