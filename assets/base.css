@@ -112,3 +112,17 @@
 .collection-section--sale .product-card__media{border:1px solid var(--oba-line);border-radius:10px}
 .collection-section--sale .product-badge--sale{background:var(--oba-accent);color:var(--oba-ink);border-radius:999px}
 @media(max-width:600px){.collection-section--sale .collection-intro{padding:26px 20px;border-radius:12px}.collection-section--sale .collection-intro h1{font-size:58px}.collection-section--sale .collection-toolbar{padding:12px 14px}}
+
+/* Keep Sale collection description content aligned and readable, including Shopify rich-text headings. */
+.collection-section--sale .collection-description{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:12px;width:min(100%,560px);margin:0;text-align:left;font-size:15px;line-height:1.55;font-weight:600}
+.collection-section--sale .collection-description > *{margin:0!important;max-width:100%;text-align:left}
+.collection-section--sale .collection-description h1,
+.collection-section--sale .collection-description h2,
+.collection-section--sale .collection-description h3,
+.collection-section--sale .collection-description h4{font-size:15px;line-height:1.55;letter-spacing:0;font-weight:700}
+.collection-section--sale .collection-description p{font-size:15px;line-height:1.55}
+.collection-section--sale .collection-description ul,
+.collection-section--sale .collection-description ol{margin:0;padding-left:20px}
+.collection-section--sale .collection-description li{margin:0 0 6px}
+@media(max-width:900px){.collection-section--sale .collection-description{width:100%;margin-top:22px}}
+@media(max-width:600px){.collection-section--sale .collection-description{font-size:14px;line-height:1.5;gap:9px}.collection-section--sale .collection-description h1,.collection-section--sale .collection-description h2,.collection-section--sale .collection-description h3,.collection-section--sale .collection-description h4,.collection-section--sale .collection-description p{font-size:14px;line-height:1.5}}
