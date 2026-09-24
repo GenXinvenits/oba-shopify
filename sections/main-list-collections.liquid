@@ -1,0 +1,57 @@
+<section class="section collections-index">
+  <div class="container">
+    <div class="collections-index__intro">
+      <div>
+        <div class="eyebrow">OBA Pro Shop</div>
+        <h1>Product<br>Collections.</h1>
+      </div>
+      <p>Explore badminton equipment and essentials by category.</p>
+    </div>
+
+    <div class="collections-index__grid">
+      {% for collection in collections %}
+        {% unless collection.handle == 'frontpage' %}
+          <a class="collections-index__card" href="{{ collection.url }}">
+            <div class="collections-index__media">
+              {% if collection.featured_image != blank %}
+                {{ collection.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: collection.title | escape }}
+              {% elsif collection.products.first.featured_image != blank %}
+                {{ collection.products.first.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: collection.title | escape }}
+              {% else %}
+                {{ 'collection-1' | placeholder_svg_tag }}
+              {% endif %}
+            </div>
+            <div class="collections-index__content">
+              <span>{{ collection.products_count }} {% if collection.products_count == 1 %}product{% else %}products{% endif %}</span>
+              <h2>{{ collection.title }}</h2>
+              <b>Explore ↗</b>
+            </div>
+          </a>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+.collections-index{padding-top:64px}
+.collections-index__intro{display:flex;align-items:end;justify-content:space-between;gap:40px;padding-bottom:34px;border-bottom:1px solid var(--oba-line)}
+.collections-index__intro h1{font-size:clamp(52px,8vw,108px);line-height:.82;letter-spacing:-.065em;margin:10px 0 0}
+.collections-index__intro p{max-width:420px;color:var(--oba-muted);line-height:1.65;margin:0 0 4px}
+.collections-index__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.collections-index__card{display:block;background:#fff;border:1px solid var(--oba-line);border-radius:12px;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
+.collections-index__card:hover{transform:translateY(-4px);box-shadow:0 14px 35px rgba(0,0,0,.08)}
+.collections-index__media{aspect-ratio:4/3;background:#f0f0eb;overflow:hidden}
+.collections-index__media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.collections-index__card:hover .collections-index__media img{transform:scale(1.045)}
+.collections-index__content{padding:18px 18px 20px}
+.collections-index__content>span{font-size:9px;color:var(--oba-muted);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.collections-index__content h2{font-size:26px;letter-spacing:-.04em;margin:7px 0 18px}
+.collections-index__content b{font-size:10px;text-transform:uppercase;letter-spacing:.1em}
+@media(max-width:900px){.collections-index__intro{display:block}.collections-index__intro p{margin-top:20px}.collections-index__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.collections-index{padding-top:42px}.collections-index__intro h1{font-size:54px}.collections-index__grid{grid-template-columns:1fr;gap:14px}}
+</style>
+
+{% schema %}
+{"name":"Collections index","settings":[]}
+{% endschema %}
