@@ -15,12 +15,17 @@
             </a>
           {% endfor %}
         </div>
-        <div class="product-main-images">
-          {% for image in product.images %}
-            <figure id="ProductImage-{{ image.id }}" class="product-image">
-              {{ image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: image.alt | default: product.title | escape }}
-            </figure>
-          {% endfor %}
+        <div class="product-main-images" data-product-gallery>
+          <button type="button" class="product-gallery-arrow product-gallery-arrow--prev" data-gallery-prev aria-label="Previous product image">‹</button>
+          <div class="product-image-track">
+            {% for image in product.images %}
+              <figure id="ProductImage-{{ image.id }}" class="product-image{% if forloop.first %} is-active{% endif %}" data-gallery-slide="{{ forloop.index0 }}">
+                {{ image | image_url: width: 1600 | image_tag: loading: forloop.first | default: 'lazy', alt: image.alt | default: product.title | escape }}
+              </figure>
+            {% endfor %}
+          </div>
+          <button type="button" class="product-gallery-arrow product-gallery-arrow--next" data-gallery-next aria-label="Next product image">›</button>
+          <div class="product-gallery-count" aria-live="polite"><span data-gallery-current>1</span> / {{ product.images.size }}</div>
         </div>
       </div>
 
@@ -101,12 +106,18 @@
 .product-thumb{display:block;background:#fff;border:1px solid var(--oba-line);aspect-ratio:1;overflow:hidden;flex:0 0 auto}
 .product-thumb:hover{border-color:var(--oba-ink)}
 .product-thumb img{display:block;width:100%;height:100%;object-fit:contain}
-.product-main-images{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;min-width:0}
-.product-image{background:#fff;margin:0;aspect-ratio:1/1;overflow:hidden;scroll-margin-top:100px;border:1px solid rgba(16,16,16,.06);border-radius:10px;padding:12px}
-.product-image:first-child{grid-column:1/-1;aspect-ratio:4/3;padding:18px}
+.product-main-images{position:relative;min-width:0}
+.product-image-track{position:relative;width:100%;aspect-ratio:4/3;background:#fff;border:1px solid rgba(16,16,16,.06);border-radius:10px;overflow:hidden}
+.product-image{display:none;background:#fff;margin:0;width:100%;height:100%;padding:18px}
+.product-image.is-active{display:block}
 .product-image img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;transition:transform .35s ease}
-.product-image:first-child img{transform:scale(1.03)}
-.product-image:hover img{transform:scale(1.04)}
+.product-image.is-active img{transform:scale(1.03)}
+.product-gallery-arrow{position:absolute;z-index:3;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(16,16,16,.12);border-radius:50%;background:rgba(255,255,255,.92);color:var(--oba-ink);font-size:28px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.12)}
+.product-gallery-arrow:hover{background:var(--oba-accent);border-color:var(--oba-accent)}
+.product-gallery-arrow--prev{left:12px}
+.product-gallery-arrow--next{right:12px}
+.product-gallery-count{position:absolute;right:14px;bottom:14px;z-index:3;padding:6px 10px;border-radius:999px;background:rgba(16,16,16,.72);color:#fff;font-size:10px;letter-spacing:.08em}
+
 .product-details{position:sticky;top:96px;height:max-content}
 .product-brand{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;text-decoration:underline;text-underline-offset:3px}
 .product-details h1{font-size:clamp(34px,3.5vw,52px);line-height:.95;letter-spacing:-.05em;margin:10px 0 14px}
@@ -145,9 +156,13 @@
 }
 @media(max-width:600px){
   .product-page{padding-top:18px}
-  .product-gallery{display:flex;flex-direction:column-reverse}
-  .product-thumbs{display:grid;grid-template-columns:repeat(5,1fr);width:100%}
-  .product-main-images{grid-template-columns:1fr;width:100%}
+  .product-gallery{display:flex;flex-direction:column;gap:10px}
+  .product-thumbs{display:grid;grid-template-columns:repeat(5,1fr);width:100%;order:2}
+  .product-main-images{width:100%;order:1}
+  .product-image-track{aspect-ratio:1/1}
+  .product-image{padding:12px}
+  .product-gallery-arrow{width:38px;height:38px}
+  .product-gallery-count{right:10px;bottom:10px}
   .product-details h1{font-size:38px}
   .product-purchase-box{padding:16px}
   .product-information{margin-top:55px}
@@ -155,3 +170,36 @@
 </style>
 
 {% schema %}{"name":"Main product","settings":[]}{% endschema %}
+
+<script>
+(function(){
+  function initProductGallery(root){
+    if(!root || root.dataset.galleryReady) return;
+    root.dataset.galleryReady='true';
+    var slides=[...root.querySelectorAll('[data-gallery-slide]')];
+    var thumbs=[...document.querySelectorAll('.product-thumb')];
+    var current=root.querySelector('[data-gallery-current]');
+    var prev=root.querySelector('[data-gallery-prev]');
+    var next=root.querySelector('[data-gallery-next]');
+    var index=0;
+    if(slides.length<2){
+      if(prev) prev.hidden=true;
+      if(next) next.hidden=true;
+      return;
+    }
+    function show(i){
+      index=(i+slides.length)%slides.length;
+      slides.forEach(function(slide,n){slide.classList.toggle('is-active',n===index);});
+      thumbs.forEach(function(thumb,n){thumb.classList.toggle('is-active',n===index);});
+      if(current) current.textContent=index+1;
+    }
+    prev && prev.addEventListener('click',function(){show(index-1);});
+    next && next.addEventListener('click',function(){show(index+1);});
+    thumbs.forEach(function(thumb,n){
+      thumb.addEventListener('click',function(e){e.preventDefault();show(n);});
+    });
+    show(0);
+  }
+  document.querySelectorAll('[data-product-gallery]').forEach(initProductGallery);
+})();
+</script>
