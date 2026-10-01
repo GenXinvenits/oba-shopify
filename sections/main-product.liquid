@@ -20,10 +20,10 @@
           <div class="product-image-track">
             {% for image in product.images %}
               <figure id="ProductImage-{{ image.id }}" class="product-image{% if forloop.first %} is-active{% endif %}" data-gallery-slide="{{ forloop.index0 }}">
-                <div class="product-image__zoom">
+                <button type="button" class="product-image__zoom" data-image-zoom aria-label="Open enlarged image: {{ image.alt | default: product.title | escape }}">
                   {{ image | image_url: width: 1600 | image_tag: loading: forloop.first | default: 'lazy', alt: image.alt | default: product.title | escape }}
                   <span class="product-image__zoom-hint" aria-hidden="true">⌕</span>
-                </div>
+                </button>
               </figure>
             {% endfor %}
           </div>
@@ -113,9 +113,9 @@
 .product-image-track{position:relative;width:100%;aspect-ratio:4/3;background:#e7e6eb;border:1px solid rgba(16,16,16,.06);border-radius:10px;overflow:hidden}
 .product-image{display:none;background:#e7e6eb;margin:0;width:100%;height:100%;padding:18px}
 .product-image.is-active{display:block}
-.product-image__zoom{position:relative;width:100%;height:100%;overflow:hidden;cursor:zoom-in;background:#e7e6eb}
-.product-image__zoom img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;transform:scale(1.03);transform-origin:center center;transition:transform .12s ease-out}
-.product-image__zoom:hover img{transform:scale(2.15)}
+.product-image__zoom{position:relative;width:100%;height:100%;padding:0;border:0;display:block;overflow:hidden;cursor:zoom-in;background:#e7e6eb}
+.product-image__zoom img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;transform:scale(1.03);transition:transform .12s ease-out}
+.product-image__zoom:hover img{transform:scale(1.03)}
 .product-image__zoom-hint{position:absolute;right:12px;bottom:12px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.9);color:var(--oba-ink);font-size:22px;line-height:1;box-shadow:0 2px 10px rgba(0,0,0,.12);pointer-events:none;opacity:.9;transition:opacity .2s}
 .product-image__zoom:hover .product-image__zoom-hint{opacity:0}
 .product-gallery-arrow{position:absolute;z-index:3;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(16,16,16,.12);border-radius:50%;background:rgba(255,255,255,.92);color:var(--oba-ink);font-size:28px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.12)}
@@ -175,6 +175,25 @@
 }
 </style>
 
+<div class="product-image-modal" data-image-modal hidden aria-hidden="true">
+  <div class="product-image-modal__backdrop" data-image-modal-close></div>
+  <div class="product-image-modal__panel" role="dialog" aria-modal="true" aria-label="Enlarged product image">
+    <button type="button" class="product-image-modal__close" data-image-modal-close aria-label="Close enlarged image">×</button>
+    <img class="product-image-modal__image" data-image-modal-image src="" alt="">
+  </div>
+</div>
+
+<style>
+.product-image-modal{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:28px}
+.product-image-modal[hidden]{display:none}
+.product-image-modal__backdrop{position:absolute;inset:0;background:rgba(16,16,16,.72);backdrop-filter:blur(5px);cursor:zoom-out}
+.product-image-modal__panel{position:relative;z-index:1;width:min(92vw,1100px);height:min(88vh,850px);display:grid;place-items:center;background:#e7e6eb;border-radius:14px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.35)}
+.product-image-modal__image{display:block;width:100%;height:100%;object-fit:contain;padding:28px}
+.product-image-modal__close{position:absolute;right:14px;top:14px;z-index:2;width:42px;height:42px;border:1px solid rgba(16,16,16,.14);border-radius:50%;background:rgba(255,255,255,.94);color:var(--oba-ink);font-size:30px;line-height:1;cursor:pointer}
+.product-image-modal__close:hover{background:var(--oba-accent)}
+@media(max-width:600px){.product-image-modal{padding:12px}.product-image-modal__panel{width:96vw;height:82vh;border-radius:10px}.product-image-modal__image{padding:16px}}
+</style>
+
 {% schema %}{"name":"Main product","settings":[]}{% endschema %}
 
 <script>
@@ -197,6 +216,37 @@
     });
   }
   initProductZoom();
+  function initProductImageModal(){
+    var modal=document.querySelector('[data-image-modal]');
+    if(!modal || modal.dataset.ready) return;
+    modal.dataset.ready='true';
+    var modalImage=modal.querySelector('[data-image-modal-image]');
+    var closeButtons=modal.querySelectorAll('[data-image-modal-close]');
+    var lastTrigger=null;
+    function close(){
+      modal.hidden=true;
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+      if(lastTrigger) lastTrigger.focus();
+    }
+    document.querySelectorAll('[data-image-zoom]').forEach(function(trigger){
+      trigger.addEventListener('click',function(){
+        var img=trigger.querySelector('img');
+        if(!img) return;
+        lastTrigger=trigger;
+        modalImage.src=img.currentSrc || img.src;
+        modalImage.alt=img.alt || '';
+        modal.hidden=false;
+        modal.setAttribute('aria-hidden','false');
+        document.body.style.overflow='hidden';
+      });
+    });
+    closeButtons.forEach(function(button){button.addEventListener('click',close);});
+    document.addEventListener('keydown',function(e){
+      if(e.key==='Escape' && !modal.hidden) close();
+    });
+  }
+  initProductImageModal();
   function initProductGallery(root){
     if(!root || root.dataset.galleryReady) return;
     root.dataset.galleryReady='true';
