@@ -205,10 +205,11 @@
 .product-image-modal__image{display:block;width:100%;height:100%;min-width:100%;min-height:100%;max-width:none;object-fit:contain;padding:28px;transform-origin:center center;transition:transform .2s ease}
 .product-image-modal__viewport .product-image-modal__image{width:100%;height:100%}
 .product-image-modal__zoom-controls{position:absolute;left:14px;bottom:14px;z-index:3;display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 3px 14px rgba(0,0,0,.14)}
-.product-image-modal__zoom-button{width:40px;height:36px;border:1px solid rgba(16,16,16,.14);border-radius:999px;background:#fff;color:var(--oba-ink);font-size:15px;font-weight:900;line-height:1;display:grid;place-items:center;cursor:pointer;-webkit-text-fill-color:var(--oba-ink)}
+.product-image-modal__zoom-button{width:40px;height:36px;border:1px solid #101010;border-radius:999px;background:#101010;color:#fff;font-size:17px;font-weight:900;line-height:1;display:grid;place-items:center;cursor:pointer;-webkit-text-fill-color:#fff;transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease}
+.product-image-modal__zoom-button:hover:not(:disabled){background:var(--oba-accent);border-color:var(--oba-accent);color:#101010;-webkit-text-fill-color:#101010;transform:translateY(-1px)}
 .product-image-modal__zoom-button span{display:block;color:inherit;-webkit-text-fill-color:inherit;opacity:1;visibility:visible}
 .product-image-modal__zoom-button:disabled{opacity:.35;cursor:not-allowed}
-.product-image-modal__zoom-level{min-width:52px;height:36px;display:grid;place-items:center;color:var(--oba-ink);font-size:12px;font-weight:800;line-height:1}
+.product-image-modal__zoom-level{min-width:52px;height:36px;display:grid;place-items:center;color:#101010;background:#fff;border-radius:999px;font-size:12px;font-weight:900;line-height:1}
 .product-image-modal__zoom-button.is-active,.product-image-modal__zoom-button:hover{background:var(--oba-accent);border-color:var(--oba-accent)}
 .product-image-modal__close{position:absolute;right:14px;top:14px;z-index:2;width:42px;height:42px;border:1px solid rgba(16,16,16,.14);border-radius:50%;background:rgba(255,255,255,.94);color:var(--oba-ink);font-size:30px;line-height:1;cursor:pointer}
 .product-image-modal__close:hover{background:var(--oba-accent)}
