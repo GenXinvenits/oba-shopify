@@ -526,5 +526,42 @@
     show(0);
   }
   document.querySelectorAll('[data-product-gallery]').forEach(initProductGallery);
+
+  function initProductVariants(){
+    var form=document.querySelector('[data-product-form]');
+    if(!form || form.dataset.variantsReady) return;
+    form.dataset.variantsReady='true';
+
+    var variantInput=form.querySelector('[data-product-variant-id]');
+    var addButton=form.querySelector('[data-product-add]');
+    var optionSelects=[...form.querySelectorAll('[data-product-option]')];
+    var variantsEl=document.querySelector('[data-product-variants]');
+    if(!variantInput || !addButton || !variantsEl) return;
+
+    var variants=[];
+    try{ variants=JSON.parse(variantsEl.textContent || '[]'); }catch(e){ return; }
+
+    function findVariant(){
+      if(!optionSelects.length) return variants.find(function(v){return v.id===Number(variantInput.value);}) || variants[0];
+      var selected=optionSelects.map(function(select){return select.value;});
+      return variants.find(function(variant){
+        return variant.options && variant.options.every(function(value,index){return value===selected[index];});
+      });
+    }
+
+    function sync(){
+      var variant=findVariant();
+      if(!variant) return;
+      variantInput.value=variant.id;
+      var available=!!variant.available;
+      addButton.disabled=!available;
+      addButton.textContent=available?'Add to cart':'Sold out';
+    }
+
+    optionSelects.forEach(function(select){select.addEventListener('change',sync);});
+    sync();
+  }
+
+  initProductVariants();
 })();
 </script>
