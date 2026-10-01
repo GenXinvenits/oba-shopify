@@ -74,7 +74,6 @@
           {% endunless %}
 
           <div class="product-purchase-box">
-            <div class="product-stock">{% if product.available %}In stock{% else %}Currently unavailable{% endif %}</div>
             <div class="product-purchase-row">
               <label for="ProductQuantity-{{ section.id }}">Qty</label>
               <select id="ProductQuantity-{{ section.id }}" name="quantity" aria-label="Quantity">
