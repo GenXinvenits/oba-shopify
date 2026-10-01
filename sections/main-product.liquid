@@ -37,7 +37,7 @@
         <h1>{{ product.title }}</h1>
         <div class="product-rating" aria-label="Product information">
           <span class="product-rating__stars">★★★★★</span>
-          <a href="#product-details">See product details</a>
+          <a href="#product-content">See product details</a>
         </div>
         <div class="product-price-row">
           <span class="product-price">{{ product.selected_or_first_available_variant.price | money }}</span>
@@ -48,9 +48,7 @@
         <div class="product-shipping-callout">
           <strong>FREE US shipping</strong> on orders over $125.
         </div>
-        {% if product.description != blank %}
-          <div class="product-description" id="product-details">{{ product.description }}</div>
-        {% endif %}
+        <div class="product-lede" data-product-lede></div>
 
         {% form 'product', product, class: 'product-buy-form' %}
           {% unless product.has_only_default_variant %}
@@ -88,7 +86,7 @@
       </div>
     </div>
 
-    <div class="product-information">
+    <div class="product-information" id="product-content">
       <div><div class="eyebrow">Product information</div><h2>Built for your game.</h2></div>
       <div class="product-information__content">
         {% if product.description != blank %}{{ product.description }}{% else %}<p>Authentic badminton equipment selected by OBA for players who train, play and compete.</p>{% endif %}
@@ -134,7 +132,8 @@
 .product-price{font-size:27px;font-weight:800}
 .product-was{font-size:11px;color:var(--oba-muted)}
 .product-shipping-callout{padding:13px 0;font-size:12px}
-.product-description{color:var(--oba-muted);line-height:1.65;font-size:14px;margin:8px 0 20px}
+.product-lede{color:var(--oba-muted);line-height:1.55;font-size:15px;font-weight:600;margin:8px 0 20px}
+.product-lede > *{margin:0!important}
 .product-option label,.product-purchase-row label{display:block;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
 .product-details select{width:100%;height:46px;background:#fff;border:1px solid var(--oba-line);padding:0 12px}
 .product-purchase-box{margin-top:16px;border:1px solid var(--oba-line);padding:18px;background:#fff}
@@ -145,10 +144,19 @@
 .product-add,.button--buy-now{width:100%;margin-top:8px;cursor:pointer}
 .button--buy-now{background:var(--oba-accent);color:var(--oba-ink);border-color:var(--oba-accent)}
 .product-trust{font-size:10px;color:var(--oba-muted);line-height:1.5;text-align:center;margin-top:13px}
-.product-information{display:grid;grid-template-columns:1fr 1.5fr;gap:60px;margin-top:72px;padding:55px 0;border-top:1px solid var(--oba-line)}
-.product-information h2{font-size:clamp(36px,5vw,64px);line-height:.9;letter-spacing:-.05em;margin:10px 0}
-.product-information__content{font-size:15px;line-height:1.8}
-.product-information__content p{margin-top:0}
+.product-information{margin-top:72px;padding:55px 0 20px;border-top:1px solid var(--oba-line)}
+.product-information__content{max-width:980px;margin:0 auto;font-size:15px;line-height:1.8}
+.product-information__content > *:first-child{margin-top:0}
+.product-information__content h1,.product-information__content h2,.product-information__content h3,.product-information__content h4{color:var(--oba-ink);letter-spacing:-.03em}
+.product-information__content h1,.product-information__content h2{font-size:clamp(30px,4vw,48px);line-height:1;margin:42px 0 18px}
+.product-information__content h3{font-size:clamp(22px,3vw,34px);line-height:1.05;margin:42px 0 12px}
+.product-information__content h4{font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin:28px 0 8px}
+.product-information__content p{margin:0 0 18px}
+.product-information__content img{display:block;width:100%;max-width:760px;height:auto;margin:28px auto;border-radius:12px;background:#e7e6eb}
+.product-information__content table{width:100%;border-collapse:collapse;margin:18px 0 42px;background:#fff}
+.product-information__content td,.product-information__content th{padding:13px 16px;border-bottom:1px solid var(--oba-line);text-align:left;vertical-align:top}
+.product-information__content td:first-child,.product-information__content th:first-child{width:28%;font-weight:800;color:var(--oba-ink)}
+.product-information__content ul,.product-information__content ol{padding-left:22px;margin:0 0 24px}
 
 @media(max-width:1100px){
   .product-layout--amazon{grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:30px}
@@ -157,7 +165,7 @@
 @media(max-width:900px){
   .product-layout--amazon{grid-template-columns:1fr}
   .product-details{position:static}
-  .product-information{grid-template-columns:1fr;gap:20px}
+  .product-information__content{max-width:760px}
   .product-thumbs{position:static;max-height:none;overflow:visible}
 }
 @media(max-width:600px){
@@ -171,7 +179,10 @@
   .product-gallery-count{right:10px;bottom:10px}
   .product-details h1{font-size:38px}
   .product-purchase-box{padding:16px}
-  .product-information{margin-top:55px}
+  .product-information{margin-top:55px;padding-top:38px}
+  .product-information__content{font-size:14px}
+  .product-information__content h1,.product-information__content h2{font-size:32px}
+  .product-information__content h3{font-size:24px}
 }
 </style>
 
@@ -238,6 +249,17 @@
     });
   }
   initProductZoom();
+  function organizeProductDescription(){
+    var content=document.querySelector('[data-product-description]');
+    var lede=document.querySelector('[data-product-lede]');
+    if(!content || !lede || lede.dataset.ready) return;
+    var children=[...content.children];
+    var specsIndex=children.findIndex(function(node){ return node.textContent.trim().toUpperCase()==='SPECS'; });
+    if(specsIndex<0) return;
+    children.slice(0,specsIndex).forEach(function(node){ lede.appendChild(node); });
+    lede.dataset.ready='true';
+  }
+  organizeProductDescription();
   function initProductImageModal(){
     var modal=document.querySelector('[data-image-modal]');
     if(!modal || modal.dataset.ready) return;
