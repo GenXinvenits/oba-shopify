@@ -180,6 +180,10 @@
   <div class="product-image-modal__panel" role="dialog" aria-modal="true" aria-label="Enlarged product image">
     <button type="button" class="product-image-modal__close" data-image-modal-close aria-label="Close enlarged image">×</button>
     <img class="product-image-modal__image" data-image-modal-image src="" alt="">
+    <div class="product-image-modal__zoom-controls" aria-label="Image magnification">
+      <button type="button" class="product-image-modal__zoom-button is-active" data-zoom-level="1.5">1.5×</button>
+      <button type="button" class="product-image-modal__zoom-button" data-zoom-level="2">2×</button>
+    </div>
   </div>
 </div>
 
@@ -187,8 +191,12 @@
 .product-image-modal{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:28px}
 .product-image-modal[hidden]{display:none}
 .product-image-modal__backdrop{position:absolute;inset:0;background:rgba(16,16,16,.72);backdrop-filter:blur(5px);cursor:zoom-out}
-.product-image-modal__panel{position:relative;z-index:1;width:min(92vw,1100px);height:min(88vh,850px);display:grid;place-items:center;background:#e7e6eb;border-radius:14px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.35)}
-.product-image-modal__image{display:block;width:100%;height:100%;object-fit:contain;padding:28px}
+.product-image-modal__panel{position:relative;z-index:1;width:min(92vw,1100px);height:min(88vh,850px);background:#e7e6eb;border-radius:14px;overflow:auto;box-shadow:0 24px 80px rgba(0,0,0,.35);cursor:grab}
+.product-image-modal__panel:active{cursor:grabbing}
+.product-image-modal__image{display:block;width:auto;height:auto;min-width:100%;min-height:100%;max-width:none;object-fit:contain;padding:28px;transform-origin:center center;transition:transform .2s ease}
+.product-image-modal__zoom-controls{position:absolute;left:14px;bottom:14px;z-index:3;display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 3px 14px rgba(0,0,0,.14)}
+.product-image-modal__zoom-button{width:42px;height:36px;border:1px solid rgba(16,16,16,.14);border-radius:999px;background:#fff;color:var(--oba-ink);font-weight:800;cursor:pointer}
+.product-image-modal__zoom-button.is-active,.product-image-modal__zoom-button:hover{background:var(--oba-accent);border-color:var(--oba-accent)}
 .product-image-modal__close{position:absolute;right:14px;top:14px;z-index:2;width:42px;height:42px;border:1px solid rgba(16,16,16,.14);border-radius:50%;background:rgba(255,255,255,.94);color:var(--oba-ink);font-size:30px;line-height:1;cursor:pointer}
 .product-image-modal__close:hover{background:var(--oba-accent)}
 @media(max-width:600px){.product-image-modal{padding:12px}.product-image-modal__panel{width:96vw;height:82vh;border-radius:10px}.product-image-modal__image{padding:16px}}
@@ -223,6 +231,13 @@
     var modalImage=modal.querySelector('[data-image-modal-image]');
     var closeButtons=modal.querySelectorAll('[data-image-modal-close]');
     var lastTrigger=null;
+    var zoomButtons=modal.querySelectorAll('[data-zoom-level]');
+    var zoomLevel=1.5;
+    function applyZoom(level){
+      zoomLevel=level;
+      modalImage.style.transform='scale('+level+')';
+      zoomButtons.forEach(function(button){button.classList.toggle('is-active',Number(button.dataset.zoomLevel)===level);});
+    }
     function close(){
       modal.hidden=true;
       modal.setAttribute('aria-hidden','true');
@@ -236,12 +251,19 @@
         lastTrigger=trigger;
         modalImage.src=img.currentSrc || img.src;
         modalImage.alt=img.alt || '';
+        modalImage.style.transform='scale(1.5)';
         modal.hidden=false;
         modal.setAttribute('aria-hidden','false');
         document.body.style.overflow='hidden';
       });
     });
     closeButtons.forEach(function(button){button.addEventListener('click',close);});
+    zoomButtons.forEach(function(button){
+      button.addEventListener('click',function(e){
+        e.stopPropagation();
+        applyZoom(Number(button.dataset.zoomLevel));
+      });
+    });
     document.addEventListener('keydown',function(e){
       if(e.key==='Escape' && !modal.hidden) close();
     });
