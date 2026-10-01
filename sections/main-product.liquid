@@ -183,14 +183,12 @@
       <img class="product-image-modal__image" data-image-modal-image src="" alt="">
     </div>
     <div class="product-image-modal__zoom-controls" aria-label="Image magnification">
-      <button type="button" class="product-image-modal__zoom-button is-active" data-zoom-level="1" aria-label="100 percent zoom" title="100%">
-        <span aria-hidden="true">1×</span>
+      <button type="button" class="product-image-modal__zoom-button" data-zoom-step="-1" aria-label="Zoom out" title="Zoom out">
+        <span aria-hidden="true">−</span>
       </button>
-      <button type="button" class="product-image-modal__zoom-button" data-zoom-level="2" aria-label="200 percent zoom" title="200%">
-        <span aria-hidden="true">2×</span>
-      </button>
-      <button type="button" class="product-image-modal__zoom-button" data-zoom-level="3" aria-label="300 percent zoom" title="300%">
-        <span aria-hidden="true">3×</span>
+      <span class="product-image-modal__zoom-level" data-zoom-level-label aria-live="polite">100%</span>
+      <button type="button" class="product-image-modal__zoom-button" data-zoom-step="1" aria-label="Zoom in" title="Zoom in">
+        <span aria-hidden="true">+</span>
       </button>
     </div>
   </div>
@@ -209,6 +207,8 @@
 .product-image-modal__zoom-controls{position:absolute;left:14px;bottom:14px;z-index:3;display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(255,255,255,.94);box-shadow:0 3px 14px rgba(0,0,0,.14)}
 .product-image-modal__zoom-button{width:40px;height:36px;border:1px solid rgba(16,16,16,.14);border-radius:999px;background:#fff;color:var(--oba-ink);font-size:15px;font-weight:900;line-height:1;display:grid;place-items:center;cursor:pointer;-webkit-text-fill-color:var(--oba-ink)}
 .product-image-modal__zoom-button span{display:block;color:inherit;-webkit-text-fill-color:inherit;opacity:1;visibility:visible}
+.product-image-modal__zoom-button:disabled{opacity:.35;cursor:not-allowed}
+.product-image-modal__zoom-level{min-width:52px;height:36px;display:grid;place-items:center;color:var(--oba-ink);font-size:12px;font-weight:800;line-height:1}
 .product-image-modal__zoom-button.is-active,.product-image-modal__zoom-button:hover{background:var(--oba-accent);border-color:var(--oba-accent)}
 .product-image-modal__close{position:absolute;right:14px;top:14px;z-index:2;width:42px;height:42px;border:1px solid rgba(16,16,16,.14);border-radius:50%;background:rgba(255,255,255,.94);color:var(--oba-ink);font-size:30px;line-height:1;cursor:pointer}
 .product-image-modal__close:hover{background:var(--oba-accent)}
@@ -245,12 +245,20 @@
     var viewport=modal.querySelector('[data-image-modal-viewport]');
     var closeButtons=modal.querySelectorAll('[data-image-modal-close]');
     var lastTrigger=null;
-    var zoomButtons=modal.querySelectorAll('[data-zoom-level]');
+    var zoomButtons=modal.querySelectorAll('[data-zoom-step]');
+    var zoomLabel=modal.querySelector('[data-zoom-level-label]');
+    var zoomLevels=[1,2,3];
+    var zoomIndex=0;
     var zoomLevel=1;
     function applyZoom(level){
       zoomLevel=level;
       modalImage.style.transform='scale('+level+')';
-      zoomButtons.forEach(function(button){button.classList.toggle('is-active',Number(button.dataset.zoomLevel)===level);});
+      zoomIndex=Math.max(0,zoomLevels.indexOf(level));
+      if(zoomLabel) zoomLabel.textContent=Math.round(level*100)+'%';
+      zoomButtons.forEach(function(button){
+        var step=Number(button.dataset.zoomStep);
+        button.disabled=(step<0 && zoomIndex===0)||(step>0 && zoomIndex===zoomLevels.length-1);
+      });
     }
     function close(){
       modal.hidden=true;
@@ -276,7 +284,8 @@
     zoomButtons.forEach(function(button){
       button.addEventListener('click',function(e){
         e.stopPropagation();
-        applyZoom(Number(button.dataset.zoomLevel));
+        var nextIndex=Math.max(0,Math.min(zoomLevels.length-1,zoomIndex+Number(button.dataset.zoomStep)));
+        applyZoom(zoomLevels[nextIndex]);
       });
     });
     document.addEventListener('keydown',function(e){
