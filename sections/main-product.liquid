@@ -57,34 +57,37 @@
         </div>
         <div class="product-lede" data-product-lede></div>
 
-        {% form 'product', product, class: 'product-buy-form' %}
+        {% form 'product', product, class: 'product-buy-form', data-product-form: true %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-product-variant-id>
+
           {% unless product.has_only_default_variant %}
-            <div class="product-option">
-              <label for="ProductSelect-{{ section.id }}">Select option</label>
-              <select id="ProductSelect-{{ section.id }}" name="id">
-                {% for variant in product.variants %}
-                  <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
-                    {{ variant.title }}{% unless variant.available %} — Sold out{% endunless %}
-                  </option>
-                {% endfor %}
-              </select>
+            <div class="product-options">
+              {% for option in product.options_with_values %}
+                <div class="product-option">
+                  <label for="ProductOption-{{ section.id }}-{{ option.position }}">{{ option.name }}</label>
+                  <select
+                    id="ProductOption-{{ section.id }}-{{ option.position }}"
+                    name="options[{{ option.name | escape }}]"
+                    data-product-option="{{ option.position }}"
+                  >
+                    {% for value in option.values %}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              {% endfor %}
             </div>
-          {% else %}
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
           {% endunless %}
 
           <div class="product-purchase-box">
             <div class="product-purchase-row">
-              <label for="ProductQuantity-{{ section.id }}">Qty</label>
+              <label for="ProductQuantity-{{ section.id }}">Quantity</label>
               <select id="ProductQuantity-{{ section.id }}" name="quantity" aria-label="Quantity">
                 {% for quantity in (1..10) %}<option value="{{ quantity }}">{{ quantity }}</option>{% endfor %}
               </select>
             </div>
-            <button class="button product-add" type="submit" {% unless product.available %}disabled{% endunless %}>
+            <button class="button product-add" type="submit" data-product-add {% unless product.available %}disabled{% endunless %}>
               {% if product.available %}Add to cart{% else %}Sold out{% endif %}
-            </button>
-            <button class="button button--buy-now" type="submit" name="add" value="{{ product.selected_or_first_available_variant.id }}" {% unless product.available %}disabled{% endunless %}>
-              Buy now
             </button>
             <div class="product-trust">Secure checkout · Authentic OBA Pro Shop gear · Easy cart updates</div>
           </div>
@@ -298,6 +301,57 @@
   }
 }
 
+
+/* Product options: mirror the live OBA PDP's labeled selector treatment. */
+.product-options{
+  display:grid;
+  gap:14px;
+  margin-top:18px;
+}
+.product-option{
+  display:grid;
+  gap:8px;
+}
+.product-option label{
+  margin:0;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.product-option select,
+.product-purchase-row select{
+  min-height:46px;
+  border:1px solid #b8b8b2;
+  border-radius:8px;
+  background:#fff;
+  color:#101010;
+  padding:0 12px;
+  font-size:14px;
+}
+.product-purchase-row{
+  justify-content:space-between;
+  margin-bottom:14px;
+}
+.product-purchase-row label{
+  margin:0;
+  font-size:11px;
+}
+.product-purchase-row select{
+  width:88px;
+  min-width:88px;
+}
+.product-add:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  background:#b9b9b4;
+  border-color:#b9b9b4;
+  color:#fff;
+  -webkit-text-fill-color:#fff;
+  transform:none;
+  box-shadow:none;
+}
+
 </style>
 
 <div class="product-image-modal" data-image-modal hidden aria-hidden="true">
@@ -340,6 +394,8 @@
 .product-image-modal__close:hover{background:var(--oba-accent)}
 @media(max-width:600px){.product-image-modal{padding:12px}.product-image-modal__panel{width:96vw;height:82vh;border-radius:10px}.product-image-modal__image{padding:16px}}
 </style>
+
+<script type="application/json" data-product-variants>{{ product.variants | json }}</script>
 
 {% schema %}{"name":"Main product","settings":[]}{% endschema %}
 
