@@ -36,9 +36,15 @@
         {% if product.vendor != blank %}<a class="product-brand" href="{{ routes.search_url }}?q={{ product.vendor | url_encode }}">{{ product.vendor }}</a>{% endif %}
         <h1>{{ product.title }}</h1>
         {% if product.available %}
-          <div class="product-availability">Available to order</div>
+          <div class="product-availability">
+            <span class="product-availability__dot" aria-hidden="true"></span>
+            <span>In stock</span>
+          </div>
         {% else %}
-          <div class="product-availability product-availability--sold-out">Currently unavailable</div>
+          <div class="product-availability product-availability--sold-out">
+            <span class="product-availability__dot" aria-hidden="true"></span>
+            <span>Currently unavailable</span>
+          </div>
         {% endif %}
         <div class="product-price-row">
           <span class="product-price">{{ product.selected_or_first_available_variant.price | money }}</span>
@@ -125,8 +131,10 @@
 .product-details{position:sticky;top:96px;height:max-content}
 .product-brand{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;text-decoration:underline;text-underline-offset:3px}
 .product-details h1{font-size:clamp(34px,3.5vw,52px);line-height:.95;letter-spacing:-.05em;margin:10px 0 14px}
-.product-availability{display:inline-flex;align-items:center;min-height:28px;margin:0 0 10px;padding:0 10px;border-radius:999px;background:#e7e6eb;color:var(--oba-ink);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
-.product-availability--sold-out{background:#f0eeee;color:#8a3030}
+.product-availability{display:inline-flex;align-items:center;gap:8px;min-height:34px;margin:0 0 12px;padding:0 13px;border:1px solid #b7d9b9;border-radius:8px;background:#edf8ee;color:#176b2c;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.09em;box-shadow:0 1px 3px rgba(23,107,44,.08)}
+.product-availability__dot{width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:#2e9d43;box-shadow:0 0 0 3px rgba(46,157,67,.14)}
+.product-availability--sold-out{border-color:#e2b8b8;background:#fff1f1;color:#9a2f2f;box-shadow:0 1px 3px rgba(154,47,47,.08)}
+.product-availability--sold-out .product-availability__dot{background:#c33b3b;box-shadow:0 0 0 3px rgba(195,59,59,.14)}
 .product-price-row{display:flex;align-items:baseline;gap:14px;padding:15px 0;border-top:1px solid var(--oba-line);border-bottom:1px solid var(--oba-line)}
 .product-price{font-size:27px;font-weight:800}
 .product-was{font-size:11px;color:var(--oba-muted)}
