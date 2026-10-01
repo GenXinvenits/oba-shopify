@@ -191,6 +191,114 @@
   .product-information__content h1,.product-information__content h2{font-size:32px}
   .product-information__content h3{font-size:24px}
 }
+
+/* Product page: stronger purchase-panel contrast + rounded surfaces */
+.product-purchase-box{
+  margin-top:18px;
+  padding:20px;
+  border:1px solid #c9c9c4;
+  border-radius:14px;
+  background:#f0f0ec;
+  box-shadow:0 8px 24px rgba(16,16,16,.07);
+}
+.product-stock{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-height:34px;
+  margin:0 0 14px;
+  padding:0 12px;
+  border:1px solid #b7d9b9;
+  border-radius:8px;
+  background:#edf8ee;
+  color:#176b2c;
+  font-size:12px;
+  font-weight:900;
+}
+.product-stock:before{
+  content:"";
+  width:8px;
+  height:8px;
+  flex:0 0 8px;
+  border-radius:50%;
+  background:#2e9d43;
+  box-shadow:0 0 0 3px rgba(46,157,67,.14);
+}
+.product-purchase-row select,
+.product-details select{
+  border-radius:8px;
+}
+.product-purchase-row select{
+  background:#fff;
+  border:1px solid #b8b8b2;
+  color:#101010;
+}
+.product-add,
+.button--buy-now{
+  min-height:50px;
+  border-radius:9px;
+  font-weight:900;
+  letter-spacing:.01em;
+}
+.product-add{
+  background:#101010;
+  color:#fff;
+  border-color:#101010;
+  -webkit-text-fill-color:#fff;
+}
+.product-add:hover{
+  background:var(--oba-accent);
+  color:#101010;
+  border-color:var(--oba-accent);
+  -webkit-text-fill-color:#101010;
+}
+.button--buy-now{
+  background:var(--oba-accent);
+  color:#101010;
+  border-color:#101010;
+  -webkit-text-fill-color:#101010;
+}
+.button--buy-now:hover{
+  background:#101010;
+  color:#fff;
+  border-color:#101010;
+  -webkit-text-fill-color:#fff;
+}
+.product-trust{
+  padding-top:4px;
+}
+.product-option select{
+  border-radius:8px;
+}
+.product-image-track,
+.product-thumb,
+.product-image-modal__panel{
+  border-radius:14px;
+}
+.product-thumb{
+  border-radius:9px;
+}
+.product-gallery-arrow{
+  border-radius:50%;
+}
+.product-shipping-callout{
+  border-radius:8px;
+}
+.product-information{
+  border-radius:14px;
+}
+@media(max-width:600px){
+  .product-purchase-box{
+    padding:16px;
+    border-radius:12px;
+  }
+  .product-add,
+  .button--buy-now{
+    min-height:48px;
+    border-radius:8px;
+  }
+}
+
 </style>
 
 <div class="product-image-modal" data-image-modal hidden aria-hidden="true">
