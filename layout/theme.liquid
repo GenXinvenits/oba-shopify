@@ -16,6 +16,44 @@
     {% section 'header' %}
     <main id="MainContent" role="main">{{ content_for_layout }}</main>
     {% section 'footer' %}
+
+    <div class="oba-cart-drawer" data-cart-drawer hidden>
+      <button class="oba-cart-drawer__backdrop" type="button" data-cart-drawer-close aria-label="Close cart"></button>
+      <aside class="oba-cart-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="CartDrawerTitle">
+        <div class="oba-cart-drawer__header">
+          <div>
+            <span class="eyebrow">Your gear</span>
+            <h2 id="CartDrawerTitle">Cart <span data-cart-drawer-count>{{ cart.item_count }}</span></h2>
+          </div>
+          <button class="oba-cart-drawer__close" type="button" data-cart-drawer-close aria-label="Close cart">×</button>
+        </div>
+        <div class="oba-cart-drawer__body" data-cart-drawer-body>
+          {% if cart.item_count == 0 %}
+            <div class="oba-cart-drawer__empty"><p>Your cart is empty.</p><a class="button" href="{{ routes.all_products_collection_url }}">Shop the Pro Shop</a></div>
+          {% else %}
+            {% for item in cart.items %}
+              <article class="oba-cart-line">
+                <a class="oba-cart-line__image" href="{{ item.url }}">{{ item.image | image_url: width: 180 | image_tag: loading: 'lazy', alt: item.product.title | escape }}</a>
+                <div class="oba-cart-line__content">
+                  <a class="oba-cart-line__title" href="{{ item.url }}">{{ item.product.title }}</a>
+                  <span class="oba-cart-line__price">{{ item.final_line_price | money }}</span>
+                  <div class="oba-cart-line__controls">
+                    <span>Qty {{ item.quantity }}</span>
+                    <a href="{{ item.url_to_remove }}" data-cart-remove="{{ item.key }}">Remove</a>
+                  </div>
+                </div>
+              </article>
+            {% endfor %}
+          {% endif %}
+        </div>
+        <div class="oba-cart-drawer__footer" data-cart-drawer-footer{% if cart.item_count == 0 %} hidden{% endif %}>
+          <div class="oba-cart-drawer__subtotal"><span>Subtotal</span><strong data-cart-drawer-total>{{ cart.total_price | money }}</strong></div>
+          <p>Taxes and shipping calculated at checkout.</p>
+          <a class="button oba-cart-drawer__checkout" href="{{ routes.cart_url }}">View cart &amp; checkout</a>
+        </div>
+      </aside>
+    </div>
+
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
   </body>
 </html>
