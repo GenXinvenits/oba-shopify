@@ -158,3 +158,46 @@
 @keyframes obaCartIn{from{transform:translateX(100%)}to{transform:none}}
 body.oba-cart-open{overflow:hidden}
 @media(max-width:600px){.oba-cart-drawer__header{padding:22px 18px 18px}.oba-cart-drawer__body{padding-inline:18px}.oba-cart-drawer__footer{padding:18px}.oba-cart-drawer__header h2{font-size:36px}}
+
+/* Concept-inspired button motion: directional fill + lift, with readable contrast. */
+.button,.product-card__add-button{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  transform:translateZ(0);
+}
+.button:before,.product-card__add-button:before{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:0;
+  background:var(--oba-accent);
+  z-index:-1;
+  transition:height .28s cubic-bezier(.22,.61,.36,1);
+}
+.button:hover:before,.product-card__add-button:hover:before{
+  height:100%;
+}
+.button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 0 rgba(16,16,16,.12);
+}
+.button:not(:hover):before,.product-card__add-button:not(:hover):before{
+  height:0;
+}
+.button--light:before,.button--secondary:before{
+  background:var(--oba-accent);
+}
+.button--light:hover,.button--secondary:hover,.product-card__add-button:hover{
+  color:#101010;
+  -webkit-text-fill-color:#101010;
+}
+.button span,.product-card__add-button span{
+  position:relative;
+  z-index:1;
+}
+@media(prefers-reduced-motion:reduce){
+  .button:before,.product-card__add-button:before{transition:none}
+}
