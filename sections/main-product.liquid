@@ -71,6 +71,11 @@
             <button class="button product-add" type="submit" data-product-add {% unless product.available %}disabled{% endunless %}>
               {% if product.available %}Add to cart{% else %}Sold out{% endif %}
             </button>
+            {% if product.available %}
+              <div class="product-buy-now">
+                {{ form | payment_button }}
+              </div>
+            {% endif %}
           </div>
         {% endform %}
 
