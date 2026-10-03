@@ -34,6 +34,10 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8.5h11l1 12h-13l1-12Z"></path><path d="M9 8.5V6a3 3 0 0 1 6 0v2.5"></path></svg>
         </a>
       </div>
+    {% else %}
+      <div class="product-card__actions product-card__actions--sold-out" aria-label="Product availability">
+        <span class="product-card__sold-out">Sold out</span>
+      </div>
     {% endif %}
   </div>
 
