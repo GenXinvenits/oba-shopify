@@ -9,132 +9,109 @@
   const mm = gsap.matchMedia();
 
   mm.add('(min-width: 768px)', function () {
-    const hero = document.querySelector('.hero');
-    const heroMedia = document.querySelector('.hero-media img');
-
-    if (hero && heroMedia) {
-      gsap.to(heroMedia, {
-        yPercent: 10,
-        scale: 1.08,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: hero,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.2
-        }
-      });
-    }
-
-    gsap.utils.toArray('.category-card').forEach(function (card, index) {
-      gsap.fromTo(card,
-        { y: 70, opacity: 0, scale: .96 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: .8,
-          ease: 'power3.out',
-          delay: (index % 3) * .06,
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 88%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
+    // Keep GSAP off the hero image: the hero slider already owns its transform animation.
+    // This prevents two animation systems from fighting over the same transform.
+    
+    // Category cards: animate opacity only on the card itself, and movement on its content.
+    ScrollTrigger.batch('.category-card', {
+      start: 'top 88%',
+      once: true,
+      interval: 0.08,
+      batchMax: 3,
+      onEnter: function (batch) {
+        gsap.fromTo(batch,
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: 0.55, stagger: 0.08, ease: 'power2.out', overwrite: 'auto' }
+        );
+        gsap.fromTo(batch.map(function (card) {
+          return card.querySelector('.category-card__content');
+        }).filter(Boolean),
+          { y: 22 },
+          { y: 0, duration: 0.65, stagger: 0.08, ease: 'power3.out', overwrite: 'auto' }
+        );
+      }
     });
 
-    gsap.utils.toArray('.product-card').forEach(function (card, index) {
-      gsap.fromTo(card,
-        { y: 55, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: .7,
-          ease: 'power2.out',
-          delay: (index % 4) * .07,
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 90%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
+    // Product cards: never animate transform on the card itself because the theme
+    // uses transform for hover/quick-add interactions. Animate opacity + inner content.
+    ScrollTrigger.batch('.product-card', {
+      start: 'top 91%',
+      once: true,
+      interval: 0.08,
+      batchMax: 4,
+      onEnter: function (batch) {
+        gsap.fromTo(batch,
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: 0.45, stagger: 0.06, ease: 'power2.out', overwrite: 'auto' }
+        );
+        gsap.fromTo(batch.map(function (card) {
+          return card.querySelector('.product-card__info');
+        }).filter(Boolean),
+          { y: 18 },
+          { y: 0, duration: 0.5, stagger: 0.06, ease: 'power3.out', overwrite: 'auto' }
+        );
+      }
     });
 
-    gsap.utils.toArray('.story-map').forEach(function (media) {
-      gsap.fromTo(media,
-        { y: 45, clipPath: 'inset(10% 0 10% 0)' },
-        {
-          y: 0,
-          clipPath: 'inset(0% 0 0% 0)',
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: media,
-            start: 'top 82%',
-            end: 'top 35%',
-            scrub: 1
-          }
-        }
-      );
+    // Story section: use opacity/translation rather than clip-path on the map,
+    // which is much lighter while scrolling and avoids map repaint glitches.
+    ScrollTrigger.create({
+      trigger: '.story-grid',
+      start: 'top 82%',
+      once: true,
+      onEnter: function () {
+        gsap.fromTo('.story-map',
+          { autoAlpha: 0.65 },
+          { autoAlpha: 1, duration: 0.7, ease: 'power2.out', overwrite: 'auto' }
+        );
+        gsap.fromTo('.story-content',
+          { autoAlpha: 0, x: 28 },
+          { autoAlpha: 1, x: 0, duration: 0.7, ease: 'power3.out', overwrite: 'auto' }
+        );
+      }
     });
 
-    gsap.utils.toArray('.story-content').forEach(function (content) {
-      gsap.fromTo(content,
-        { x: 70, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: content,
-            start: 'top 82%',
-            end: 'top 52%',
-            scrub: 1
-          }
-        }
-      );
-    });
-
-    gsap.utils.toArray('.brand-list > *').forEach(function (brand, index) {
-      gsap.fromTo(brand,
-        { y: 35, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: .7,
-          ease: 'power2.out',
-          delay: index * .08,
-          scrollTrigger: {
-            trigger: brand,
-            start: 'top 90%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
+    // Brand strip: simple stagger, no repeated reverse animation.
+    ScrollTrigger.batch('.brand-list > *', {
+      start: 'top 92%',
+      once: true,
+      interval: 0.08,
+      batchMax: 4,
+      onEnter: function (batch) {
+        gsap.fromTo(batch,
+          { autoAlpha: 0, y: 14 },
+          { autoAlpha: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out', overwrite: 'auto' }
+        );
+      }
     });
 
     const newsletter = document.querySelector('.newsletter');
     if (newsletter) {
       gsap.fromTo(newsletter,
-        { y: 55, opacity: 0 },
+        { autoAlpha: 0, y: 20 },
         {
+          autoAlpha: 1,
           y: 0,
-          opacity: 1,
-          duration: .9,
+          duration: 0.65,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: newsletter,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
+            start: 'top 88%',
+            once: true
           }
         }
       );
     }
+
+    // Wait until layout/images have settled before measuring trigger positions.
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        ScrollTrigger.refresh();
+      });
+    });
   });
 
   window.addEventListener('load', function () {
     ScrollTrigger.refresh();
-  });
+  }, { once: true });
 })();
