@@ -63,7 +63,7 @@
       );
     });
 
-    gsap.utils.toArray('.story-media').forEach(function (media) {
+    gsap.utils.toArray('.story-map').forEach(function (media) {
       gsap.fromTo(media,
         { y: 45, clipPath: 'inset(10% 0 10% 0)' },
         {
@@ -97,7 +97,7 @@
       );
     });
 
-    gsap.utils.toArray('.brand-strip > *').forEach(function (brand, index) {
+    gsap.utils.toArray('.brand-list > *').forEach(function (brand, index) {
       gsap.fromTo(brand,
         { y: 35, opacity: 0 },
         {
