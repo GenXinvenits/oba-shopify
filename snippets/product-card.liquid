@@ -23,7 +23,7 @@
 
     {% if card_variant != blank and card_variant.available %}
       <div class="product-card__actions" aria-label="Product actions">
-        <a class="product-card__quick" href="{{ product.url }}" aria-label="View {{ product.title | escape }}" title="View product"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12s3.2-5 8.5-5 8.5 5 8.5 5-3.2 5-8.5 5-8.5-5-8.5-5Z"></path><circle cx="12" cy="12" r="2.4"></circle></svg></a>
+        <a class="product-card__quick" href="{{ product.url }}" data-quick-view aria-label="Quick view {{ product.title | escape }}" title="Quick view"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12s3.2-5 8.5-5 8.5 5 8.5 5-3.2 5-8.5 5-8.5-5-8.5-5Z"></path><circle cx="12" cy="12" r="2.4"></circle></svg></a>
         <form class="product-card__action-form" method="post" action="{{ routes.cart_add_url }}" data-product-card-form>
           <input type="hidden" name="id" value="{{ card_variant.id }}">
           <input type="hidden" name="quantity" value="1">
@@ -37,7 +37,7 @@
       </div>
     {% else %}
       <div class="product-card__actions product-card__actions--sold-out" aria-label="Product actions">
-        <a class="product-card__quick" href="{{ product.url }}" aria-label="View {{ product.title | escape }}" title="View product"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12s3.2-5 8.5-5 8.5 5 8.5 5-3.2 5-8.5 5-8.5-5-8.5-5Z"></path><circle cx="12" cy="12" r="2.4"></circle></svg></a>
+        <a class="product-card__quick" href="{{ product.url }}" data-quick-view aria-label="Quick view {{ product.title | escape }}" title="Quick view"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12s3.2-5 8.5-5 8.5 5 8.5 5-3.2 5-8.5 5-8.5-5-8.5-5Z"></path><circle cx="12" cy="12" r="2.4"></circle></svg></a>
       </div>
     {% endif %}
   </div>
