@@ -439,3 +439,30 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
     max-width:132px;
   }
 }
+
+/* Improve OBA story section visibility and content contrast. */
+.story{
+  background:var(--oba-m3-surface);
+  border:1px solid var(--oba-m3-outline);
+}
+.story-content{
+  background:var(--oba-m3-primary-container);
+  color:var(--oba-m3-on-primary-container);
+}
+.story-content h2{
+  color:var(--oba-m3-on-primary-container);
+}
+.story-content p{
+  color:color-mix(in srgb,var(--oba-m3-on-primary-container) 78%,transparent);
+}
+.story-content .eyebrow{
+  color:var(--oba-m3-primary);
+}
+.story-content .button{
+  margin-top:8px;
+}
+@media(max-width:749px){
+  .story-content{
+    padding:36px 24px;
+  }
+}
