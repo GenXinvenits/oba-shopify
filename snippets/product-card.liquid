@@ -13,9 +13,7 @@
     </a>
 
     <span class="product-card__badges" aria-label="Product badges">
-      {% if product.compare_at_price > product.price %}
-        <span class="product-badge product-badge--sale">Sale</span>
-      {% endif %}
+      <span class="product-badge product-badge--sale">Sale</span>
       {% if product.tags contains 'New' or product.tags contains 'new' %}
         <span class="product-badge product-badge--new">New</span>
       {% endif %}
