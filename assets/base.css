@@ -116,13 +116,13 @@
 }
 
 /* Sale collection */
-.collection-section--sale .collection-intro{background:var(--oba-accent);border:0;border-radius:14px;padding:34px 38px;margin-bottom:18px}
+.collection-section--sale .collection-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,520px);align-items:center;gap:40px;background:var(--oba-accent);border:0;border-radius:18px;padding:38px 42px;margin-bottom:22px;min-height:190px}.collection-section--sale .collection-intro > div:first-child{min-width:0}.collection-section--sale .collection-intro .eyebrow{margin-bottom:10px}.collection-section--sale .collection-intro h1{margin:0}
 .collection-section--sale .collection-intro h1{font-size:clamp(58px,9vw,120px);letter-spacing:-.075em}
 .collection-section--sale .collection-description{color:var(--oba-ink)}
 .collection-section--sale .collection-toolbar{background:#fff;border:1px solid var(--oba-line);border-radius:10px;padding:14px 18px;margin-bottom:24px}
 .collection-section--sale .product-card__media{border:1px solid var(--oba-line);border-radius:10px}
 .collection-section--sale .product-badge--sale{background:var(--oba-accent);color:var(--oba-ink);border-radius:999px}
-@media(max-width:600px){.collection-section--sale .collection-intro{padding:26px 20px;border-radius:12px}.collection-section--sale .collection-intro h1{font-size:58px}.collection-section--sale .collection-toolbar{padding:12px 14px}}
+@media(max-width:900px){.collection-section--sale .collection-intro{grid-template-columns:1fr;gap:18px}}@media(max-width:600px){.collection-section--sale .collection-intro{padding:26px 20px;border-radius:14px;min-height:0}.collection-section--sale .collection-intro h1{font-size:58px}.collection-section--sale .collection-toolbar{padding:12px 14px}}
 
 /* Keep Sale collection description content aligned and readable, including Shopify rich-text headings. */
 .collection-section--sale .collection-description{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:12px;width:min(100%,560px);margin:0;text-align:left;font-size:15px;line-height:1.55;font-weight:600}
