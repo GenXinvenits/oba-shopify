@@ -296,15 +296,18 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
 .product-card__availability{
   display:inline-flex;
   align-items:center;
-  min-height:auto;
-  padding:0;
-  border-radius:0;
-  background:transparent;
-  color:var(--oba-muted);
+  justify-content:center;
+  min-height:24px;
+  padding:0 9px;
+  border:1px solid rgba(19,52,88,.16);
+  border-radius:var(--oba-m3-pill);
+  background:var(--oba-m3-primary-container);
+  color:var(--oba-m3-primary);
   font-size:8px;
-  font-weight:700;
+  font-weight:800;
   letter-spacing:.07em;
   text-transform:uppercase;
+  white-space:nowrap;
 }
 .product-card h3{
   margin:10px 0 12px;
@@ -337,7 +340,7 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
     padding:14px 10px 11px;
   }
   .product-card__meta{min-height:20px}
-  .product-card__availability{font-size:7px}
+  .product-card__availability{min-height:22px;padding:0 8px;font-size:7px}
   .product-card h3{margin:8px 0 10px;font-size:14px}
   .product-card__footer{padding-top:8px}
   .product-card__footer .price{font-size:13px}
