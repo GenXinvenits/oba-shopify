@@ -379,3 +379,14 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
 
 .footer-brand,.footer-brand:hover,.footer-brand:focus,.footer-brand:focus-visible,.footer-brand:active{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;transform:none!important;outline:none!important;transition:none!important}
 .footer-brand-logo{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+
+/* Keep product availability aligned to the right of the product-card meta row. */
+.product-card__meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.product-card__availability{
+  margin-left:auto;
+  text-align:right;
+}
