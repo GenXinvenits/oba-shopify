@@ -294,9 +294,9 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
   text-transform:uppercase;
 }
 .product-card__availability--sold-out{
-  border-color:rgba(120,120,115,.24);
-  background:var(--oba-m3-surface-high);
-  color:var(--oba-muted);
+  border-color:rgba(155,58,58,.22);
+  background:#f9e5e5;
+  color:#9b3a3a;
 }
 .product-card__availability{
   display:inline-flex;
