@@ -57,6 +57,19 @@
       </aside>
     </div>
 
+    <div class="oba-quick-view" data-quick-view-modal hidden>
+      <button class="oba-quick-view__backdrop" type="button" data-quick-view-close aria-label="Close quick view"></button>
+      <div class="oba-quick-view__panel" role="dialog" aria-modal="true" aria-labelledby="QuickViewTitle">
+        <div class="oba-quick-view__header">
+          <span class="eyebrow" id="QuickViewTitle">Quick view</span>
+          <button class="oba-quick-view__close" type="button" data-quick-view-close aria-label="Close quick view">×</button>
+        </div>
+        <div class="oba-quick-view__frame-wrap">
+          <iframe class="oba-quick-view__frame" data-quick-view-frame title="Product quick view" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
   </body>
 </html>
