@@ -10,11 +10,13 @@
     <style>:root{--oba-accent:{{ settings.accent_color | default: '#d8ff3e' }};--oba-bg:{{ settings.background_color | default: '#f5f5f1' }};--oba-ink:{{ settings.ink_color | default: '#101010' }}}</style>
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'oba-material.css' | asset_url | stylesheet_tag }}
+      <style>.site-header-sticky-shell{position:sticky;top:0;z-index:100;width:100%;}
+</style>
   </head>
   <body class="template-{{ template.name | handle }}">
     <a class="skip-link" href="#MainContent">Skip to content</a>
     {% section 'announcement-bar' %}
-    {% section 'header' %}
+    <div class="site-header-sticky-shell">{% section 'header' %}</div>
     <main id="MainContent" role="main">{{ content_for_layout }}</main>
     {% section 'footer' %}
 
