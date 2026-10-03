@@ -68,6 +68,11 @@
       </div>
     </div>
 
+    {% if template.name == 'index' %}
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+      <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+      <script src="{{ 'homepage-scroll.js' | asset_url }}" defer></script>
+    {% endif %}
     <script src="{{ 'theme.js' | asset_url }}" defer></script>
   </body>
 </html>
