@@ -460,6 +460,15 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
 }
 .story-content .button{
   margin-top:8px;
+  background:var(--oba-m3-primary-container);
+  color:var(--oba-m3-on-primary-container);
+  border-color:var(--oba-m3-primary-container);
+}
+.story-content .button:hover,
+.story-content .button:focus-visible{
+  background:var(--oba-m3-surface);
+  color:var(--oba-m3-on-primary-container);
+  border-color:var(--oba-m3-surface);
 }
 @media(max-width:749px){
   .story-content{
