@@ -23,7 +23,7 @@
         <div class="footer-localization">
           {% form 'localization', class: 'footer-localization__form' %}
             <label for="FooterCountry">Currency</label>
-            <select id="FooterCountry" name="country_code" aria-label="Currency">
+            <select id="FooterCountry" name="country_code" aria-label="Currency" onchange="this.form.submit()">
               {% for country in localization.available_countries %}
                 <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>
                   {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
