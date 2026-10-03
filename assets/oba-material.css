@@ -313,11 +313,7 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
   letter-spacing:-.02em;
 }
 .product-card h3 a{
-  color:var(--oba-ink);
-}
-.product-card h3 a:hover{
   color:var(--oba-m3-primary);
-  opacity:1;
 }
 .product-card__footer{
   padding-top:10px;
