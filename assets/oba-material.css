@@ -240,6 +240,13 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
 #shopify-section-announcement-bar{background:#fff}
 
 
+/* Keep product-card overlays strictly contained within each product media surface. */
+.product-card{position:relative;min-width:0}
+.product-card__media-wrap{position:relative;isolation:isolate;contain:layout paint}
+.product-card__badges,.product-card__actions{position:absolute;z-index:5}
+.product-card__badges{top:14px;left:14px}
+.product-card__actions{top:14px;right:14px}
+
 /* Product card actions: compact rounded icon buttons. */
 .product-card__actions{position:absolute;right:14px;top:14px;z-index:4;display:flex;gap:8px;opacity:0;transform:translateY(8px);transition:opacity .25s ease,transform .25s cubic-bezier(.2,.8,.2,1)}
 .product-card:hover .product-card__actions,.product-card:focus-within .product-card__actions{opacity:1;transform:none}
