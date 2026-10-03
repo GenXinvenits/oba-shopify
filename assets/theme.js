@@ -116,3 +116,42 @@ document.addEventListener('click',(event)=>{const toggle=event.target.closest('.
     if(cartButton && !drawer.hidden) openDrawer();
   });
 })();
+
+
+(function(){
+  const modal=document.querySelector('[data-quick-view-modal]');
+  if(!modal) return;
+  const frame=modal.querySelector('[data-quick-view-frame]');
+  const closeButtons=modal.querySelectorAll('[data-quick-view-close]');
+  let lastTrigger=null;
+
+  function closeQuickView(){
+    modal.classList.remove('is-open');
+    document.body.classList.remove('oba-quick-view-open');
+    window.setTimeout(()=>{modal.hidden=true;if(frame) frame.src='about:blank';},180);
+    lastTrigger?.focus();
+  }
+
+  function openQuickView(trigger){
+    const url=trigger.getAttribute('href');
+    if(!url || !frame) return;
+    lastTrigger=trigger;
+    frame.src=url;
+    modal.hidden=false;
+    document.body.classList.add('oba-quick-view-open');
+    requestAnimationFrame(()=>modal.classList.add('is-open'));
+  }
+
+  document.addEventListener('click',function(event){
+    const trigger=event.target.closest('[data-quick-view]');
+    if(!trigger) return;
+    event.preventDefault();
+    openQuickView(trigger);
+  });
+
+  closeButtons.forEach(button=>button.addEventListener('click',closeQuickView));
+
+  document.addEventListener('keydown',function(event){
+    if(event.key==='Escape' && !modal.hidden) closeQuickView();
+  });
+})();
