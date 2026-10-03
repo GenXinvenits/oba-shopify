@@ -40,6 +40,9 @@
         <a class="product-card__quick" href="{{ product.url }}" aria-label="View {{ product.title | escape }}" title="View product"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12s3.2-5 8.5-5 8.5 5 8.5 5-3.2 5-8.5 5-8.5-5-8.5-5Z"></path><circle cx="12" cy="12" r="2.4"></circle></svg></a>
       </div>
     {% endif %}
+  </div>
+
+  <div class="product-card__info">
     <div class="product-card__meta">
       {% if product.vendor != blank %}<span class="product-card__brand">{{ product.vendor }}</span>{% endif %}
       <span class="product-card__availability{% unless product.available %} product-card__availability--sold-out{% endunless %}">{{ product.available | default: false | replace: 'true', 'In stock' | replace: 'false', 'Sold out' }}</span>
