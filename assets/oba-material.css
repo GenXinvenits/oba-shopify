@@ -293,6 +293,11 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
   letter-spacing:.12em;
   text-transform:uppercase;
 }
+.product-card__availability--sold-out{
+  border-color:rgba(120,120,115,.24);
+  background:var(--oba-m3-surface-high);
+  color:var(--oba-muted);
+}
 .product-card__availability{
   display:inline-flex;
   align-items:center;
