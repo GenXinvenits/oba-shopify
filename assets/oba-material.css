@@ -408,3 +408,34 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
   margin-left:auto;
   text-align:right;
 }
+
+/* Align the footer brand block with the footer grid and text columns. */
+.site-footer .footer-grid > div:first-child{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:flex-start;
+}
+.site-footer .footer-grid > div:first-child > p{
+  margin:12px 0 0;
+  max-width:28ch;
+  text-align:left;
+}
+.footer-brand{
+  align-self:flex-start;
+  margin:0;
+  min-height:44px;
+}
+.footer-brand-logo{
+  height:44px;
+  max-width:145px;
+}
+@media(max-width:600px){
+  .site-footer .footer-grid > div:first-child > p{
+    max-width:34ch;
+  }
+  .footer-brand-logo{
+    height:40px;
+    max-width:132px;
+  }
+}
