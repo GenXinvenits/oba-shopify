@@ -236,3 +236,5 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
  .collection-empty{padding:56px 20px!important;border-radius:var(--oba-m3-lg)!important}
  .collections-index__grid{grid-template-columns:1fr!important;gap:14px!important}
 }
+
+#shopify-section-announcement-bar{background:#fff}
