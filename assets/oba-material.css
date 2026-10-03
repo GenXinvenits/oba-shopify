@@ -446,17 +446,17 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
   border:1px solid var(--oba-m3-outline);
 }
 .story-content{
-  background:var(--oba-m3-primary-container);
-  color:var(--oba-m3-on-primary-container);
+  background:var(--oba-m3-on-primary-container);
+  color:var(--oba-m3-primary-container);
 }
 .story-content h2{
-  color:var(--oba-m3-on-primary-container);
+  color:var(--oba-m3-primary-container);
 }
 .story-content p{
-  color:color-mix(in srgb,var(--oba-m3-on-primary-container) 78%,transparent);
+  color:color-mix(in srgb,var(--oba-m3-primary-container) 78%,transparent);
 }
 .story-content .eyebrow{
-  color:var(--oba-m3-primary);
+  color:var(--oba-m3-primary-container);
 }
 .story-content .button{
   margin-top:8px;
