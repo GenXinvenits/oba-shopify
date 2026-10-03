@@ -2,7 +2,25 @@
   <div class="container">
     <div class="section-heading">
       <div><div class="eyebrow">OBA Pro Shop</div><h2>{{ section.settings.heading }}</h2></div>
-      {% if section.settings.collection != blank %}<a class="button" href="{{ section.settings.collection.url }}">{{ section.settings.button_label | default: section.settings.collection.title }}</a>{% endif %}
+      {% if section.settings.collection != blank %}
+        <a class="button featured-products__browse-button" href="{{ section.settings.collection.url }}">
+          {% case section.settings.collection.handle %}
+            {% when 'rackets' %}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 16.5 7.5"></path><path d="m14 5 2-2 5 5-2 2"></path><path d="m4 20 3.5-.8L5 17.2 4 20Z"></path></svg>
+            {% when 'shoes' %}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16.5c2.8-.2 5.1-1.3 6.5-3.5l1.8-2.8 2.2 2.3c1.3 1.4 2.8 2.3 4.5 2.7l1 .2v3.1H4v-2Z"></path><path d="M9 18.5h10"></path></svg>
+            {% when 'bag' %}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+            {% when 'accessories' %}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"></circle><circle cx="16" cy="16" r="3"></circle><path d="m10.2 10.2 3.6 3.6"></path></svg>
+            {% when 'apparel' %}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 4 2 4-2 4 3-2 4-2-1v8H8v-8l-2 1-2-4 4-3Z"></path></svg>
+            {% when 'shuttlecocks' %}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 8 8"></path><path d="m6 7 8 8"></path><path d="m10 3 8 8"></path><path d="M14 13c1.8 1.8 3.2 3.2 5 5l-2 2-5-5"></path><path d="M7 17 4 20"></path></svg>
+          {% endcase %}
+          <span>{{ section.settings.button_label | default: 'Browse' }}</span>
+        </a>
+      {% endif %}
     </div>
     {% assign selected_collection = section.settings.collection %}
     {% if selected_collection != blank %}
