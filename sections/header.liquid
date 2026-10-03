@@ -20,76 +20,13 @@
         </div>
       </details>
 
-      <details class="header-account-menu">
-        <summary class="header-action header-account" aria-label="Account">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.2 20c.8-3.35 3.05-5.15 6.8-5.15s6 1.8 6.8 5.15"></path></svg>
-          <span>Account</span>
-        </summary>
-        <div class="header-account-dropdown">
-          {% if shop.customer_accounts_enabled %}
-            {% if customer %}
-              <div class="account-dropdown-profile">
-                <div class="account-dropdown-avatar" aria-hidden="true">
-                  {% if customer.first_name != blank %}
-                    {{ customer.first_name | slice: 0 | upcase }}
-                  {% else %}
-                    {{ customer.email | slice: 0 | upcase }}
-                  {% endif %}
-                </div>
-                <div class="account-dropdown-identity">
-                  <span class="account-dropdown-kicker">YOUR OBA ACCOUNT</span>
-                  <strong>
-                    {% if customer.name != blank %}
-                      {{ customer.name | escape }}
-                    {% else %}
-                      {{ customer.email | escape }}
-                    {% endif %}
-                  </strong>
-                  <span>{{ customer.email | escape }}</span>
-                </div>
-              </div>
-
-              <div class="account-dropdown-info">
-                <div class="account-dropdown-row">
-                  <span>Orders</span>
-                  <strong>{{ customer.orders_count }}</strong>
-                </div>
-              </div>
-
-              <div class="account-dropdown-actions">
-                <a class="account-dropdown-primary" href="{{ routes.account_url }}">View account <span>↗</span></a>
-                <a class="account-dropdown-secondary" href="{{ routes.account_logout_url }}">Sign out</a>
-              </div>
-            {% else %}
-              <div class="account-dropdown-profile account-dropdown-profile--guest">
-                <div class="account-dropdown-avatar" aria-hidden="true">
-                  <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.2 20c.8-3.35 3.05-5.15 6.8-5.15s6 1.8 6.8 5.15"></path></svg>
-                </div>
-                <div class="account-dropdown-identity">
-                  <span class="account-dropdown-kicker">OBA PRO SHOP</span>
-                  <strong>Customer account</strong>
-                  <span>Sign in securely with Shopify to access your orders and account.</span>
-                </div>
-              </div>
-
-              <div class="account-dropdown-actions account-dropdown-actions--single">
-                <a class="account-dropdown-primary" href="{{ routes.account_login_url }}">Continue to sign in <span>↗</span></a>
-              </div>
-            {% endif %}
-          {% else %}
-            <div class="account-dropdown-profile account-dropdown-profile--guest">
-              <div class="account-dropdown-avatar" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.2 20c.8-3.35 3.05-5.15 6.8-5.15s6 1.8 6.8 5.15"></path></svg>
-              </div>
-              <div class="account-dropdown-identity">
-                <span class="account-dropdown-kicker">OBA PRO SHOP</span>
-                <strong>Customer accounts</strong>
-                <span>Customer accounts are currently unavailable.</span>
-              </div>
-            </div>
-          {% endif %}
-        </div>
-      </details>
+      {% if shop.customer_accounts_enabled %}
+        <shopify-account class="header-shopify-account" menu="customer-account-main-menu">
+          <div slot="signed-out-avatar" class="header-shopify-account-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"></circle><path d="M5.2 20c.8-3.35 3.05-5.15 6.8-5.15s6 1.8 6.8 5.15"></path></svg>
+          </div>
+        </shopify-account>
+      {% endif %}
 
       <a class="header-action header-cart" href="{{ routes.cart_url }}" data-cart-drawer-open aria-label="Cart, {{ cart.item_count }} items"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4h2l1.65 10.7a2.15 2.15 0 0 0 2.1 1.8h8.55a2.1 2.1 0 0 0 2-1.65L21 8H6.25"></path><circle cx="9.5" cy="20" r="1.15"></circle><circle cx="18" cy="20" r="1.15"></circle></svg><span>Cart</span><span class="cart-count" data-cart-count>{{ cart.item_count }}</span></a>
     </div>
