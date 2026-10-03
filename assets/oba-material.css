@@ -149,7 +149,7 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
 
 /* Keep alignment intentional across every commerce surface. */
 .product-card__meta,.product-card__footer{justify-content:flex-start;gap:10px}
-.product-card__footer .price{margin-left:auto}
+.product-card__footer .price{margin-left:0;margin-right:auto}
 .collection-toolbar{align-items:center}
 .collection-toolbar__summary{line-height:1.3}
 .collection-filter summary{min-height:48px;align-items:center}
