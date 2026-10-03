@@ -298,6 +298,16 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
   background:#f9e5e5;
   color:#9b3a3a;
 }
+/* Sold-out status must keep its red tone in every state. */
+.product-card__availability--sold-out,
+.product-card__availability--sold-out:hover,
+.product-card__availability--sold-out:focus,
+.product-card__availability--sold-out:active{
+  border-color:rgba(155,58,58,.28)!important;
+  background:#f9e5e5!important;
+  color:#9b3a3a!important;
+  box-shadow:none!important;
+}
 .product-card__availability{
   display:inline-flex;
   align-items:center;
