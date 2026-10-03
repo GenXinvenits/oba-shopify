@@ -1,11 +1,25 @@
-<section class="brand-strip">
+<section class="brand-strip" aria-label="Partner brands">
   <div class="container">
-    <div class="brand-list">
-      {% for block in section.blocks %}<span {{ block.shopify_attributes }}>{{ block.settings.name }}</span>{% endfor %}
+    <div class="brand-marquee" data-brand-marquee>
+      <div class="brand-marquee__track">
+        {% for repeat in (1..2) %}
+          <div class="brand-marquee__group"{% if repeat == 2 %} aria-hidden="true"{% endif %}>
+            {% for block in section.blocks %}
+              {% if block.settings.logo != blank %}
+                <div class="brand-marquee__item" {{ block.shopify_attributes }}>
+                  {{ block.settings.logo | image_url: width: 320 | image_tag: loading: 'lazy', widths: '160,240,320', alt: block.settings.name }}
+                </div>
+              {% elsif block.settings.name != blank %}
+                <span class="brand-marquee__item brand-marquee__item--text" {{ block.shopify_attributes }}>{{ block.settings.name }}</span>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>
 
 {% schema %}
-{"name":"Brand strip","settings":[],"blocks":[{"type":"brand","name":"Brand","settings":[{"type":"text","id":"name","label":"Brand name","default":"YONEX"}]}],"max_blocks":8,"presets":[{"name":"OBA brands","blocks":[{"type":"brand","settings":{"name":"YONEX"}},{"type":"brand","settings":{"name":"VICTOR"}},{"type":"brand","settings":{"name":"HUNDRED"}},{"type":"brand","settings":{"name":"YANG YANG"}}]}]}
+{"name":"Brand strip","settings":[{"type":"range","id":"speed","label":"Marquee speed","min":10,"max":60,"step":5,"unit":"s","default":30}],"blocks":[{"type":"brand","name":"Partner brand","settings":[{"type":"text","id":"name","label":"Brand name","default":"YONEX"},{"type":"image_picker","id":"logo","label":"Brand logo"}]}],"max_blocks":8,"presets":[{"name":"OBA brands","blocks":[{"type":"brand","settings":{"name":"YONEX"}},{"type":"brand","settings":{"name":"VICTOR"}},{"type":"brand","settings":{"name":"HUNDRED"}},{"type":"brand","settings":{"name":"YANG YANG"}}]}]}
 {% endschema %}
