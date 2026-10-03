@@ -342,3 +342,37 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
   .product-card__footer{padding-top:8px}
   .product-card__footer .price{font-size:13px}
 }
+
+/* Product card titles keep one color in every interaction state. */
+.product-card h3 a,
+.product-card h3 a:hover,
+.product-card h3 a:focus,
+.product-card h3 a:active{
+  color:var(--oba-m3-primary)!important;
+  opacity:1!important;
+  text-decoration:none!important;
+  transition:none!important;
+}
+
+/* Use the same OBA brand mark in the footer as the navbar. */
+.footer-brand{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  min-height:44px;
+  padding:6px 8px;
+  border-radius:var(--oba-m3-md);
+}
+.footer-brand-logo{
+  display:block;
+  width:auto;
+  height:44px;
+  max-width:145px;
+  object-fit:contain;
+}
+.footer-brand:hover{
+  background:var(--oba-m3-surface-high);
+}
+@media(max-width:600px){
+  .footer-brand-logo{height:40px;max-width:132px}
+}
