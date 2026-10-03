@@ -17,7 +17,7 @@
 .oba-quick-view__thumb img{display:block;width:100%;height:100%;object-fit:contain}
 .oba-quick-view__details{padding:56px 54px 48px;display:flex;flex-direction:column;justify-content:flex-start;background:#fff;min-width:0}
 .oba-quick-view__vendor{font-size:10px;text-transform:uppercase;letter-spacing:.16em;font-weight:800;color:#5e5e59;margin-bottom:14px}
-.oba-quick-view__title{font-size:clamp(34px,3.5vw,54px);line-height:.96;letter-spacing:-.055em;margin:0 0 20px;max-width:620px;color:#101010}
+.oba-quick-view__title{font-size:36px;line-height:.96;letter-spacing:-.055em;margin:0 0 20px;max-width:620px;color:#101010}
 .oba-quick-view__price{font-size:24px;font-weight:800;margin-bottom:26px;color:#101010}
 .oba-quick-view__description{font-size:14px;line-height:1.7;color:#555550;max-width:600px;margin-bottom:28px}
 .oba-quick-view__description p:first-child{margin-top:0}
