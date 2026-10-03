@@ -155,3 +155,116 @@ document.addEventListener('click',(event)=>{const toggle=event.target.closest('.
     if(event.key==='Escape' && !modal.hidden) closeQuickView();
   });
 })();
+
+/* Quick View replacement: load Shopify product JSON directly instead of embedding the product page. */
+(function(){
+  const modal=document.querySelector('[data-quick-view-modal]');
+  if(!modal) return;
+  const content=modal.querySelector('[data-quick-view-content]');
+  const closeButtons=modal.querySelectorAll('[data-quick-view-close]');
+  let lastTrigger=null;
+
+  const escapeHtml=(value)=>String(value??'').replace(/[&<>'"]/g,(char)=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+  const money=(cents)=>new Intl.NumberFormat(undefined,{style:'currency',currency:window.Shopify?.currency?.active||'USD'}).format(Number(cents||0)/100);
+
+  function close(){
+    modal.classList.remove('is-open');
+    document.body.classList.remove('oba-quick-view-open');
+    window.setTimeout(()=>{modal.hidden=true;if(content) content.innerHTML='<div class="oba-quick-view__loading">Loading product…</div>';},180);
+    lastTrigger?.focus();
+  }
+
+  function render(product,productUrl){
+    const images=(product.images||[]).filter(Boolean);
+    const variants=(product.variants||[]).filter(Boolean);
+    const firstImage=images[0]||product.featured_image;
+    const imageHtml=firstImage?`<img class="oba-quick-view__main-image" data-qv-main-image src="${escapeHtml(firstImage)}" alt="${escapeHtml(product.title)}">`:'<div class="oba-quick-view__loading">No product image</div>';
+    const thumbs=images.length>1?`<div class="oba-quick-view__thumbs">${images.map((src,index)=>`<button type="button" class="oba-quick-view__thumb${index===0?' is-active':''}" data-qv-thumb="${escapeHtml(src)}" aria-label="View image ${index+1}"><img src="${escapeHtml(src)}" alt=""></button>`).join('')}</div>`:'';
+    const variantOptions=variants.length>1?`<div class="oba-quick-view__option"><label for="QuickViewVariant">Options</label><select id="QuickViewVariant" data-qv-variant>${variants.map((variant,index)=>`<option value="${variant.id}" data-available="${variant.available}" data-price="${variant.price}">${escapeHtml(variant.title)} — ${money(variant.price)}${variant.available?'':' — Sold out'}</option>`).join('')}</select></div>`:'';
+    const selected=variants[0];
+    const disabled=!selected||!selected.available;
+    content.innerHTML=`<div class="oba-quick-view__product">
+      <div class="oba-quick-view__gallery">${imageHtml}${thumbs}</div>
+      <div class="oba-quick-view__details">
+        ${product.vendor?`<div class="oba-quick-view__vendor">${escapeHtml(product.vendor)}</div>`:''}
+        <h2 class="oba-quick-view__title">${escapeHtml(product.title)}</h2>
+        <div class="oba-quick-view__price" data-qv-price>${money(selected?.price||product.price)}</div>
+        ${product.description?`<div class="oba-quick-view__description">${product.description}</div>`:''}
+        <form class="oba-quick-view__form" data-qv-form>
+          ${variantOptions}
+          <button class="button oba-quick-view__submit" type="submit" data-qv-submit data-variant-id="${selected?.id||''}" ${disabled?'disabled':''}>${disabled?'Sold out':'Add to cart'}</button>
+          <a class="oba-quick-view__full-link" href="${escapeHtml(productUrl)}">View full product</a>
+        </form>
+      </div>
+    </div>`;
+
+    content.querySelectorAll('[data-qv-thumb]').forEach((thumb)=>thumb.addEventListener('click',()=>{
+      const main=content.querySelector('[data-qv-main-image]');
+      if(main) main.src=thumb.dataset.qvThumb;
+      content.querySelectorAll('[data-qv-thumb]').forEach((item)=>item.classList.toggle('is-active',item===thumb));
+    }));
+
+    const select=content.querySelector('[data-qv-variant]');
+    const price=content.querySelector('[data-qv-price]');
+    const submit=content.querySelector('[data-qv-submit]');
+    select?.addEventListener('change',()=>{
+      const option=select.options[select.selectedIndex];
+      const available=option.dataset.available==='true';
+      if(price) price.textContent=money(option.dataset.price);
+      if(submit){submit.dataset.variantId=option.value;submit.disabled=!available;submit.textContent=available?'Add to cart':'Sold out';}
+    });
+
+    content.querySelector('[data-qv-form]')?.addEventListener('submit',async(event)=>{
+      event.preventDefault();
+      const button=content.querySelector('[data-qv-submit]');
+      const id=button?.dataset.variantId;
+      if(!id||button?.disabled) return;
+      const original=button.textContent;
+      button.disabled=true;button.textContent='Adding…';
+      try{
+        const response=await fetch('/cart/add.js',{method:'POST',headers:{Accept:'application/json','Content-Type':'application/json'},body:JSON.stringify({items:[{id:Number(id),quantity:1}]})});
+        if(!response.ok) throw new Error('Add to cart failed');
+        const cartResponse=await fetch('/cart.js',{headers:{Accept:'application/json'}});
+        const cart=await cartResponse.json();
+        document.querySelectorAll('[data-cart-count]').forEach((el)=>{el.textContent=cart.item_count});
+        document.dispatchEvent(new CustomEvent('oba:cart-updated',{detail:{cart}}));
+        button.textContent='Added';
+        window.setTimeout(()=>{button.disabled=false;button.textContent=original},1000);
+      }catch(error){
+        button.disabled=false;button.textContent=original;
+        console.error('Quick View add failed',error);
+      }
+    });
+  }
+
+  async function open(trigger){
+    const href=trigger.getAttribute('href');
+    if(!href||!content) return;
+    lastTrigger=trigger;
+    modal.hidden=false;
+    document.body.classList.add('oba-quick-view-open');
+    requestAnimationFrame(()=>modal.classList.add('is-open'));
+    content.innerHTML='<div class="oba-quick-view__loading">Loading product…</div>';
+    try{
+      const url=new URL(href,window.location.origin);
+      const productEndpoint=`${url.origin}${url.pathname.replace(/\/$/,'')}.js`;
+      const response=await fetch(productEndpoint,{headers:{Accept:'application/json'}});
+      if(!response.ok) throw new Error(`Product request failed: ${response.status}`);
+      const product=await response.json();
+      render(product,`${url.pathname}${url.search}`);
+    }catch(error){
+      content.innerHTML='<div class="oba-quick-view__error"><div><strong>Quick view unavailable.</strong><p>Please open the full product page instead.</p></div></div>';
+      console.error('Quick View load failed',error);
+    }
+  }
+
+  document.addEventListener('click',(event)=>{
+    const trigger=event.target.closest('[data-quick-view]');
+    if(!trigger) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    open(trigger);
+  });
+  closeButtons.forEach((button)=>button.addEventListener('click',close));
+  document.addEventListener('keydown',(event)=>{if(event.key==='Escape'&&!modal.hidden) close();});
+})();
