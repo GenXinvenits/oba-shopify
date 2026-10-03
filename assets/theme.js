@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded',()=>{
+  const localizationForms=document.querySelectorAll('.footer-localization__form');
+  localizationForms.forEach((form)=>{
+    const country=form.querySelector('select[name="country_code"]');
+    country?.addEventListener('change',()=>form.submit());
+  });
+
   const toggle=document.querySelector('.menu-toggle');
   const nav=document.getElementById('MobileNav');
   if(toggle&&nav){toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));nav.hidden=open;});}
