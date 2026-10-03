@@ -326,3 +326,8 @@ body.oba-quick-view-open{overflow:hidden}
     display:none;
   }
 }
+
+
+/* Sale collection: align the section flush beneath the Sale ticker. */
+.collection-section--sale{padding-top:0}
+@media(max-width:600px){.collection-section--sale{padding-top:0}}
