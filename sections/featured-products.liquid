@@ -4,14 +4,7 @@
       <div><div class="eyebrow">OBA Pro Shop</div><h2>{{ section.settings.heading }}</h2></div>
       {% if section.settings.collection != blank %}
         <a class="button featured-products__browse-button" href="{{ section.settings.collection.url }}">
-          {% case section.settings.collection.handle %}
-            {% when 'rackets' %}<i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i>
-            {% when 'shoes' %}<i class="fa-solid fa-shoe-prints" aria-hidden="true"></i>
-            {% when 'bag' %}<i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
-            {% when 'accessories' %}<i class="fa-solid fa-toolbox" aria-hidden="true"></i>
-            {% when 'apparel' %}<i class="fa-solid fa-shirt" aria-hidden="true"></i>
-            {% when 'shuttlecocks' %}<i class="fa-solid fa-shuttlecock" aria-hidden="true"></i>
-          {% endcase %}
+          <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
           <span>{{ section.settings.button_label | default: 'Browse' }}</span>
         </a>
       {% endif %}
