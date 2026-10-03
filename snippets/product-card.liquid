@@ -31,7 +31,7 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4h2l1.65 10.7a2.15 2.15 0 0 0 2.1 1.8h8.55a2.1 2.1 0 0 0 2-1.65L21 8H6.25"></path><circle cx="9.5" cy="20" r="1.15"></circle><circle cx="18" cy="20" r="1.15"></circle></svg>
           </button>
         </form>
-        <a class="product-card__action-button product-card__action-button--buy" href="{{ routes.cart_url }}/{{ card_variant.id }}:1?checkout=1" aria-label="Buy {{ product.title | escape }} now" title="Buy now">
+        <a class="product-card__action-button product-card__action-button--buy" href="{{ product.url }}" data-buy-now data-variant-id="{{ card_variant.id }}" aria-label="Buy {{ product.title | escape }} now" title="Buy now">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8.5h11l1 12h-13l1-12Z"></path><path d="M9 8.5V6a3 3 0 0 1 6 0v2.5"></path></svg>
         </a>
       </div>
