@@ -79,6 +79,7 @@
 @media(max-width:900px){.story{margin-inline:14px}}
 @media(max-width:600px){.story{border-radius:14px}.button{min-height:46px;padding:0 19px}.product-card__add-button{border-radius:7px}}
 
+.oba-action-spinner{display:block;width:15px;height:15px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:obaActionSpin .65s linear infinite}@keyframes obaActionSpin{to{transform:rotate(360deg)}}
 /* Prevent hover-state text from becoming invisible on any button variant. */
 .button:hover,.button:focus-visible,.button--light:hover,.button--secondary:hover,.product-card__add-button:hover{opacity:1;visibility:visible;text-shadow:none}
 .button:hover *,.button--light:hover *,.button--secondary:hover *,.product-card__add-button:hover *{color:#101010;-webkit-text-fill-color:#101010;opacity:1;visibility:visible}
