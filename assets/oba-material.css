@@ -271,3 +271,78 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
 .product-card__quick svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .product-card__actions .product-card__quick:hover{transform:translateY(-2px);background:var(--oba-m3-primary);color:var(--oba-m3-on-primary);border-color:var(--oba-m3-primary);box-shadow:var(--oba-m3-shadow-3)}
 @media(max-width:600px){.product-card__badges{top:10px;left:10px}.product-card__badges{height:38px}.product-badge--sale{height:30px;min-height:30px;margin-left:5px;padding:0 11px 0 13px;font-size:.64rem}.product-badge--sale::before{left:-10px;border-top-width:15px;border-bottom-width:15px;border-right-width:10px}.product-badge--sale::after{left:-2px;width:3px;height:3px}.product-card__quick{width:38px;height:38px;flex-basis:38px}.product-card__quick svg{width:17px;height:17px}}
+
+
+/* Product card info: refined Material 3 tonal surface treatment. */
+.product-card__info{
+  margin:0 2px 2px;
+  padding:18px 14px 14px;
+  border-radius:0 0 calc(var(--oba-m3-xl) - 4px) calc(var(--oba-m3-xl) - 4px);
+  background:var(--oba-m3-surface-container);
+  border:1px solid rgba(19,52,88,.08);
+  border-top:0;
+}
+.product-card__meta{
+  min-height:22px;
+  gap:8px;
+}
+.product-card__brand{
+  color:var(--oba-m3-primary);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+.product-card__availability{
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  padding:0 9px;
+  border-radius:var(--oba-m3-pill);
+  background:var(--oba-m3-primary-container);
+  color:var(--oba-m3-on-primary-container);
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.07em;
+}
+.product-card h3{
+  margin:10px 0 12px;
+  font-size:16px;
+  font-weight:750;
+  letter-spacing:-.02em;
+}
+.product-card h3 a{
+  color:var(--oba-m3-on-primary-container);
+}
+.product-card h3 a:hover{
+  color:var(--oba-m3-primary);
+  opacity:1;
+}
+.product-card__footer{
+  padding-top:10px;
+  border-top:1px solid rgba(19,52,88,.10);
+}
+.product-card__footer .price{
+  color:var(--oba-m3-primary);
+  font-size:15px;
+  font-weight:850;
+}
+.product-card__footer .price s{
+  color:var(--oba-muted);
+  font-size:12px;
+}
+.product-card__from{
+  color:var(--oba-m3-primary);
+  font-weight:800;
+}
+@media(max-width:600px){
+  .product-card__info{
+    margin:0 1px 1px;
+    padding:14px 10px 11px;
+    border-radius:0 0 calc(var(--oba-m3-lg) - 4px) calc(var(--oba-m3-lg) - 4px);
+  }
+  .product-card__meta{min-height:20px}
+  .product-card__availability{min-height:21px;padding:0 7px;font-size:7px}
+  .product-card h3{margin:8px 0 10px;font-size:14px}
+  .product-card__footer{padding-top:8px}
+  .product-card__footer .price{font-size:13px}
+}
