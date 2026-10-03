@@ -238,3 +238,91 @@ body.oba-quick-view-open{overflow:hidden}
   .oba-quick-view__header{height:52px;flex-basis:52px;padding-left:18px}
 }
 @media(prefers-reduced-motion:reduce){.oba-quick-view__panel{animation:none}}
+
+
+/* Collection toolbar: stronger contrast and clearer controls. */
+.collection-section .collection-toolbar{
+  background:#fff;
+  border:1px solid #cfcfc7;
+  border-radius:10px;
+  padding:12px 14px;
+  margin-bottom:24px;
+  box-shadow:0 2px 8px rgba(16,16,16,.05);
+}
+.collection-section .collection-toolbar__summary{
+  color:var(--oba-ink);
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.1em;
+}
+.collection-section .collection-toolbar__controls{
+  gap:10px;
+}
+.collection-section .collection-filter-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:38px;
+  padding:0 13px;
+  border:1px solid var(--oba-ink);
+  border-radius:8px;
+  background:var(--oba-ink);
+  color:#fff;
+  transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease;
+}
+.collection-section .collection-filter-toggle:hover{
+  background:var(--oba-accent);
+  color:var(--oba-ink);
+  border-color:var(--oba-accent);
+  transform:translateY(-1px);
+}
+.collection-section .collection-filter-toggle span{
+  margin:0;
+  font-size:15px;
+  line-height:1;
+}
+.collection-section .collection-sort{
+  gap:8px;
+}
+.collection-section .collection-sort label{
+  color:var(--oba-ink);
+  font-weight:900;
+}
+.collection-section .collection-sort select{
+  min-height:38px;
+  border:1px solid #bdbdb5;
+  border-radius:8px;
+  background:#f7f7f3;
+  color:var(--oba-ink);
+  padding:9px 32px 9px 11px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.06em;
+}
+.collection-section .collection-sort select:hover,
+.collection-section .collection-sort select:focus{
+  border-color:var(--oba-ink);
+  background:#fff;
+}
+.collection-section .collection-sort select:focus-visible,
+.collection-section .collection-filter-toggle:focus-visible{
+  outline:2px solid var(--oba-accent);
+  outline-offset:2px;
+}
+@media(max-width:600px){
+  .collection-section .collection-toolbar{
+    align-items:center;
+    padding:10px;
+  }
+  .collection-section .collection-toolbar__controls{
+    gap:7px;
+  }
+  .collection-section .collection-filter-toggle,
+  .collection-section .collection-sort select{
+    min-height:36px;
+  }
+  .collection-section .collection-sort label{
+    display:none;
+  }
+}
