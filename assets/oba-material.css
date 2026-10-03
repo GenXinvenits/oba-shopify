@@ -376,3 +376,6 @@ input[type=search]{border-radius:var(--oba-m3-pill)}
 @media(max-width:600px){
   .footer-brand-logo{height:40px;max-width:132px}
 }
+
+.footer-brand,.footer-brand:hover,.footer-brand:focus,.footer-brand:focus-visible,.footer-brand:active{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;transform:none!important;outline:none!important;transition:none!important}
+.footer-brand-logo{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
