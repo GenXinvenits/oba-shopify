@@ -1,6 +1,6 @@
 /* OBA Material 3 / Android-inspired visual layer */
 :root{
-  --oba-m3-primary:#8f2024;--oba-m3-on-primary:#fff;--oba-m3-primary-container:#f7dadb;--oba-m3-on-primary-container:#3b080b;
+  --oba-m3-primary:#133458;--oba-m3-on-primary:#fff;--oba-m3-primary-container:#E3F2FD;--oba-m3-on-primary-container:#3b080b;
   --oba-m3-surface:#fff;--oba-m3-surface-container:#f7f7f5;--oba-m3-surface-high:#eeeeeb;--oba-m3-outline:#d9d9d2;
   --oba-m3-shadow-1:0 2px 8px rgb(16 16 16 / 6%);--oba-m3-shadow-2:0 8px 24px rgb(16 16 16 / 8%);--oba-m3-shadow-3:0 18px 44px rgb(16 16 16 / 12%);
   --oba-m3-xs:10px;--oba-m3-sm:14px;--oba-m3-md:18px;--oba-m3-lg:24px;--oba-m3-xl:32px;--oba-m3-pill:999px;
