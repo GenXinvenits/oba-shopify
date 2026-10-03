@@ -2,7 +2,7 @@
   <div class="container">
     <div class="section-heading">
       <div><div class="eyebrow">OBA Pro Shop</div><h2>{{ section.settings.heading }}</h2></div>
-      {% if section.settings.collection != blank %}<a class="button" href="{{ section.settings.collection.url }}">View collection</a>{% endif %}
+      {% if section.settings.collection != blank %}<a class="button" href="{{ section.settings.collection.url }}">Browse all {{ section.settings.collection.title }}</a>{% endif %}
     </div>
     {% assign selected_collection = section.settings.collection %}
     {% if selected_collection != blank %}
