@@ -2,7 +2,7 @@
   "sections": {
     "hero": {"type":"hero","settings":{"eyebrow":"OBA PRO SHOP","heading":"PLAY WITH PURPOSE.","text":"Authentic badminton gear selected for players who train, compete and love the game.","primary_label":"Shop rackets","primary_link":"/collections/rackets","secondary_label":"Shop all","secondary_link":"/collections/all"}},
     "categories": {"type":"category-grid","blocks":{"rackets":{"type":"category","settings":{"collection":"rackets","title":"Rackets"}},"shoes":{"type":"category","settings":{"collection":"shoes","title":"Shoes"}},"bags":{"type":"category","settings":{"collection":"bag","title":"Bags"}},"accessories":{"type":"category","settings":{"collection":"accessories","title":"Accessories"}},"apparel":{"type":"category","settings":{"collection":"apparel","title":"Apparel"}},"shuttles":{"type":"category","settings":{"collection":"shuttlecocks","title":"Shuttlecocks"}}},"block_order":["rackets","shoes","bags","accessories","apparel","shuttles"],"settings":{"heading":"SHOP BY CATEGORY","text":"Build your setup from rackets, shoes, shuttles and the gear you trust on court."}},
-    "featured": {"type":"featured-products","settings":{"heading":"NEW & NOTABLE","collection":"frontpage","products_to_show":4}},
+    "featured": {"type":"featured-products","settings":{"heading":"NEW & NOTABLE","collection":"new-products","products_to_show":4}},
     "rackets_products": {"type":"featured-products","settings":{"heading":"RACKETS","collection":"rackets","products_to_show":4}},
     "shoes_products": {"type":"featured-products","settings":{"heading":"SHOES","collection":"shoes","products_to_show":4}},
     "bags_products": {"type":"featured-products","settings":{"heading":"BAGS","collection":"bag","products_to_show":4}},
