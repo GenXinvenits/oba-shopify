@@ -48,7 +48,29 @@
       </div>
     </div>
   {% endif %}
-  <div id="MobileNav" class="mobile-nav" hidden><nav class="container" aria-label="Mobile navigation"><a href="{{ routes.all_products_collection_url }}"><span>01</span>Shop all</a><a href="{{ routes.collections_url }}/rackets"><span>02</span>Rackets</a><a href="{{ routes.collections_url }}/shoes"><span>03</span>Shoes</a><a href="{{ routes.collections_url }}/bag"><span>04</span>Bags</a><a href="{{ routes.collections_url }}/accessories"><span>05</span>Accessories</a><a href="{{ routes.collections_url }}/apparel"><span>06</span>Apparel</a><a href="{{ routes.collections_url }}/shuttlecocks"><span>07</span>Shuttlecocks</a><a class="mobile-sale" href="{{ routes.collections_url }}/sale"><span>08</span>Sale</a></nav></div>
+  <div id="MobileNav" class="mobile-nav" hidden>
+    <nav class="container" aria-label="Mobile navigation">
+      <details class="mobile-nav-group">
+        <summary><span class="mobile-nav-index">01</span><span>Shop</span><span class="mobile-nav-chevron" aria-hidden="true"></span></summary>
+        <div class="mobile-nav-submenu">
+          <a href="{{ routes.all_products_collection_url }}"><span>01</span>Shop all</a>
+          <a href="{{ routes.collections_url }}/rackets"><span>02</span>Rackets</a>
+          <a href="{{ routes.collections_url }}/shoes"><span>03</span>Shoes</a>
+          <a href="{{ routes.collections_url }}/shuttlecocks"><span>04</span>Shuttlecocks</a>
+          <a href="{{ routes.collections_url }}/bag"><span>05</span>Bags</a>
+          <a href="{{ routes.collections_url }}/accessories"><span>06</span>Accessories</a>
+          <a href="{{ routes.collections_url }}/apparel"><span>07</span>Apparel</a>
+          <a href="{{ routes.collections_url }}/strings"><span>08</span>Strings</a>
+          <a href="{{ routes.collections_url }}/grips"><span>09</span>Grips</a>
+        </div>
+      </details>
+      <a href="{{ routes.collections_url }}/rackets"><span>02</span>Rackets</a>
+      <a href="{{ routes.collections_url }}/shoes"><span>03</span>Shoes</a>
+      <a href="{{ routes.collections_url }}/shuttlecocks"><span>04</span>Shuttles</a>
+      <a href="{{ routes.collections_url }}/bag"><span>05</span>Bags</a>
+      <a class="mobile-sale" href="{{ routes.collections_url }}/sale"><span>06</span>Sale</a>
+    </nav>
+  </div>
 </header>
 <style>
 .sale-ticker{position:relative;z-index:2;overflow:hidden;width:100%;border-top:1px solid var(--oba-m3-outline);border-bottom:1px solid var(--oba-m3-outline);background:var(--oba-m3-primary);color:#fff}.sale-ticker__track{display:flex;width:max-content;animation:obaSaleTicker 28s linear infinite}.sale-ticker__group{display:flex;align-items:center;gap:24px;flex:none;padding:10px 24px;font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;white-space:nowrap}.sale-ticker__group i{font-style:normal;opacity:.65}.sale-ticker:hover .sale-ticker__track{animation-play-state:paused}@keyframes obaSaleTicker{to{transform:translateX(-50%)}}.header-menu{display:none}.menu-toggle{display:none}.site-header{position:relative;z-index:100;align-self:flex-start;background:var(--oba-m3-surface);transition:background .3s ease,box-shadow .3s ease}.site-header:has(details[open]){background:var(--oba-m3-surface);backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:0 16px 40px rgba(25,25,22,.10)}
@@ -75,8 +97,54 @@
 .menu-icon{gap:5px}.menu-icon i{transition:transform .25s}.menu-toggle[aria-expanded=true] .menu-icon i:first-child{transform:translateY(3px) rotate(45deg)}.menu-toggle[aria-expanded=true] .menu-icon i:last-child{transform:translateY(-3px) rotate(-45deg)}.mobile-nav{animation:mobileIn .28s ease both}.mobile-nav a{transition:padding-left .2s,background .2s}.mobile-nav a:hover{padding-left:18px;background:var(--oba-m3-surface-high)}
 @keyframes mobileIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}@keyframes headerSearchDrop{from{opacity:0;transform:translateY(-6px) scale(.985)}to{opacity:1;transform:none}}
 @media(max-width:1100px){.header-inner{gap:22px}.nav{gap:5px}.nav>a,.nav summary{font-size:10px;padding-inline:12px}.header-actions{gap:4px}.header-action span:not(.cart-count){display:none}.mega-menu{grid-template-columns:1fr 1fr 1fr;gap:12px}.mega-feature{display:none}}
-@media(max-width:900px){.header-inner{grid-template-columns:auto 1fr auto;gap:12px}.header-menu{display:block}.menu-toggle{display:flex}.brand{justify-self:center;min-width:0}.nav{display:none}.header-actions{gap:4px}.header-action{min-width:36px;padding:7px 4px}.header-account{display:inline-flex}.header-action svg{width:19px;height:19px}.mobile-nav[hidden]{display:none!important}}
-@media(max-width:600px){.header-inner{min-height:66px}.brand-word{font-size:27px}.header-actions{gap:2px}.header-action{min-width:34px;padding:6px 3px}.header-action svg{width:18px;height:18px}.cart-count{min-width:19px;height:19px}}
+@media(max-width:1024px){
+  .header-inner{grid-template-columns:44px minmax(0,1fr) auto;gap:12px;min-height:68px}
+  .header-menu{display:flex;align-items:center}
+  .menu-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;width:44px;height:44px;padding:0;border:0;border-radius:999px;background:transparent;color:var(--oba-ink);font:inherit;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+  .menu-toggle:hover,.menu-toggle:focus-visible{background:var(--oba-m3-surface-high)}
+  .menu-toggle:focus-visible{outline:2px solid var(--oba-m3-primary);outline-offset:2px}
+  .menu-icon{display:inline-flex;flex-direction:column;justify-content:center;width:18px;height:18px}
+  .menu-icon i{display:block;width:18px;height:1.5px;background:currentColor;border-radius:2px}
+  .brand{justify-self:center;min-width:0;max-width:150px}
+  .brand-logo{height:42px;max-width:150px}
+  .nav{display:none}
+  .header-actions{gap:3px}
+  .header-action{min-width:40px;min-height:42px;padding:7px 5px}
+  .header-action span:not(.cart-count){display:none}
+  .header-action svg{width:19px;height:19px}
+  .shopify-account.header-shopify-account{height:42px}
+  .header-shopify-account-avatar span{display:none}
+  .shopify-account.header-shopify-account::part(signed-out-avatar){padding:7px 9px}
+  .mobile-nav[hidden]{display:none!important}
+  .mobile-nav{position:absolute;left:0;right:0;top:100%;max-height:calc(100vh - 68px);overflow:auto;background:var(--oba-m3-surface);border-top:1px solid var(--oba-m3-outline);border-bottom:1px solid var(--oba-m3-outline);box-shadow:0 18px 38px rgba(25,25,22,.14);overscroll-behavior:contain}
+  .mobile-nav>.container{display:flex;flex-direction:column;padding-top:8px;padding-bottom:12px}
+  .mobile-nav a,.mobile-nav-group>summary{min-height:52px;padding:0 4px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--oba-m3-outline);color:var(--oba-ink);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .mobile-nav a:hover,.mobile-nav-group>summary:hover{background:var(--oba-m3-surface-high)}
+  .mobile-nav a span,.mobile-nav-index{width:28px;flex:0 0 28px;color:var(--oba-muted);font-size:9px;letter-spacing:.08em}
+  .mobile-nav-group{border-bottom:1px solid var(--oba-m3-outline)}
+  .mobile-nav-group>summary{list-style:none;border-bottom:0;cursor:pointer}
+  .mobile-nav-group>summary::-webkit-details-marker{display:none}
+  .mobile-nav-chevron{margin-left:auto;width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s ease}
+  .mobile-nav-group[open] .mobile-nav-chevron{transform:rotate(225deg) translate(-1px,-1px)}
+  .mobile-nav-submenu{display:grid;grid-template-columns:1fr 1fr;padding:4px 0 8px 42px}
+  .mobile-nav-submenu a{min-height:44px;padding:0 10px 0 0;border-bottom:0;font-size:10px;letter-spacing:.06em}
+  .mobile-nav-submenu a span{width:22px;flex-basis:22px}
+  .mobile-nav .mobile-sale{color:var(--oba-m3-primary);background:var(--oba-m3-primary-container);border:0;margin-top:8px;border-radius:10px;padding-inline:12px}
+}
+@media(max-width:600px){
+  .header-inner{min-height:62px;grid-template-columns:40px minmax(0,1fr) auto;gap:7px}
+  .menu-toggle{width:40px;height:40px;font-size:0}
+  .brand-logo{height:38px;max-width:132px}
+  .header-actions{gap:1px}
+  .header-action{min-width:36px;min-height:40px;padding:6px 3px}
+  .header-action svg{width:18px;height:18px}
+  .cart-count{min-width:19px;height:19px}
+  .mobile-nav{max-height:calc(100vh - 62px)}
+  .mobile-nav>.container{padding-inline:14px}
+  .mobile-nav a,.mobile-nav-group>summary{min-height:50px}
+  .mobile-nav-submenu{grid-template-columns:1fr;padding-left:42px}
+  .mobile-nav-submenu a{min-height:42px}
+}
 @media(prefers-reduced-motion:reduce){.mega-menu,.mobile-nav,.header-search-dropdown,.header-account-dropdown{animation:none}.nav>a,.nav summary,.nav>a:before,.nav summary:before,.nav>a:after,.nav summary:after,.mega-column a,.mega-feature:after,.header-action,.mobile-nav a,.account-dropdown-primary,.account-dropdown-secondary{transition:none}}
 </style>
 <script>
