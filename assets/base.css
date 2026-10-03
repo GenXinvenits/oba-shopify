@@ -201,3 +201,9 @@ body.oba-cart-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){
   .button:before,.product-card__add-button:before{transition:none}
 }
+
+
+/* Homepage product rows: keep consecutive category listings compact. */
+.template-index .section:has(.product-grid){padding-top:42px;padding-bottom:42px}
+.template-index .section:has(.product-grid) .section-heading{margin-bottom:24px}
+.template-index .section:has(+ .section .product-grid){padding-bottom:42px}
