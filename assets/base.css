@@ -216,7 +216,7 @@ body.oba-cart-open{overflow:hidden}
 
 /* Homepage product rows: keep consecutive category listings compact. */
 .template-index .section:has(.product-grid){padding-top:42px;padding-bottom:42px}
-.featured-products__browse-button{gap:9px}.featured-products__browse-button svg{display:block;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}.template-index .section:has(.product-grid) .section-heading{margin-bottom:24px}
+.featured-products__browse-button{gap:9px}.featured-products__browse-button i{display:block;width:16px;font-size:14px;line-height:1;text-align:center;flex:none}.template-index .section:has(.product-grid) .section-heading{margin-bottom:24px}
 .template-index .section:has(+ .section .product-grid){padding-bottom:42px}
 
 
