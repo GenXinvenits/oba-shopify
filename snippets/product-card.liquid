@@ -13,7 +13,7 @@
     </a>
 
     <span class="product-card__badges" aria-label="Product badges">
-      {% if product.compare_at_price > product.price %}
+      {% if card_variant.compare_at_price > card_variant.price %}
         <span class="product-badge product-badge--sale">Sale</span>
       {% endif %}
       {% if product.tags contains 'New' or product.tags contains 'new' %}
@@ -52,7 +52,7 @@
     <div class="product-card__footer">
       <div class="price">
         {{ product.price | money }}
-        {% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}
+        {% if card_variant.compare_at_price > card_variant.price %}<s>{{ card_variant.compare_at_price | money }}</s>{% endif %}
       </div>
       {% if product.price_varies %}<span class="product-card__from">From</span>{% endif %}
     </div>
