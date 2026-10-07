@@ -395,3 +395,20 @@ html,body{max-width:100%;overflow-x:hidden}
 .product-grid--dynamic{grid-template-columns:repeat(var(--oba-product-count,4),minmax(0,1fr))}
 @media(max-width:1100px){.product-grid--dynamic{grid-template-columns:repeat(min(var(--oba-product-count,4),3),minmax(0,1fr))}}
 @media(max-width:900px){.product-grid--dynamic{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Animated page atmosphere */
+body{
+  background:
+    radial-gradient(circle at 12% 18%,color-mix(in srgb,var(--oba-accent) 13%,transparent),transparent 30%),
+    radial-gradient(circle at 86% 34%,rgba(150,180,255,.10),transparent 32%),
+    radial-gradient(circle at 48% 88%,rgba(255,180,210,.08),transparent 34%),
+    var(--oba-bg);
+  background-size:140% 140%,160% 160%,150% 150%,100% 100%;
+  animation:obaPageGradient 18s ease-in-out infinite alternate;
+}
+@keyframes obaPageGradient{
+  0%{background-position:0% 0%,100% 20%,35% 100%,0 0}
+  50%{background-position:45% 25%,55% 0%,75% 55%,0 0}
+  100%{background-position:100% 70%,0% 80%,20% 0%,0 0}
+}
+@media(prefers-reduced-motion:reduce){body{animation:none;background-position:0 0}}
