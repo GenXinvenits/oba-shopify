@@ -1,0 +1,92 @@
+{% assign new_collection = collections['new-products'] %}
+{% assign racket_collection = collections['rackets'] %}
+{% assign shoe_collection = collections['shoes'] %}
+{% assign bag_collection = collections['bag'] %}
+{% assign accessory_collection = collections['accessories'] %}
+
+<div class="oba-landing">
+  <section class="oba-landing__hero">
+    <img src="https://orbadminton.com/wp-content/uploads/2025/08/a-photograph.webp" alt="Badminton player on court" loading="eager" fetchpriority="high">
+    <div class="oba-landing__hero-shade"></div>
+    <div class="oba-landing__hero-content container">
+      <span class="eyebrow">OBA PRO SHOP</span>
+      <h1>PLAY.<br>TRAIN.<br>COMPETE.</h1>
+      <p>Authentic badminton equipment for players who take every rally seriously.</p>
+      <div class="oba-landing__actions">
+        <a class="button" href="{{ routes.all_products_collection_url }}">Shop all gear</a>
+        <a class="button button--light" href="{{ routes.collections_url }}/rackets">Explore rackets</a>
+      </div>
+    </div>
+    <div class="oba-landing__hero-bottom container"><span>01</span><span>BADMINTON / OBA</span><span>SCROLL TO EXPLORE ↓</span></div>
+  </section>
+
+  <section class="oba-landing__intro">
+    <div class="container oba-landing__intro-grid">
+      <span class="eyebrow">ENGINEERED FOR THE GAME</span>
+      <h2>YOUR COURT.<br>YOUR GEAR.</h2>
+      <p>From first training session to tournament day, OBA Pro Shop brings together the equipment, footwear and essentials players rely on.</p>
+    </div>
+  </section>
+
+  <section class="oba-landing__spotlight">
+    <div class="container">
+      <div class="oba-landing__section-head"><div><span class="eyebrow">SPOTLIGHT</span><h2>BUILT TO PERFORM</h2></div><a href="{{ routes.collections_url }}">View all <span>↗</span></a></div>
+      <div class="oba-landing__spotlight-grid">
+        <a class="oba-landing__spotlight-card oba-landing__spotlight-card--wide" href="{{ routes.collections_url }}/rackets">
+          <img src="https://orbadminton.com/wp-content/uploads/2025/08/PXL_20250423_0147530011-scaled.jpg" alt="Badminton court and players" loading="lazy">
+          <div><span>RACKETS</span><strong>FIND YOUR<br>WEAPON.</strong><b>SHOP NOW ↗</b></div>
+        </a>
+        <a class="oba-landing__spotlight-card" href="{{ routes.collections_url }}/shoes">
+          <div class="oba-landing__spotlight-placeholder">FOOTWORK<br>MATTERS.</div>
+          <div><span>FOOTWEAR</span><strong>MOVE<br>FASTER.</strong><b>SHOP SHOES ↗</b></div>
+        </a>
+        <a class="oba-landing__spotlight-card" href="{{ routes.collections_url }}/accessories">
+          <div class="oba-landing__spotlight-placeholder oba-landing__spotlight-placeholder--light">EVERY<br>DETAIL.</div>
+          <div><span>ACCESSORIES</span><strong>READY<br>FOR RALLY.</strong><b>SHOP ACCESSORIES ↗</b></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {% if new_collection != blank and new_collection.products_count > 0 %}
+    <section class="oba-landing__products">
+      <div class="container">
+        <div class="oba-landing__section-head"><div><span class="eyebrow">JUST IN</span><h2>NEW ARRIVALS</h2></div><a href="{{ new_collection.url }}">Shop new arrivals <span>↗</span></a></div>
+        <div class="product-grid oba-landing__product-grid">
+          {% for product in new_collection.products limit: 4 %}{% render 'product-card', product: product %}{% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="oba-landing__categories">
+    <div class="container">
+      <div class="oba-landing__section-head"><div><span class="eyebrow">SHOP BY CATEGORY</span><h2>GEAR UP</h2></div></div>
+      <div class="oba-landing__category-grid">
+        {% assign landing_categories = 'rackets|Rackets|POWER & CONTROL,shoes|Shoes|MOVE WITH CONFIDENCE,bag|Bags|CARRY YOUR GAME,accessories|Accessories|THE ESSENTIALS' | split: ',' %}
+        {% for item in landing_categories %}
+          {% assign bits = item | split: '|' %}{% assign collection = collections[bits[0]] %}
+          <a class="oba-landing__category" href="{{ collection.url | default: routes.collections_url }}">
+            {% if collection.featured_image %}{{ collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: bits[1] | escape }}{% else %}<div class="oba-landing__category-fallback">{{ bits[1] }}</div>{% endif %}
+            <div><span>{{ bits[2] }}</span><strong>{{ bits[1] }}</strong><b>EXPLORE ↗</b></div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="oba-landing__story">
+    <div class="oba-landing__story-media"><img src="https://orbadminton.com/wp-content/uploads/2025/04/enhacningg-Picsart-AiImageEnhancer-700x800.png" alt="OBA badminton players" loading="lazy"></div>
+    <div class="oba-landing__story-content"><span class="eyebrow">MORE THAN A PRO SHOP</span><h2>BUILT AROUND<br>THE GAME.</h2><p>OBA Pro Shop is part of Oregon Badminton Academy — a community built around training, competition and a love for badminton.</p><a class="button button--light" href="https://orbadminton.com/">Discover OBA ↗</a></div>
+  </section>
+
+  <section class="oba-landing__brands"><div class="container"><span class="eyebrow">BRANDS WE TRUST</span><div><span>YONEX</span><span>VICTOR</span><span>HUNDRED</span><span>YANG YANG</span></div></div></section>
+
+  <section class="oba-landing__final"><div class="container"><span class="eyebrow">OBA PRO SHOP</span><h2>READY FOR<br>YOUR NEXT RALLY?</h2><a class="button" href="{{ routes.all_products_collection_url }}">SHOP THE PRO SHOP ↗</a></div></section>
+</div>
+
+<style>
+.oba-landing{background:#f7f7f5;color:#101010;overflow:hidden}.oba-landing__hero{position:relative;min-height:calc(100svh - 82px);height:min(900px,calc(100svh - 82px));background:#111;color:#fff;overflow:hidden}.oba-landing__hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}.oba-landing__hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,8,12,.88),rgba(5,8,12,.48) 48%,rgba(5,8,12,.08)),linear-gradient(0deg,rgba(0,0,0,.6),transparent 50%)}.oba-landing__hero-content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-top:30px}.oba-landing__hero h1{font-size:clamp(64px,10vw,150px);line-height:.78;letter-spacing:-.075em;margin:18px 0 28px;max-width:900px}.oba-landing__hero p{max-width:500px;font-size:18px;line-height:1.5;color:#ededeb;margin:0 0 28px}.oba-landing__actions{display:flex;gap:10px;flex-wrap:wrap}.oba-landing__hero-bottom{position:absolute;z-index:3;left:50%;bottom:26px;transform:translateX(-50%);display:grid;grid-template-columns:1fr 1fr 1fr;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#d2d2d0}.oba-landing__hero-bottom span:nth-child(2){text-align:center}.oba-landing__hero-bottom span:last-child{text-align:right}.oba-landing__intro{padding:110px 0 100px}.oba-landing__intro-grid{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:40px;align-items:start}.oba-landing__intro h2,.oba-landing__section-head h2,.oba-landing__final h2{font-size:clamp(48px,6vw,90px);line-height:.86;letter-spacing:-.06em;margin:0}.oba-landing__intro p{max-width:440px;margin:4px 0 0;font-size:17px;line-height:1.65;color:#565651}.oba-landing__section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:30px}.oba-landing__section-head a{color:#101010;text-decoration:none;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.oba-landing__section-head a span{font-size:16px;margin-left:5px}.oba-landing__spotlight{padding:20px 0 110px}.oba-landing__spotlight-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:14px}.oba-landing__spotlight-card{position:relative;display:block;min-height:590px;overflow:hidden;background:#111;color:#fff;text-decoration:none}.oba-landing__spotlight-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s ease}.oba-landing__spotlight-card:hover img{transform:scale(1.035)}.oba-landing__spotlight-card>div:last-child{position:absolute;inset:auto 26px 28px;display:flex;flex-direction:column;align-items:flex-start}.oba-landing__spotlight-card span,.oba-landing__category span{font-size:10px;font-weight:800;letter-spacing:.12em}.oba-landing__spotlight-card strong{font-size:clamp(38px,4vw,66px);line-height:.86;letter-spacing:-.055em;margin:10px 0 20px}.oba-landing__spotlight-card b,.oba-landing__category b{font-size:10px;letter-spacing:.1em}.oba-landing__spotlight-placeholder{position:absolute;inset:0;background:linear-gradient(145deg,#101010,#24405d);display:flex;align-items:center;justify-content:center;text-align:center;font-size:clamp(44px,5vw,78px);font-weight:900;line-height:.8;letter-spacing:-.07em}.oba-landing__spotlight-placeholder--light{background:#e3f2fd;color:#133458}.oba-landing__products{padding:0 0 110px}.oba-landing__product-grid{gap:20px}.oba-landing__categories{padding:0 0 110px}.oba-landing__category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.oba-landing__category{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;background:#ddd;color:#fff;text-decoration:none}.oba-landing__category img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}.oba-landing__category:hover img{transform:scale(1.035)}.oba-landing__category:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.72),transparent 60%)}.oba-landing__category>div:last-child{position:absolute;z-index:2;inset:auto 20px 20px;display:flex;flex-direction:column;align-items:flex-start}.oba-landing__category strong{font-size:34px;line-height:.9;letter-spacing:-.045em;margin:7px 0 15px}.oba-landing__category-fallback{height:100%;display:grid;place-items:center;background:#111;color:#fff;font-size:36px;font-weight:900}.oba-landing__story{display:grid;grid-template-columns:1.1fr .9fr;min-height:680px;background:#133458;color:#fff}.oba-landing__story-media{min-height:680px}.oba-landing__story-media img{display:block;width:100%;height:100%;object-fit:cover}.oba-landing__story-content{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(50px,8vw,120px)}.oba-landing__story-content h2{font-size:clamp(50px,6vw,92px);line-height:.84;letter-spacing:-.06em;margin:16px 0 24px}.oba-landing__story-content p{max-width:470px;color:#dfe9f1;font-size:17px;line-height:1.65;margin:0 0 28px}.oba-landing__brands{padding:70px 0;border-bottom:1px solid #deded7}.oba-landing__brands>div>div{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:35px}.oba-landing__brands>div>div span{font-size:clamp(26px,3vw,46px);font-weight:900;letter-spacing:-.05em}.oba-landing__final{padding:130px 0 150px;background:#101010;color:#fff}.oba-landing__final h2{margin:18px 0 34px}.oba-landing__final .eyebrow{color:#d8ff3e}
+@media(max-width:900px){.oba-landing__hero{min-height:78svh;height:78svh}.oba-landing__intro-grid{grid-template-columns:1fr 1fr}.oba-landing__intro-grid p{grid-column:2}.oba-landing__spotlight-grid{grid-template-columns:1fr 1fr}.oba-landing__spotlight-card--wide{grid-column:1/-1}.oba-landing__spotlight-card{min-height:500px}.oba-landing__category-grid{grid-template-columns:repeat(2,1fr)}.oba-landing__story{grid-template-columns:1fr}.oba-landing__story-media{min-height:520px}.oba-landing__brands>div>div{grid-template-columns:repeat(2,1fr);row-gap:28px}}
+@media(max-width:600px){.oba-landing__hero-content{justify-content:flex-end;padding-bottom:105px}.oba-landing__hero h1{font-size:clamp(54px,16vw,82px)}.oba-landing__hero p{font-size:15px}.oba-landing__hero-bottom{grid-template-columns:40px 1fr 90px;width:min(calc(100% - 28px),var(--oba-max));bottom:18px}.oba-landing__hero-bottom span:nth-child(2){text-align:left}.oba-landing__intro{padding:70px 0}.oba-landing__intro-grid{grid-template-columns:1fr;gap:20px}.oba-landing__intro-grid p{grid-column:auto;margin:0}.oba-landing__spotlight{padding-bottom:70px}.oba-landing__spotlight-grid{grid-template-columns:1fr}.oba-landing__spotlight-card--wide{grid-column:auto}.oba-landing__spotlight-card{min-height:440px}.oba-landing__products,.oba-landing__categories{padding-bottom:70px}.oba-landing__section-head{align-items:flex-start;flex-direction:column;gap:14px}.oba-landing__category-grid{grid-template-columns:1fr 1fr;gap:10px}.oba-landing__category strong{font-size:25px}.oba-landing__story-media{min-height:420px}.oba-landing__story-content{padding:55px 28px 65px}.oba-landing__brands{padding:55px 0}.oba-landing__brands>div>div{grid-template-columns:1fr 1fr}.oba-landing__final{padding:85px 0 100px}}
+</style>
