@@ -6,9 +6,9 @@
       </div>
       <div class="oba-hero-slide__shade"></div>
       <div class="oba-hero-slide__content container">
-        <div class="eyebrow">YONEX POWER CUSHION</div>
+        <div class="eyebrow">YONEX · PERFORMANCE FOOTWEAR</div>
         <h2>STABILITY.<br>CONTROL.<br>CONFIDENCE.</h2>
-        <p>Built for quick turnarounds and agile footwork, with POWER CUSHION+ support under every step.</p>
+        <p>Built for explosive movement and confident footwork, with POWER CUSHION+ support under every step.</p>
         <div class="hero-actions">
           <a class="button" href="{{ routes.collections_url }}/shoes">Shop shoes</a>
           <a class="button button--light" href="{{ routes.collections_url }}">Shop all</a>
@@ -22,9 +22,9 @@
       </div>
       <div class="oba-hero-slide__shade"></div>
       <div class="oba-hero-slide__content container">
-        <div class="eyebrow">YONEX NANOFLARE</div>
+        <div class="eyebrow">YONEX · NANOFLARE 700 GAME</div>
         <h2>PLAY FASTER.<br>MOVE FREER.</h2>
-        <p>The NANOFLARE 700 GAME combines a head-light profile with responsive repulsion and easy maneuverability.</p>
+        <p>A head-light profile, responsive repulsion and effortless handling built for fast, attacking rallies.</p>
         <div class="hero-actions">
           <a class="button" href="{{ routes.collections_url }}/rackets">Explore rackets</a>
           <a class="button button--light" href="{{ routes.collections_url }}">View collection</a>
@@ -38,9 +38,9 @@
       </div>
       <div class="oba-hero-slide__shade"></div>
       <div class="oba-hero-slide__content container">
-        <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+        <div class="eyebrow">YONEX · NANOFLARE 1000 GAME</div>
         <h1>NANOFLARE 1000 GAME.</h1>
-        <p>Lightning-fast handling and explosive repulsion for players who want to accelerate every rally.</p>
+        <p>Lightning-fast handling and explosive repulsion for players ready to accelerate every rally.</p>
         <div class="hero-actions">
           <a class="button" href="{{ routes.collections_url }}/rackets">Shop rackets</a>
           <a class="button button--light" href="{{ routes.collections_url }}">Shop all</a>
@@ -78,23 +78,23 @@
 .oba-hero-slide:nth-child(2) .oba-hero-slide__media img{width:min(58vw,860px);height:86%}
 .oba-hero-slide:nth-child(3) .oba-hero-slide__media img{width:min(58vw,820px);height:82%}
 .oba-hero-slide__shade{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(201,201,196,.96) 0%,rgba(216,215,210,.86) 30%,rgba(226,224,217,.58) 48%,rgba(238,236,229,0) 72%),linear-gradient(0deg,rgba(0,0,0,.04),transparent 45%)}
-.oba-hero-slide__content{position:relative;z-index:2;min-height:inherit;height:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-top:40px;padding-bottom:110px}
+ .oba-hero-slide__content{position:relative;z-index:2;min-height:inherit;height:100%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding-top:24px;padding-bottom:112px}
 .oba-hero-slide__content>*{opacity:0;transform:translateY(24px)}
 .oba-hero-slide.is-active .oba-hero-slide__content>*{animation:obaHeroText .7s cubic-bezier(.2,.8,.2,1) forwards}
 .oba-hero-slide.is-active .oba-hero-slide__content .eyebrow{animation-delay:.08s}
 .oba-hero-slide.is-active .oba-hero-slide__content h1,.oba-hero-slide.is-active .oba-hero-slide__content h2{animation-delay:.16s}
 .oba-hero-slide.is-active .oba-hero-slide__content p{animation-delay:.24s}
 .oba-hero-slide.is-active .oba-hero-slide__content .hero-actions{animation-delay:.32s}
-.oba-hero-slide .eyebrow{color:#555}
-.oba-hero-slide h1,.oba-hero-slide h2{font-size:clamp(58px,8vw,126px);line-height:.79;letter-spacing:-.075em;margin:14px 0 28px;max-width:720px}
-.oba-hero-slide p{max-width:480px;color:#444;font-size:17px;line-height:1.55;margin:0 0 28px}
-.oba-hero-slide .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+ .oba-hero-slide .eyebrow{color:#555;font-size:11px;font-weight:800;line-height:1;letter-spacing:.14em;text-transform:uppercase;margin:0 0 18px}
+.oba-hero-slide h1,.oba-hero-slide h2{font-size:clamp(62px,6.6vw,104px);font-weight:900;line-height:.86;letter-spacing:-.065em;margin:0 0 24px;max-width:620px;text-wrap:balance}
+.oba-hero-slide p{max-width:440px;color:#444;font-size:16px;font-weight:500;line-height:1.55;margin:0 0 28px}
+.oba-hero-slide .hero-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .oba-hero-slide .button{background:#111;color:#fff;border-color:#111}
 .oba-hero-slide .button:hover{background:var(--oba-accent);color:#111;border-color:var(--oba-accent)}
 .oba-hero-slide .button--light{background:transparent;color:#111;border-color:#111}
 .oba-hero-slide .button--light:hover{background:#111;color:#fff;border-color:#111}
 .oba-hero-slider__controls{position:absolute;z-index:5;bottom:28px;left:50%;transform:translateX(-50%);display:grid;grid-template-columns:100px 1fr 100px;align-items:center;gap:20px}
-.oba-hero-slider__counter{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#777}
+.oba-hero-slider__counter{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#777}
 .oba-hero-slider__counter strong{color:#111;font-size:15px;margin-right:5px}
 .oba-hero-slider__dots{display:flex;justify-content:center;gap:8px}
 .oba-hero-slider__dots button{position:relative;width:42px;height:4px;padding:0;border:0;border-radius:999px;background:rgba(17,17,17,.18);cursor:pointer;overflow:hidden;transition:width .3s,background .3s}
@@ -102,7 +102,7 @@
 .oba-hero-slider__dots button.is-active{width:64px;background:rgba(17,17,17,.18)}
 .oba-hero-slider__dots button.is-active::after{animation:obaHeroDotTimer 6.5s linear forwards}
 @keyframes obaHeroDotTimer{from{width:0}to{width:100%}}
-.oba-hero-slider__next{justify-self:end;border:0;background:transparent;color:#111;font-size:10px;letter-spacing:.14em;font-weight:800;cursor:pointer;padding:10px 0}
+.oba-hero-slider__next{justify-self:end;border:0;background:transparent;color:#111;font-size:10px;letter-spacing:.14em;font-weight:800;text-transform:uppercase;cursor:pointer;padding:10px 0}
 .oba-hero-slider__next span{font-size:16px;margin-left:6px;transition:transform .2s;display:inline-block}
 .oba-hero-slider__next:hover span{transform:translate(3px,-3px)}
 @keyframes obaHeroText{to{opacity:1;transform:none}}
@@ -117,8 +117,9 @@
   .oba-hero-slide:nth-child(2) .oba-hero-slide__media img,.oba-hero-slide:nth-child(3) .oba-hero-slide__media img{width:88vw;height:52%}
   .oba-hero-slide__shade{background:linear-gradient(180deg,rgba(238,236,229,.18) 0%,rgba(226,224,217,.52) 38%,#d5d4cf 68%,#d5d4cf 100%)}
   .oba-hero-slide__content{justify-content:flex-end;padding-bottom:105px}
-  .oba-hero-slide h1,.oba-hero-slide h2{font-size:clamp(50px,14vw,76px);max-width:92vw}
-  .oba-hero-slide p{font-size:15px;max-width:360px}
+  .oba-hero-slide .eyebrow{font-size:10px;margin-bottom:14px}
+  .oba-hero-slide h1,.oba-hero-slide h2{font-size:clamp(48px,13vw,72px);line-height:.88;max-width:92vw;margin-bottom:18px}
+  .oba-hero-slide p{font-size:14px;line-height:1.5;max-width:360px;margin-bottom:22px}
   .oba-hero-slider__controls{grid-template-columns:60px 1fr 65px;bottom:18px;gap:10px}
   .oba-hero-slider__dots button{width:24px}
   .oba-hero-slider__dots button.is-active{width:38px}
