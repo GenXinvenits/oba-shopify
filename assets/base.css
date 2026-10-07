@@ -335,7 +335,8 @@ html,body{max-width:100%;overflow-x:hidden}
 .product-card,.category-card,.footer-col{min-width:0}
 .product-card__media-wrap,.product-card__info{min-width:0}
 .product-card h3,.product-card__brand,.product-card__availability,.product-card__from{overflow-wrap:anywhere}
-.product-card__media-wrap>.product-card__actions{position:absolute;right:14px;bottom:14px;display:flex;align-items:center;gap:8px;z-index:3}
+.product-card__media-wrap{position:relative;display:block;width:100%}
+.product-card__media-wrap>.product-card__actions{position:absolute;top:auto!important;right:14px!important;bottom:14px!important;left:auto!important;display:flex;align-items:center;justify-content:flex-end;gap:8px;width:max-content;z-index:10}
 .product-card__action-form{margin:0}
 .product-card__action-button{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--oba-ink);background:var(--oba-ink);color:#fff;border-radius:7px;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}
 .product-card__action-button svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
