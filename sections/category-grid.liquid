@@ -8,26 +8,10 @@
       {% for block in section.blocks %}
         {% assign collection = block.settings.collection %}
         <a class="category-card" href="{% if collection != blank %}{{ collection.url }}{% else %}{{ routes.collections_url }}{% endif %}" {{ block.shopify_attributes }}>
-          {% assign banner_url = blank %}
           {% if block.settings.image != blank %}
-            {% assign banner_url = block.settings.image | image_url: width: 1400 %}
-          {% elsif collection.handle == 'rackets' %}
-            {% assign banner_url = 'https://www.yonex.com/media/catalog/category/heroimage_b_racquets_260206_1.jpg' %}
-          {% elsif collection.handle == 'shoes' %}
-            {% assign banner_url = 'https://www.yonex.com/media/catalog/category/heroimage_b_footwear_260206_1.jpg' %}
-          {% elsif collection.handle == 'bag' %}
-            {% assign banner_url = 'https://www.yonex.com/media/catalog/category/heroimage_b_bag_260206.jpg' %}
-          {% elsif collection.handle == 'accessories' %}
-            {% assign banner_url = 'https://www.yonex.com/media/catalog/category/2880x1400_AC_pc_2024_1.jpg' %}
-          {% elsif collection.handle == 'apparel' %}
-            {% assign banner_url = 'https://www.yonex.com/media/catalog/category/bad_260123_banner_1.jpg' %}
-          {% elsif collection.handle == 'shuttlecocks' %}
-            {% assign banner_url = 'https://www.yonex.com/media/catalog/category/heroimage_shuttle_260206_1.jpg' %}
+            {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
           {% elsif collection.featured_image != blank %}
-            {% assign banner_url = collection.featured_image | image_url: width: 1400 %}
-          {% endif %}
-          {% if banner_url != blank %}
-            <img src="{{ banner_url }}" alt="{{ block.settings.title | default: collection.title | escape }}" loading="lazy" width="1400" height="700">
+            {{ collection.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
           {% endif %}
           <div class="category-card__content">
             <div class="eyebrow">Shop</div>
