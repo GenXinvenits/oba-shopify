@@ -214,12 +214,13 @@ document.addEventListener('click',(event)=>{const buyNow=event.target.closest('[
         ${product.vendor?`<div class="oba-quick-view__vendor">${escapeHtml(product.vendor)}</div>`:''}
         <h2 class="oba-quick-view__title">${escapeHtml(product.title)}</h2>
         <div class="oba-quick-view__price" data-qv-price>${money(selected?.price||product.price)}</div>
-        ${product.description?`<div class="oba-quick-view__description">${product.description}</div>`:''}
         <form class="oba-quick-view__form" data-qv-form>
           ${variantOptions}
           <button class="button oba-quick-view__submit" type="submit" data-qv-submit data-variant-id="${selected?.id||''}" ${disabled?'disabled':''}>${disabled?'Sold out':'Add to cart'}</button>
           <a class="oba-quick-view__full-link" href="${escapeHtml(productUrl)}">View full product</a>
         </form>
+        ${product.description?`<div class="oba-quick-view__description">${product.description}</div>`:''}
+
       </div>
     </div>`;
 
