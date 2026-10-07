@@ -151,16 +151,18 @@
         window.clearInterval(timer);
         timer = window.setInterval(() => show(index + 1), 6500);
       };
+      const stop = () => window.clearInterval(timer);
+
       dots.forEach((dot, i) => dot.addEventListener('click', () => { show(i); start(); }));
       next?.addEventListener('click', () => { show(index + 1); start(); });
-      hero.addEventListener('mouseenter', () => window.clearInterval(timer));
-      hero.addEventListener('mouseleave', start);
-      hero.addEventListener('focusin', () => window.clearInterval(timer));
-      hero.addEventListener('focusout', start);
+
+      // Autoplay must continue while the hero is hovered/focused.
+      // Only pause when the document itself is hidden.
       document.addEventListener('visibilitychange', () => {
-        if (document.hidden) window.clearInterval(timer);
+        if (document.hidden) stop();
         else start();
       });
+
       show(index);
       start();
     });
