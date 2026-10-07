@@ -8,10 +8,13 @@
       {% for block in section.blocks %}
         {% assign collection = block.settings.collection %}
         <a class="category-card" href="{% if collection != blank %}{{ collection.url }}{% else %}{{ routes.collections_url }}{% endif %}" {{ block.shopify_attributes }}>
+          {% assign category_product = collection.products.first %}
           {% if block.settings.image != blank %}
-            {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+            {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 901px) 33vw, 100vw' }}
+          {% elsif category_product.featured_image != blank %}
+            {{ category_product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 901px) 33vw, 100vw' }}
           {% elsif collection.featured_image != blank %}
-            {{ collection.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+            {{ collection.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '(min-width: 901px) 33vw, 100vw' }}
           {% endif %}
           <div class="category-card__content">
             <div class="eyebrow">Shop</div>
