@@ -329,7 +329,7 @@ body.oba-quick-view-open{overflow:hidden}
 
 
 /* Global alignment + responsive consistency */
-html,body{max-width:100%;overflow-x:hidden}
+html,body{max-width:100%;overflow-x:clip}
 .container,.hero-content{width:min(calc(100% - 40px),var(--oba-max));margin-inline:auto}
 .container>*{min-width:0}
 .section-heading,.newsletter-grid,.footer-bottom,.collection-intro,.collections-index__intro{min-width:0}
