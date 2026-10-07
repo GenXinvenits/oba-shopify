@@ -1,13 +1,19 @@
 <section class="section category-section">
   <div class="container">
     <div class="category-section__heading">
+      <div class="category-section__meta">
+        <span class="category-section__index" aria-hidden="true">01</span>
+        <span class="eyebrow">Explore the collection</span>
+      </div>
       <div class="category-section__title">
-        <div class="eyebrow">Explore the collection</div>
         <h2>{{ section.settings.heading }}</h2>
       </div>
       <div class="category-section__intro">
         {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
-        <a class="category-section__all" href="{{ routes.collections_url }}">View all <span aria-hidden="true">↗</span></a>
+        <a class="category-section__all" href="{{ routes.collections_url }}">
+          <span>View all</span>
+          <span class="category-section__all-icon" aria-hidden="true">↗</span>
+        </a>
       </div>
     </div>
     <div class="category-grid">
