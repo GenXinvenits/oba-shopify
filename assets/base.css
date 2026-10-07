@@ -19,7 +19,8 @@
 .product-badge{padding:7px 9px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
 .product-badge--sale{background:var(--oba-accent);color:var(--oba-ink)}
 .product-badge--new{background:var(--oba-ink);color:#fff}
-.product-card__quick{position:absolute;left:14px;bottom:14px;padding:9px 11px;background:rgba(255,255,255,.92);font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;z-index:2}
+.product-card__quick{position:static;display:grid;place-items:center;width:40px;height:40px;padding:0;background:rgba(255,255,255,.92);border:1px solid var(--oba-ink);border-radius:7px;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;z-index:2}
+.product-card__quick svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .product-card:hover .product-card__quick{opacity:1;transform:none}
 .product-card__quick-add{position:absolute;right:14px;bottom:14px;z-index:3;margin:0}
 .product-card__add-button{display:flex;align-items:center;gap:10px;border:1px solid var(--oba-ink);background:var(--oba-ink);color:#fff;padding:10px 12px;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s,transform .2s}
