@@ -10,8 +10,9 @@
       {% endif %}
     </div>
     {% assign selected_collection = section.settings.collection %}
+    {% assign product_count = section.settings.products_to_show | at_most: selected_collection.products_count %}
     {% if selected_collection != blank %}
-      <div class="product-grid">
+      <div class="product-grid product-grid--dynamic" style="--oba-product-count:{{ product_count }};">
         {% for product in selected_collection.products limit: section.settings.products_to_show %}{% render 'product-card', product: product %}{% endfor %}
       </div>
     {% else %}
