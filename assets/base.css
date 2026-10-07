@@ -460,3 +460,8 @@ body{
 
 /* Typography system: IBM Plex Sans for a polished, professional retail interface. */
 h1,h2,h3,h4,h5,h6,.brand,.footer-brand,.product-card h3,.collection-intro h1,.category-section__title h2,.category-section .category-card h3,.product-banner__content strong,.hero h1,.story-content h2,.newsletter h2{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-weight:600;letter-spacing:-.025em}
+
+
+/* Header account label: match Search and Cart weight exactly. */
+.shopify-account.header-shopify-account::part(signed-out-avatar){font-size:11px!important;font-weight:800!important;letter-spacing:.09em!important;text-transform:uppercase!important}
+.header-shopify-account-avatar{font-weight:800!important}
