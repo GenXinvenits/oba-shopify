@@ -34,24 +34,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
   }
 
-  const hero=document.querySelector('[data-oba-hero]');
-  if(hero){
-    const slides=[...hero.querySelectorAll('.oba-hero-slide')];
-    const dots=[...hero.querySelectorAll('[data-hero-slide]')];
-    const current=hero.querySelector('[data-hero-current]');
-    const next=hero.querySelector('[data-hero-next]');
-    let index=0; let timer;
-    const show=(nextIndex)=>{index=(nextIndex+slides.length)%slides.length;slides.forEach((slide,i)=>slide.classList.toggle('is-active',i===index));dots.forEach((dot,i)=>dot.classList.toggle('is-active',i===index));if(current) current.textContent=String(index+1).padStart(2,'0');};
-    const start=()=>{clearInterval(timer);timer=setInterval(()=>show(index+1),6500);};
-    dots.forEach((dot,i)=>dot.addEventListener('click',()=>{show(i);start();}));
-    next?.addEventListener('click',()=>{show(index+1);start();});
-    hero.addEventListener('mouseenter',()=>clearInterval(timer));
-    hero.addEventListener('mouseleave',start);
-    hero.addEventListener('focusin',()=>clearInterval(timer));
-    hero.addEventListener('focusout',start);
-    start();
-  }
-
   const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduceMotion) return;
   const revealTargets=document.querySelectorAll('.section-heading,.category-card,.product-card,.story-content,.story-media,.brand-list span,.newsletter-grid,.site-footer .footer-grid');
