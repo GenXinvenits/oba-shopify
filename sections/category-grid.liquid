@@ -19,9 +19,6 @@
           {% elsif collection.featured_image != blank %}
             {{ collection.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
           {% endif %}
-          <div class="category-card__top">
-            <span class="category-card__arrow" aria-hidden="true">↗</span>
-          </div>
           <div class="category-card__content">
             <div class="eyebrow">Shop category</div>
             <h3>{% if block.settings.title != blank %}{{ block.settings.title }}{% elsif collection != blank %}{{ collection.title }}{% else %}Category{% endif %}</h3>
