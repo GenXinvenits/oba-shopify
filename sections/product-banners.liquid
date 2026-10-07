@@ -1,0 +1,32 @@
+<section class="section product-banners-section">
+  <div class="container">
+    <div class="section-heading product-banners-section__heading">
+      <div>
+        <div class="eyebrow">Yonex Spotlight</div>
+        <h2>BUILT FOR THE NEXT RALLY.</h2>
+      </div>
+      <p>Explore standout badminton equipment and collections from Yonex.</p>
+    </div>
+
+    <div class="product-banners">
+      {% assign banners = 'va|REFINE WHAT’S YOURS|Viktor Axelsen Collection|https://www.yonex.com/media/wysiwyg/news/badminton/news_260904_960.jpg|/collections/apparel;astrox|PURE POWER|ASTROX 99 Series|https://www.yonex.com/media/wysiwyg/news/badminton/news_250825_960.png|/collections/rackets;nanoflare|LIGHTNING SPEED|NANOFLARE 1000|https://www.yonex.com/media/wysiwyg/news/badminton/230512_960x600.jpg|/collections/rackets' | split: ';' %}
+
+      {% for banner in banners %}
+        {% assign parts = banner | split: '|' %}
+        <a class="product-banner product-banner--{{ parts[0] }}" href="{{ parts[4] }}">
+          <img src="{{ parts[3] }}" alt="{{ parts[2] }}" loading="lazy" width="960" height="600">
+          <span class="product-banner__shade"></span>
+          <span class="product-banner__content">
+            <span class="product-banner__eyebrow">{{ parts[1] }}</span>
+            <strong>{{ parts[2] }}</strong>
+            <span class="product-banner__link">Shop now <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+          </span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{"name":"Product banners","settings":[],"presets":[{"name":"Product banners"}]}
+{% endschema %}
