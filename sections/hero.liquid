@@ -1,6 +1,6 @@
 <section class="oba-hero-slider" data-oba-hero>
   <div class="oba-hero-slider__track">
-    <article class="oba-hero-slide">
+    <article class="oba-hero-slide is-active">
       <div class="oba-hero-slide__media">
         <img src="https://us.yonex.com/cdn/shop/files/ALL_SHBELZ3M_532-1.png?v=1740774141&width=1445" alt="YONEX POWER CUSHION ECLIPSION Z badminton shoe" loading="lazy">
       </div>
@@ -32,7 +32,7 @@
       </div>
     </article>
 
-    <article class="oba-hero-slide is-active">
+    <article class="oba-hero-slide">
       <div class="oba-hero-slide__media">
         <img src="https://us.yonex.com/cdn/shop/files/nanoflare_1000game.webp?v=1759793201&width=1445" alt="YONEX NANOFLARE 1000 GAME badminton racquet" loading="eager" fetchpriority="high">
       </div>
@@ -157,6 +157,10 @@
       hero.addEventListener('mouseleave', start);
       hero.addEventListener('focusin', () => window.clearInterval(timer));
       hero.addEventListener('focusout', start);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) window.clearInterval(timer);
+        else start();
+      });
       show(index);
       start();
     });
