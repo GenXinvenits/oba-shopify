@@ -412,3 +412,37 @@ body{
   100%{background-position:100% 70%,0% 80%,20% 0%,0 0}
 }
 @media(prefers-reduced-motion:reduce){body{animation:none;background-position:0 0}}
+
+
+/* Yonex-style editorial product banners */
+.product-banners-section{padding-top:48px}
+.product-banners-section__heading{align-items:end}
+.product-banners-section__heading p{margin:0;max-width:430px}
+.product-banners{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.product-banner{position:relative;display:block;min-width:0;aspect-ratio:16/9;overflow:hidden;background:#111;color:#fff;border-radius:10px;isolation:isolate}
+.product-banner img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .45s ease}
+.product-banner__shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 20%,rgba(0,0,0,.72) 100%);z-index:1;transition:opacity .35s ease}
+.product-banner__content{position:absolute;left:22px;right:22px;bottom:20px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;z-index:2}
+.product-banner__eyebrow{font-size:9px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--oba-accent)}
+.product-banner__content strong{font-size:clamp(20px,2.1vw,31px);line-height:.95;letter-spacing:-.045em;text-transform:uppercase}
+.product-banner__link{display:inline-flex;align-items:center;gap:7px;margin-top:5px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.product-banner__link i{font-size:10px}
+.product-banner:hover img{transform:scale(1.045)}
+.product-banner:hover .product-banner__shade{opacity:.9}
+.product-banner:hover .product-banner__link{color:var(--oba-accent)}
+@media(max-width:900px){
+  .product-banners{grid-template-columns:1fr 1fr}
+  .product-banner:last-child{grid-column:1/-1}
+}
+@media(max-width:600px){
+  .product-banners-section{padding-top:36px}
+  .product-banners-section__heading p{margin-top:0}
+  .product-banners{grid-template-columns:1fr}
+  .product-banner:last-child{grid-column:auto}
+  .product-banner{aspect-ratio:16/10}
+  .product-banner__content{left:18px;right:18px;bottom:17px}
+  .product-banner__content strong{font-size:27px}
+}
+@media(prefers-reduced-motion:reduce){
+  .product-banner img,.product-banner__shade{transition:none}
+}
