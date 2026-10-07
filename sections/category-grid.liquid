@@ -1,20 +1,30 @@
-<section class="section">
+<section class="section category-section">
   <div class="container">
-    <div class="section-heading">
-      <div><div class="eyebrow">Equip</div><h2>{{ section.settings.heading }}</h2></div>
-      {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+    <div class="category-section__heading">
+      <div class="category-section__title">
+        <div class="eyebrow">Explore the collection</div>
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+      <div class="category-section__intro">
+        {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+        <a class="category-section__all" href="{{ routes.collections_url }}">View all <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
     <div class="category-grid">
       {% for block in section.blocks %}
         {% assign collection = block.settings.collection %}
         <a class="category-card" href="{% if collection != blank %}{{ collection.url }}{% else %}{{ routes.collections_url }}{% endif %}" {{ block.shopify_attributes }}>
           {% if block.settings.image != blank %}
-            {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+            {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
           {% elsif collection.featured_image != blank %}
-            {{ collection.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+            {{ collection.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
           {% endif %}
+          <div class="category-card__top">
+            <span class="category-card__number">{{ forloop.index | prepend: '0' }}</span>
+            <span class="category-card__arrow" aria-hidden="true">↗</span>
+          </div>
           <div class="category-card__content">
-            <div class="eyebrow">Shop</div>
+            <div class="eyebrow">Shop category</div>
             <h3>{% if block.settings.title != blank %}{{ block.settings.title }}{% elsif collection != blank %}{{ collection.title }}{% else %}Category{% endif %}</h3>
           </div>
         </a>
