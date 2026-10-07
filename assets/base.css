@@ -448,8 +448,7 @@ body{
 }
 
 
-/* Category cards use wide editorial banners rather than product photography. */
-.category-card{aspect-ratio:16/10;min-height:0}
+/* Category banners: preserve the original section/card layout. */
+.category-card{min-height:360px}
 .category-card img{object-fit:cover}
-@media(max-width:900px){.category-card{aspect-ratio:16/10;min-height:0}}
-@media(max-width:600px){.category-card{aspect-ratio:16/10;min-height:0}}
+@media(max-width:600px){.category-card{min-height:280px}}
