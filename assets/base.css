@@ -448,7 +448,7 @@ body{
 }
 
 
-/* Category banners: crop wide source artwork to the section's 6:4 card shape. */
-.category-card{aspect-ratio:3/2;min-height:0}
+/* Category banners: use the existing card dimensions; images are composed for this space. */
+.category-card{min-height:360px}
 .category-card img{object-fit:cover}
-@media(max-width:600px){.category-card{aspect-ratio:3/2;min-height:0}}
+@media(max-width:600px){.category-card{min-height:280px}}
